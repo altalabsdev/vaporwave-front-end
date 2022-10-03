@@ -19,7 +19,7 @@
           "type": "uint256"
         }
       ],
-      "name": "StakeGlp",
+      "name": "StakeVlp",
       "type": "event"
     },
     {
@@ -44,7 +44,7 @@
           "type": "uint256"
         }
       ],
-      "name": "StakeGmx",
+      "name": "StakeVwave",
       "type": "event"
     },
     {
@@ -63,7 +63,7 @@
           "type": "uint256"
         }
       ],
-      "name": "UnstakeGlp",
+      "name": "UnstakeVlp",
       "type": "event"
     },
     {
@@ -88,7 +88,7 @@
           "type": "uint256"
         }
       ],
-      "name": "UnstakeGmx",
+      "name": "UnstakeVwave",
       "type": "event"
     },
     {
@@ -130,14 +130,14 @@
           "type": "uint256[]"
         }
       ],
-      "name": "batchStakeGmxForAccount",
+      "name": "batchStakeVwaveForAccount",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "bnGmx",
+      "name": "bnVwave",
       "outputs": [
         {
           "internalType": "address",
@@ -150,7 +150,7 @@
     },
     {
       "inputs": [],
-      "name": "bonusGmxTracker",
+      "name": "bonusVwaveTracker",
       "outputs": [
         {
           "internalType": "address",
@@ -170,7 +170,7 @@
     },
     {
       "inputs": [],
-      "name": "claimEsGmx",
+      "name": "claimEsVwave",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -204,7 +204,7 @@
     },
     {
       "inputs": [],
-      "name": "esGmx",
+      "name": "esVwave",
       "outputs": [
         {
           "internalType": "address",
@@ -217,7 +217,7 @@
     },
     {
       "inputs": [],
-      "name": "feeGlpTracker",
+      "name": "feeVlpTracker",
       "outputs": [
         {
           "internalType": "address",
@@ -230,7 +230,7 @@
     },
     {
       "inputs": [],
-      "name": "feeGmxTracker",
+      "name": "feeVwaveTracker",
       "outputs": [
         {
           "internalType": "address",
@@ -243,7 +243,7 @@
     },
     {
       "inputs": [],
-      "name": "glp",
+      "name": "vlp",
       "outputs": [
         {
           "internalType": "address",
@@ -256,7 +256,7 @@
     },
     {
       "inputs": [],
-      "name": "glpManager",
+      "name": "vlpManager",
       "outputs": [
         {
           "internalType": "address",
@@ -269,7 +269,7 @@
     },
     {
       "inputs": [],
-      "name": "glpVester",
+      "name": "vlpVester",
       "outputs": [
         {
           "internalType": "address",
@@ -323,22 +323,22 @@
       "inputs": [
         {
           "internalType": "bool",
-          "name": "_shouldClaimGmx",
+          "name": "_shouldClaimVwave",
           "type": "bool"
         },
         {
           "internalType": "bool",
-          "name": "_shouldStakeGmx",
+          "name": "_shouldStakeVwave",
           "type": "bool"
         },
         {
           "internalType": "bool",
-          "name": "_shouldClaimEsGmx",
+          "name": "_shouldClaimEsVwave",
           "type": "bool"
         },
         {
           "internalType": "bool",
-          "name": "_shouldStakeEsGmx",
+          "name": "_shouldStakeEsVwave",
           "type": "bool"
         },
         {
@@ -376,47 +376,47 @@
         },
         {
           "internalType": "address",
-          "name": "_esGmx",
+          "name": "_esVwave",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_bnGmx",
+          "name": "_bnVwave",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_glp",
+          "name": "_vlp",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_stakedGmxTracker",
+          "name": "_stakedVwaveTracker",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_bonusGmxTracker",
+          "name": "_bonusVwaveTracker",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_feeGmxTracker",
+          "name": "_feeVwaveTracker",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_feeGlpTracker",
+          "name": "_feeVlpTracker",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_stakedGlpTracker",
+          "name": "_stakedVlpTracker",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_glpManager",
+          "name": "_vlpManager",
           "type": "address"
         },
         {
@@ -426,7 +426,7 @@
         },
         {
           "internalType": "address",
-          "name": "_glpVester",
+          "name": "_vlpVester",
           "type": "address"
         }
       ],
@@ -467,11 +467,11 @@
         },
         {
           "internalType": "uint256",
-          "name": "_minGlp",
+          "name": "_minVlp",
           "type": "uint256"
         }
       ],
-      "name": "mintAndStakeGlp",
+      "name": "mintAndStakeVlp",
       "outputs": [
         {
           "internalType": "uint256",
@@ -491,11 +491,11 @@
         },
         {
           "internalType": "uint256",
-          "name": "_minGlp",
+          "name": "_minVlp",
           "type": "uint256"
         }
       ],
-      "name": "mintAndStakeGlpETH",
+      "name": "mintAndStakeVlpETH",
       "outputs": [
         {
           "internalType": "uint256",
@@ -559,7 +559,7 @@
           "type": "uint256"
         }
       ],
-      "name": "stakeEsGmx",
+      "name": "stakeEsVwave",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -572,7 +572,7 @@
           "type": "uint256"
         }
       ],
-      "name": "stakeGmx",
+      "name": "stakeVwave",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -590,14 +590,14 @@
           "type": "uint256"
         }
       ],
-      "name": "stakeGmxForAccount",
+      "name": "stakeVwaveForAccount",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "stakedGlpTracker",
+      "name": "stakedVlpTracker",
       "outputs": [
         {
           "internalType": "address",
@@ -610,7 +610,7 @@
     },
     {
       "inputs": [],
-      "name": "stakedGmxTracker",
+      "name": "stakedVwaveTracker",
       "outputs": [
         {
           "internalType": "address",
@@ -630,7 +630,7 @@
         },
         {
           "internalType": "uint256",
-          "name": "_glpAmount",
+          "name": "_vlpAmount",
           "type": "uint256"
         },
         {
@@ -644,7 +644,7 @@
           "type": "address"
         }
       ],
-      "name": "unstakeAndRedeemGlp",
+      "name": "unstakeAndRedeemVlp",
       "outputs": [
         {
           "internalType": "uint256",
@@ -659,7 +659,7 @@
       "inputs": [
         {
           "internalType": "uint256",
-          "name": "_glpAmount",
+          "name": "_vlpAmount",
           "type": "uint256"
         },
         {
@@ -673,7 +673,7 @@
           "type": "address"
         }
       ],
-      "name": "unstakeAndRedeemGlpETH",
+      "name": "unstakeAndRedeemVlpETH",
       "outputs": [
         {
           "internalType": "uint256",
@@ -692,7 +692,7 @@
           "type": "uint256"
         }
       ],
-      "name": "unstakeEsGmx",
+      "name": "unstakeEsVwave",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -705,7 +705,7 @@
           "type": "uint256"
         }
       ],
-      "name": "unstakeGmx",
+      "name": "unstakeVwave",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

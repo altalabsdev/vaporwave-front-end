@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "GmxMigrator",
-  "sourceName": "contracts/gmx/GmxMigrator.sol",
+  "contractName": "VwaveMigrator",
+  "sourceName": "contracts/gmx/GMXMigrator.sol",
   "abi": [
     {
       "inputs": [
