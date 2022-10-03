@@ -2,12 +2,12 @@
 
 export const homeEventsData = [
   {
-    id: "app-gmx-io-launch",
+    id: "app-vwave-io-launch",
     title: "Frontend Updates",
     isActive: true,
     validTill: "10 Jul 2022, 12:00",
     bodyText:
-      "Updates have been applied to the GMX frontend to inform users of the separation between gmx.io and app.gmx.io",
+      "Updates have been applied to the VWAVE frontend to inform users of the separation between vwave.io and app.vwave.io",
     buttons: [
       {
         text: "Read More",
@@ -69,7 +69,7 @@ export const appEventsData = [
   //   title: "Referral Program Launch",
   //   isActive: true,
   //   validTill: "4 May 2022, 12:00",
-  //   bodyText: "The GMX referral program is now live! Get fee discounts and refer traders to earn rewards.",
+  //   bodyText: "The VWAVE referral program is now live! Get fee discounts and refer traders to earn rewards.",
   //   buttons: [
   //     {
   //       text: "Read More",
@@ -83,11 +83,11 @@ export const appEventsData = [
   // },
   // {
   //   id: "gmx-arbitrum-odyssey",
-  //   title: "GMX Arbitrum Odyssey",
+  //   title: "VWAVE Arbitrum Odyssey",
   //   isActive: true,
   //   validTill: "3 Jul 2022, 12:00",
   //   bodyText:
-  //     "The GMX Arbitrum Odyssey is taking place this week, all participants will receive prizes. Read on to find out more.",
+  //     "The VWAVE Arbitrum Odyssey is taking place this week, all participants will receive prizes. Read on to find out more.",
   //   buttons: [
   //     {
   //       text: "Read More",
@@ -112,25 +112,25 @@ export const appEventsData = [
   // },
   // {
   //   id: "gmx-arbitrum-odyssey-paused",
-  //   title: "GMX Arbitrum Odyssey Paused",
+  //   title: "VWAVE Arbitrum Odyssey Paused",
   //   isActive: true,
   //   validTill: "3 Jul 2022, 12:00",
-  //   bodyText: "The GMX Arbitrum Odyssey has been paused. Please read the linked post for more information.",
+  //   bodyText: "The VWAVE Arbitrum Odyssey has been paused. Please read the linked post for more information.",
   //   buttons: [
   //     {
   //       text: "Read More",
-  //       link: "https://twitter.com/GMX_IO/status/1542163585111150592",
+  //       link: "https://twitter.com/VWAVE_IO/status/1542163585111150592",
   //       newTab: true,
   //     },
   //   ],
   // },
   // {
-  //   id: "app-gmx-io",
+  //   id: "app-vwave-io",
   //   title: "Frontend Updates",
   //   isActive: true,
   //   validTill: "6 Jul 2022, 12:00",
   //   bodyText:
-  //     "On 6 Jul 2022, updates will be applied to the GMX frontend to inform users of the separation between gmx.io and app.gmx.io",
+  //     "On 6 Jul 2022, updates will be applied to the VWAVE frontend to inform users of the separation between vwave.io and app.vwave.io",
   //   buttons: [
   //     {
   //       text: "Read More",
@@ -160,12 +160,12 @@ export const appEventsData = [
   //   ],
   // },
   {
-    id: "app-gmx-io-settings",
+    id: "app-vwave-io-settings",
     title: "Frontend Updates",
     isActive: true,
     validTill: "10 Jul 2022, 12:00",
     bodyText:
-      "You are currently using app.gmx.io. Customized settings have been reset, you may need to adjust your settings by clicking on the menu in the top right after connecting your wallet.",
+      "You are currently using app.vwave.io. Customized settings have been reset, you may need to adjust your settings by clicking on the menu in the top right after connecting your wallet.",
     buttons: [
       {
         text: "Read More",

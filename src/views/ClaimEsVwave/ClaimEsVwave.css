@@ -1,30 +1,30 @@
-.ClaimEsGmx input {
+.ClaimEsVwave input {
   border: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 1.5rem;
   width: 100%;
   box-sizing: border-box;
 }
 
-.ClaimEsGmx label {
+.ClaimEsVwave label {
   display: block;
   margin-bottom: 0.8rem;
 }
 
-.ClaimEsGmx-content {
+.ClaimEsVwave-content {
   padding: 4.65rem;
   padding-top: 1.5rem;
   max-width: 38.75rem;
 }
 
-.ClaimEsGmx-row {
+.ClaimEsVwave-row {
   margin-bottom: 1.5rem;
 }
 
-.ClaimEsGmx button {
+.ClaimEsVwave button {
   margin-top: 0.8rem;
 }
 
-.ClaimEsGmx-vesting-options .Checkbox.btn-lg {
+.ClaimEsVwave-vesting-options .Checkbox.btn-lg {
   font-size: 1.85rem;
   margin-bottom: 0.8rem;
   display: block;
@@ -33,54 +33,54 @@
   padding-top: 0.465rem;
 }
 
-.ClaimEsGmx-vesting-options .Checkbox.btn-lg.selected.arbitrum {
+.ClaimEsVwave-vesting-options .Checkbox.btn-lg.selected.arbitrum {
   background: rgba(41, 160, 240, 0.2);
 }
 
-.ClaimEsGmx-vesting-options .Checkbox.btn-lg.selected.avalanche {
+.ClaimEsVwave-vesting-options .Checkbox.btn-lg.selected.avalanche {
   background: rgba(232, 65, 65, 0.2);
 }
 
-.ClaimEsGmx-vesting-options .Checkbox img {
+.ClaimEsVwave-vesting-options .Checkbox img {
   height: 1.5rem;
 }
 
-.ClaimEsGmx-option-label {
+.ClaimEsVwave-option-label {
   display: inline-block;
   width: 27.9rem;
   text-align: center;
   opacity: 0.7;
 }
 
-.ClaimEsGmx-vesting-options .Checkbox.selected .ClaimEsGmx-option-label {
+.ClaimEsVwave-vesting-options .Checkbox.selected .ClaimEsVwave-option-label {
   opacity: 1;
 }
 
-.ClaimEsGmx-vesting-options .Checkbox.arbitrum .Checkbox-icon.active {
+.ClaimEsVwave-vesting-options .Checkbox.arbitrum .Checkbox-icon.active {
   color: #29a0f0;
 }
 
-.ClaimEsGmx-vesting-options .Checkbox.avalanche .Checkbox-icon.active {
+.ClaimEsVwave-vesting-options .Checkbox.avalanche .Checkbox-icon.active {
   color: #e84141;
 }
 
-.ClaimEsGmx button {
+.ClaimEsVwave button {
   max-width: 35.65rem;
 }
 
-.ClaimEsGmx-input-label {
+.ClaimEsVwave-input-label {
   margin-bottom: 0.8rem;
 }
 
-.ClaimEsGmx input {
+.ClaimEsVwave input {
   width: 35.65rem;
 }
 
-.ClaimEsGmx-input-container {
+.ClaimEsVwave-input-container {
   position: relative;
 }
 
-.ClaimEsGmx-max-button {
+.ClaimEsVwave-max-button {
   position: absolute;
   padding: 0.465rem 0.8rem;
   background: linear-gradient(90deg, rgba(45, 66, 252, 1) 0%, rgba(46, 61, 205, 1) 100%);
@@ -93,7 +93,7 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-.ClaimEsGmx-max-button:hover {
+.ClaimEsVwave-max-button:hover {
   color: rgba(255, 255, 255, 1);
   background: linear-gradient(90deg, rgba(58, 78, 252, 1) 0%, rgba(51, 68, 222, 1) 100%);
 }

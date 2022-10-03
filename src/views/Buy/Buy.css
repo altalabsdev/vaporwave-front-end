@@ -1,19 +1,19 @@
-.BuyGMXGLP {
+.BuyVWAVEVLP {
     background: #101124;
     justify-content: space-between;
 }
 
-.BuyGMXGLP-container {
+.BuyVWAVEVLP-container {
     padding: 0 0 3.1rem 0;
     width: 100%;
 }
 
-.BuyGMXGLP-container .section-title-content {
+.BuyVWAVEVLP-container .section-title-content {
     justify-content: flex-start;
 }
 
 @media (max-width: 400px) {
-    .BuyGMXGLP-container {
+    .BuyVWAVEVLP-container {
         padding-left: 1.6rem!important;
         padding-right: 1.6rem!important;
     }

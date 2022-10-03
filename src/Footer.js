@@ -1,7 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import "./Footer.css";
-import logoImg from "./img/ic_gmx_footer.svg";
+import logoImg from "./img/vwave-logo-final.png";
 import twitterIcon from "./img/ic_twitter.svg";
 import discordIcon from "./img/ic_discord.svg";
 import telegramIcon from "./img/ic_telegram.svg";

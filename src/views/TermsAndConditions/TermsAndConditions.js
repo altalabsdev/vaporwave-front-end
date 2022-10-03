@@ -10,42 +10,43 @@ export default function TermsAndConditions() {
       <div className="default-container Page page-layout">
         <div>
           <div className="Page-title-section center">
-            <div className="Page-title">GMX</div>
+            <div className="Page-title">VWAVE</div>
             <div className="Page-subtitle">Terms and Conditions</div>
             <div className="Page-description">Last modified: June 30th, 2022</div>
           </div>
           <div className="content">
             <div className="section">
               <p className="body-text">
-                Welcome to GMX.io (“we” “us,” or “our”), the informational resource for GMX Protocol, as defined below.
+                Welcome to VWAVE.io (“we” “us,” or “our”), the informational resource for VWAVE Protocol, as defined
+                below.
               </p>
               <p className="body-text">
-                GMX.io provides information and resources about the fundamentals of the decentralized non-custodial
-                protocol called the GMX Protocol (the “GMX Protocol”, “Protocol” or “GMX DApp”). GMX.io is not an
-                available access point to the GMX Protocol.
+                VWAVE.io provides information and resources about the fundamentals of the decentralized non-custodial
+                protocol called the VWAVE Protocol (the “VWAVE Protocol”, “Protocol” or “VWAVE DApp”). VWAVE.io is not
+                an available access point to the VWAVE Protocol.
               </p>
               <p className="body-text">
                 These Terms and Conditions and any other documents incorporated herein by reference (collectively, these
                 “Terms”) to you or the company or other legal entity you represent (“you” or “your”), explains the terms
-                and conditions by which you may access GMX.io (“the Site”) and app.GMX.io (“the Interface”). If you do
-                not agree to any of these Terms, please do not use the Site or the Interface.
+                and conditions by which you may access VWAVE.io (“the Site”) and app.VWAVE.io (“the Interface”). If you
+                do not agree to any of these Terms, please do not use the Site or the Interface.
               </p>
             </div>
             <div className="section">
               <h3 className="body-title">1. USE OF THE SITE AND THE INTERFACE</h3>
-              <p className="body-text">The GMX.io site is for informational purposes only.</p>
+              <p className="body-text">The VWAVE.io site is for informational purposes only.</p>
               <p className="body-text">
-                GMX.io is not part of any transaction on the blockchain networks underlying the GMX Protocol; we do not
-                have possession, custody or control over any cryptoassets appearing on the Interface; and we do not have
-                possession, custody, or control over any user’s funds. Further, we do not store, send, or receive any
-                cryptoassets. You understand that when you interact with any GMX Protocol smart contracts, you retain
-                control over your cryptoassets at all times. We do not have access to your private keys.
+                VWAVE.io is not part of any transaction on the blockchain networks underlying the VWAVE Protocol; we do
+                not have possession, custody or control over any cryptoassets appearing on the Interface; and we do not
+                have possession, custody, or control over any user’s funds. Further, we do not store, send, or receive
+                any cryptoassets. You understand that when you interact with any VWAVE Protocol smart contracts, you
+                retain control over your cryptoassets at all times. We do not have access to your private keys.
               </p>
               <ul className="list-style-none">
                 <li>
                   <p className="body-text">
-                    1.1. As a condition to accessing or using the Site or Interface, you represent and warrant to GMX.io
-                    the following:
+                    1.1. As a condition to accessing or using the Site or Interface, you represent and warrant to
+                    VWAVE.io the following:
                   </p>
                   <ul className="list-style-none">
                     <li>
@@ -102,7 +103,7 @@ export default function TermsAndConditions() {
                         transaction, activity, event or other matter, including any rule, letter, order, judgement,
                         directive or other requirement, guidance, or guideline issued by any domestic or foreign
                         federal, provincial or state, municipal, local or other governmental, regulatory, judicial or
-                        administrative authority having jurisdiction over GMX.io or you as otherwise duly enacted,
+                        administrative authority having jurisdiction over VWAVE.io or you as otherwise duly enacted,
                         enforceable by law, the common law or equity (collectively, “Applicable Laws”); or (b)
                         contribute to or facilitate any illegal activity.
                       </p>
@@ -121,10 +122,11 @@ export default function TermsAndConditions() {
                       <p className="body-text">
                         1.2.1. from time to time the Site or the Interface may be inaccessible or inoperable for any
                         reason, including, but not limited to: (a) equipment malfunctions; (b) periodic maintenance
-                        procedures or repairs that GMX.io or any of its suppliers or contractors may undertake from time
-                        to time; (c) causes beyond GMX.io’s control or that GMX.io could not reasonably foresee; (d)
-                        disruptions and temporary or permanent unavailability of underlying blockchain infrastructure;
-                        or (e) unavailability of third-party service providers or external partners for any reason;
+                        procedures or repairs that VWAVE.io or any of its suppliers or contractors may undertake from
+                        time to time; (c) causes beyond VWAVE.io’s control or that VWAVE.io could not reasonably
+                        foresee; (d) disruptions and temporary or permanent unavailability of underlying blockchain
+                        infrastructure; or (e) unavailability of third-party service providers or external partners for
+                        any reason;
                       </p>
                     </li>
                     <li>
@@ -146,12 +148,12 @@ export default function TermsAndConditions() {
                       <p className="body-text">
                         1.2.4. the pricing information provided on the Site or the Interface does not represent an
                         offer, a solicitation of an offer, or any advice regarding, or recommendation to enter into, a
-                        transaction with GMX.io;
+                        transaction with VWAVE.io;
                       </p>
                     </li>
                     <li>
                       <p className="body-text">
-                        1.2.5. GMX.io does not act as a broker or advisor for you or any other user of the Site or the
+                        1.2.5. VWAVE.io does not act as a broker or advisor for you or any other user of the Site or the
                         Interface;
                       </p>
                     </li>
@@ -195,8 +197,8 @@ export default function TermsAndConditions() {
               <p className="body-text">
                 You are required to pay all fees for transactions involving certain blockchain networks. These fees may
                 include gas costs, as well as all other fees reflected on the Interface at the time of your use,
-                including trading related fees. GMX.io does not receive any fees for any blockchain transactions, or the
-                use of the Site or the Interface.
+                including trading related fees. VWAVE.io does not receive any fees for any blockchain transactions, or
+                the use of the Site or the Interface.
               </p>
             </div>
             <div className="section">
@@ -216,19 +218,19 @@ export default function TermsAndConditions() {
               <ul className="list-style-none">
                 <li>
                   <p className="body-text">
-                    4.1. GMX.io own all rights, names, logos, and other marks used on the Site and the Interface
+                    4.1. VWAVE.io own all rights, names, logos, and other marks used on the Site and the Interface
                     including, without limitation, any and all copyrights in and to any content, code, data, or other
                     materials that you may access or use on or through the Site or the Interface; however, the code for
-                    the GMX Protocol and the Interface (app.GMX.io) deployed on IPFS is open-sourced. Except as
+                    the VWAVE Protocol and the Interface (app.VWAVE.io) deployed on IPFS is open-sourced. Except as
                     expressly set forth herein, your use of or access to the Site or the Interface does not grant you
                     any ownership or other rights therein.
                   </p>
                 </li>
                 <li>
                   <p className="body-text">
-                    4.2. GMX.io may use and share your comments, bug reports, ideas, or other feedback that you may
-                    provide, including suggestions about how we might improve. You agree that GMX.io are free to use or
-                    not use any feedback that we receive from you as we see fit, including copying and sharing such
+                    4.2. VWAVE.io may use and share your comments, bug reports, ideas, or other feedback that you may
+                    provide, including suggestions about how we might improve. You agree that VWAVE.io are free to use
+                    or not use any feedback that we receive from you as we see fit, including copying and sharing such
                     feedback with third parties, without any obligation to you.
                   </p>
                 </li>
@@ -239,20 +241,20 @@ export default function TermsAndConditions() {
               <ul className="list-style-none">
                 <li>
                   <p className="body-text">
-                    5.1. GMX.io reserve the right, at our sole discretion, from time to time and with or without prior
+                    5.1. VWAVE.io reserve the right, at our sole discretion, from time to time and with or without prior
                     notice to you, modify, suspend or disable (temporarily or permanently) the Site or our subdomain to
                     the Interface, in whole or in part, for any reason whatsoever, including, without limitation. Upon
                     termination of your access, your right to use the Site or the Interface from our subdomain will
                     immediately cease, although it would still be accessible via a third-party since we are not hosting
-                    or owners of its code. GMX.io will not be liable for any losses suffered by you resulting from any
+                    or owners of its code. VWAVE.io will not be liable for any losses suffered by you resulting from any
                     modification to the Site or the Interface or from any modification, suspension, or termination, for
                     any reason, of your access to all or any portion of the Site or the Interface.
                   </p>
                 </li>
                 <li>
                   <p className="body-text">
-                    5.2. GMX.io may revise these Terms from time to time. We will notify you by updating the date at the
-                    top of the Terms and by maintaining a current version of the Terms. The changes will not be
+                    5.2. VWAVE.io may revise these Terms from time to time. We will notify you by updating the date at
+                    the top of the Terms and by maintaining a current version of the Terms. The changes will not be
                     retroactive, and the most current version of the Terms, which will always be at
                     https://gmx.io/#/referral-terms. All modifications will be effective when they are posted. By
                     continuing to access or use the Site or the Interface after those revisions become effective, you
@@ -267,7 +269,7 @@ export default function TermsAndConditions() {
                 <li>
                   <p className="body-text">
                     6.1. The use of technology related to blockchain, smart contracts and cryptocurrencies, among
-                    others, entails a risk that by accessing transactions you are assuming. GMX.io does not own or
+                    others, entails a risk that by accessing transactions you are assuming. VWAVE.io does not own or
                     control any of the underlying software through which blockchain networks are formed. The software
                     underlying blockchain networks are open-source, such that anyone can use, copy, modify, and
                     distribute it. By using the Interface, you acknowledge and agree:
@@ -275,8 +277,8 @@ export default function TermsAndConditions() {
                   <ul className="list-style-none">
                     <li>
                       <p className="body-text">
-                        6.1.1. that GMX.io is not responsible for the operation of the open-source software and networks
-                        underlying the Interface;
+                        6.1.1. that VWAVE.io is not responsible for the operation of the open-source software and
+                        networks underlying the Interface;
                       </p>
                     </li>
                     <li>
@@ -291,7 +293,7 @@ export default function TermsAndConditions() {
                         those commonly referred to as “forks,” which may materially affect the Interface. You are
                         responsible for securing your private key(s). We do not have access to your private
                         key(s),losing control of your private key(s) will permanently and irreversibly deny you access
-                        on any blockchain-based network. Neither GMX.io nor any other person or entity will be able to
+                        on any blockchain-based network. Neither VWAVE.io nor any other person or entity will be able to
                         retrieve or protect your digital assets. If your private key(s) are lost, then you will not be
                         able to transfer your digital assets to any other blockchain address or wallet. If this occurs,
                         then you will not be able to realize any value or utility from the digital assets that you may
@@ -302,14 +304,14 @@ export default function TermsAndConditions() {
                 </li>
                 <li>
                   <p className="body-text">
-                    6.2. GMX.io is not responsible for the content of any third-party, including, but not limited to,
-                    information, materials, products, or services, that GMX.io does not own or control. In addition,
-                    third parties may offer promotions related to your access and use of the Interface. GMX.io does not
-                    endorse or assume any responsibility for any such resources or promotions. If you access any such
-                    resources or participate in any such promotions, you do so at your own risk, and you understand that
-                    this Terms does not apply to your dealings or relationships with any third parties. You expressly
-                    relieve GMX.io of any and all liability arising from your use of any such resources or participation
-                    in any such promotions.
+                    6.2. VWAVE.io is not responsible for the content of any third-party, including, but not limited to,
+                    information, materials, products, or services, that VWAVE.io does not own or control. In addition,
+                    third parties may offer promotions related to your access and use of the Interface. VWAVE.io does
+                    not endorse or assume any responsibility for any such resources or promotions. If you access any
+                    such resources or participate in any such promotions, you do so at your own risk, and you understand
+                    that this Terms does not apply to your dealings or relationships with any third parties. You
+                    expressly relieve VWAVE.io of any and all liability arising from your use of any such resources or
+                    participation in any such promotions.
                   </p>
                 </li>
                 <li>
@@ -337,11 +339,11 @@ export default function TermsAndConditions() {
                 </li>
                 <li>
                   <p className="body-text">
-                    6.6. You hereby assume, and agree that GMX.io will have no responsibility or liability for, the
+                    6.6. You hereby assume, and agree that VWAVE.io will have no responsibility or liability for, the
                     risks set forth in this Section 9. You hereby irrevocably waive, release and discharge all claims,
-                    whether known or unknown to you, against GMX.io, its affiliates, and their respective shareholders,
-                    members, directors, officers, employees, agents, and representatives, suppliers, and contractors
-                    related to any of the risks set forth in this Section 6.
+                    whether known or unknown to you, against VWAVE.io, its affiliates, and their respective
+                    shareholders, members, directors, officers, employees, agents, and representatives, suppliers, and
+                    contractors related to any of the risks set forth in this Section 6.
                   </p>
                 </li>
               </ul>
@@ -366,7 +368,7 @@ export default function TermsAndConditions() {
                     <li>
                       <p className="body-text">
                         7.1.2. engage in transactions involving items that infringe or violate any copyright, trademark,
-                        right of publicity, or privacy, or any other proprietary right of GMX.io;
+                        right of publicity, or privacy, or any other proprietary right of VWAVE.io;
                       </p>
                     </li>
                     <li>
@@ -397,7 +399,7 @@ export default function TermsAndConditions() {
                     </li>
                     <li>
                       <p className="body-text">
-                        7.1.6. harass, abuse, or harm of another person or entity, including GMX.io’s collaborator and
+                        7.1.6. harass, abuse, or harm of another person or entity, including VWAVE.io’s collaborator and
                         service providers;
                       </p>
                     </li>
@@ -421,9 +423,9 @@ export default function TermsAndConditions() {
             <div className="section">
               <h3 className="body-title">8. DISCLOSURES; DISCLAIMERS</h3>
               <p className="body-text">
-                GMX.io is an informational site to the GMX Protocol. GMX.io does not operate an exchange platform or
-                offer trade execution or clearing services and has no oversight, involvement, or control concerning your
-                transactions using the Interface. All transactions between users of the Interface are executed
+                VWAVE.io is an informational site to the VWAVE Protocol. VWAVE.io does not operate an exchange platform
+                or offer trade execution or clearing services and has no oversight, involvement, or control concerning
+                your transactions using the Interface. All transactions between users of the Interface are executed
                 peer-to-peer directly between the users’ blockchain addresses through a third-party developed
                 open-source smart contract.
               </p>
@@ -434,39 +436,39 @@ export default function TermsAndConditions() {
                 using the Interface.
               </p>
               <p className="body-text">
-                You understand that GMX.io is not registered or licensed by any regulatory agency or authority. No such
-                agency or authority has reviewed or approved the use of the Site or the Interface..
+                You understand that VWAVE.io is not registered or licensed by any regulatory agency or authority. No
+                such agency or authority has reviewed or approved the use of the Site or the Interface..
               </p>
               <p className="body-text">
-                You agree that the Site and the Interface are provided on an “AS IS” and “AS AVAILABLE” basis. GMX.io
+                You agree that the Site and the Interface are provided on an “AS IS” and “AS AVAILABLE” basis. VWAVE.io
                 makes no guarantees of any kind or connection with the Site or the Interface.
               </p>
             </div>
             <div className="section">
               <h3 className="body-title">9. LIMITATION OF LIABILITY</h3>
               <p className="body-text">
-                In no event shall GMX.io, its affiliates, its suppliers and contractors, and its affiliates’, suppliers’
-                and contractors’ respective stockholders, members, directors, officers, managers, employees, attorneys,
-                agents, representatives, suppliers, and contractors (collectively, the “Risk Limited Parties”) be liable
-                for any incidental, indirect, special, punitive, consequential or similar damages or liabilities
-                whatsoever (including, without limitation, damages for loss of fiat, assets, data, information, revenue,
-                opportunities, use, goodwill, profits or other business or financial benefit) arising out of or in
-                connection with the Site or the Interface, or other item provided by or on behalf of GMX.io, whether
-                under contract, tort (including negligence), civil liability, statute, strict liability, breach of
-                warranties, or under any other theory of liability, and whether or not we have been advised of, knew of
-                or should have known of the possibility of such damages and notwithstanding any failure of the essential
-                purpose of these Terms or any limited remedy hereunder nor is GMX.io in any way responsible for the
-                execution or settlement of transactions between users of the Interface.
+                In no event shall VWAVE.io, its affiliates, its suppliers and contractors, and its affiliates’,
+                suppliers’ and contractors’ respective stockholders, members, directors, officers, managers, employees,
+                attorneys, agents, representatives, suppliers, and contractors (collectively, the “Risk Limited
+                Parties”) be liable for any incidental, indirect, special, punitive, consequential or similar damages or
+                liabilities whatsoever (including, without limitation, damages for loss of fiat, assets, data,
+                information, revenue, opportunities, use, goodwill, profits or other business or financial benefit)
+                arising out of or in connection with the Site or the Interface, or other item provided by or on behalf
+                of VWAVE.io, whether under contract, tort (including negligence), civil liability, statute, strict
+                liability, breach of warranties, or under any other theory of liability, and whether or not we have been
+                advised of, knew of or should have known of the possibility of such damages and notwithstanding any
+                failure of the essential purpose of these Terms or any limited remedy hereunder nor is VWAVE.io in any
+                way responsible for the execution or settlement of transactions between users of the Interface.
               </p>
               <p className="body-text">
-                In no event shall GMX.io’s aggregate liability arising out of or in connection with the Site or
+                In no event shall VWAVE.io’s aggregate liability arising out of or in connection with the Site or
                 Interface exceed one thousand Singapore Dollars (1,000.00 SGD) .
               </p>
             </div>
             <div className="section">
               <h3 className="body-title">10. INDEMNIFICATION</h3>
               <p className="body-text">
-                You will defend, indemnify, and hold harmless GMX.io, its affiliates, and its affiliates’ respective
+                You will defend, indemnify, and hold harmless VWAVE.io, its affiliates, and its affiliates’ respective
                 stockholders, members, directors, officers, managers, employees, attorneys, agents, representatives,
                 suppliers, and contractors (collectively, “Indemnified Parties”) from any claim, demand, lawsuit,
                 action, proceeding, investigation, liability, damage, loss, cost or expense, including without
@@ -485,13 +487,13 @@ export default function TermsAndConditions() {
             <div className="section">
               <h3 className="body-title">11. DISPUTE RESOLUTION & ARBITRATION</h3>
               <p className="body-text">
-                GMX.io will use its best efforts to resolve any potential disputes through informal, good faith
+                VWAVE.io will use its best efforts to resolve any potential disputes through informal, good faith
                 negotiations. If a potential dispute arises, you must contact us by sending a written notice of your
-                claim (“Notice”) to GMX.io in any of our official channels. The Notice must (a) describe the nature and
-                basis of the claim; and (b) set forth the specific relief sought. Our notice to you will be similar in
-                form to that described above. If you and GMX.io cannot reach an agreement to resolve the claim within
-                sixty (60) days of your email, then you and GMX.io agree to resolve the potential dispute according to
-                the process set forth below.
+                claim (“Notice”) to VWAVE.io in any of our official channels. The Notice must (a) describe the nature
+                and basis of the claim; and (b) set forth the specific relief sought. Our notice to you will be similar
+                in form to that described above. If you and VWAVE.io cannot reach an agreement to resolve the claim
+                within sixty (60) days of your email, then you and VWAVE.io agree to resolve the potential dispute
+                according to the process set forth below.
               </p>
               <p className="body-text">
                 Any claim or controversy arising out of or relating to the Site, the Interface, or these Terms, or any
@@ -506,8 +508,8 @@ export default function TermsAndConditions() {
               </p>
               <p className="body-text">
                 Any claim arising out of or related to these Terms or the Site or the Interface must be filed within one
-                year after such claim arose; otherwise, the claim is permanently barred, which means that you and GMX.io
-                will not have the right to assert the claim.
+                year after such claim arose; otherwise, the claim is permanently barred, which means that you and
+                VWAVE.io will not have the right to assert the claim.
               </p>
             </div>
             <div className="section">
@@ -523,9 +525,9 @@ export default function TermsAndConditions() {
               <ul className="list-style-none">
                 <li>
                   <p className="body-text">
-                    13.1. Any right or remedy of GMX.io set forth in these Terms is in addition to, and not in lieu of,
-                    any other right or remedy whether described in these Terms, under Applicable Law, at law, or in
-                    equity. The failure or delay of GMX.io in exercising any right, power, or privilege under these
+                    13.1. Any right or remedy of VWAVE.io set forth in these Terms is in addition to, and not in lieu
+                    of, any other right or remedy whether described in these Terms, under Applicable Law, at law, or in
+                    equity. The failure or delay of VWAVE.io in exercising any right, power, or privilege under these
                     Terms shall not operate as a waiver thereof.
                   </p>
                 </li>
@@ -562,7 +564,7 @@ export default function TermsAndConditions() {
                 </li>
                 <li>
                   <p className="body-text">
-                    13.6. These Terms contain the entire agreement between you and GMX.io, and supersede all prior and
+                    13.6. These Terms contain the entire agreement between you and VWAVE.io, and supersede all prior and
                     contemporaneous understandings between the parties regarding the Interface and the Site or the
                     Interface.
                   </p>
@@ -585,8 +587,8 @@ export default function TermsAndConditions() {
             <div className="section">
               <h3 className="body-title">CONTACT INFORMATION.</h3>
               <p className="body-text">
-                If you have any questions about these Terms, the Site, or the Interface, please contact GMX.io in any of
-                our community channels.
+                If you have any questions about these Terms, the Site, or the Interface, please contact VWAVE.io in any
+                of our community channels.
               </p>
             </div>
           </div>

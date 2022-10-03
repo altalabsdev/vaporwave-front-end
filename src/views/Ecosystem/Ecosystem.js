@@ -20,54 +20,54 @@ const NETWORK_ICON_ALTS = {
 };
 
 export default function Ecosystem() {
-  const gmxPages = [
+  const vwavePages = [
     {
-      title: "GMX Governance",
+      title: "VWAVE Governance",
       link: "https://gov.gmx.io/",
-      about: "GMX Governance Page",
+      about: "VWAVE Governance Page",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Stats",
+      title: "VWAVE Stats",
       link: "https://stats.gmx.io/",
-      about: "GMX Stats Page",
+      about: "VWAVE Stats Page",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Proposals",
+      title: "VWAVE Proposals",
       link: "https://snapshot.org/#/gmx.eth",
-      about: "GMX Proposals Voting page",
+      about: "VWAVE Proposals Voting page",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Announcements",
+      title: "VWAVE Announcements",
       link: "https://t.me/GMX_Announcements",
-      about: "GMX Announcements and Updates",
+      about: "VWAVE Announcements and Updates",
       chainIds: [ARBITRUM, AVALANCHE],
     },
   ];
 
   const communityProjects = [
     {
-      title: "GMX Blueberry Club",
+      title: "VWAVE Blueberry Club",
       link: "https://www.blueberry.club/",
-      about: "GMX Blueberry NFTs",
+      about: "VWAVE Blueberry NFTs",
       creatorLabel: "@xm92boi",
       creatorLink: "https://t.me/xm92boi",
       chainIds: [ARBITRUM],
     },
     {
-      title: "GMX Leaderboard",
+      title: "VWAVE Leaderboard",
       link: "https://www.gmx.house/",
-      about: "Leaderboard for GMX traders",
+      about: "Leaderboard for VWAVE traders",
       creatorLabel: "@Itburnz",
       creatorLink: "https://t.me/Itburnz",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Positions Bot",
+      title: "VWAVE Positions Bot",
       link: "https://t.me/GMXPositions",
-      about: "Telegram bot for GMX position updates",
+      about: "Telegram bot for VWAVE position updates",
       creatorLabel: "@zhongfu",
       creatorLink: "https://t.me/zhongfu",
       chainIds: [ARBITRUM, AVALANCHE],
@@ -75,7 +75,7 @@ export default function Ecosystem() {
     {
       title: "Blueberry Pulse",
       link: "https://blueberrypulse.substack.com/",
-      about: "GMX Weekly Updates",
+      about: "VWAVE Weekly Updates",
       creatorLabel: "@puroscohiba",
       creatorLink: "https://t.me/puroscohiba",
       chainIds: [ARBITRUM, AVALANCHE],
@@ -89,24 +89,24 @@ export default function Ecosystem() {
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Yield Simulator",
+      title: "VWAVE Yield Simulator",
       link: "https://gmx.defisims.com/",
-      about: "Yield simulator for GMX",
+      about: "Yield simulator for VWAVE",
       creatorLabel: "@s0berknight",
       creatorLink: "https://twitter.com/s0berknight",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Returns Calculator",
+      title: "VWAVE Returns Calculator",
       link: "https://docs.google.com/spreadsheets/u/4/d/1mQZlztz_NpTg5qQiYIzc_Ls1OTLfMOUtmEQN-WW8jj4/copy",
       linkLabel: "Google Spreadsheet",
-      about: "Returns calculator for GMX and GLP",
+      about: "Returns calculator for VWAVE and VLP",
       creatorLabel: "@AStoicTrader1",
       creatorLink: "https://twitter.com/AStoicTrader1",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Compound Calculator",
+      title: "VWAVE Compound Calculator",
       link: "https://docs.google.com/spreadsheets/d/14DiIE1wZkK9-Y5xSx1PzIgmpcj4ccz1YVw5nwzIWLgI/edit#gid=0",
       linkLabel: "Google Spreadsheet",
       about: "Optimal compound interval calculator",
@@ -118,23 +118,23 @@ export default function Ecosystem() {
 
   const dashboardProjects = [
     {
-      title: "GMX Referrals Dashboard",
+      title: "VWAVE Referrals Dashboard",
       link: "https://www.gmxreferrals.com/",
-      about: "Dashboard for GMX referral stats",
+      about: "Dashboard for VWAVE referral stats",
       creatorLabel: "@s0berknight",
       creatorLink: "https://twitter.com/s0berknight",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Terminal",
+      title: "VWAVE Terminal",
       link: "https://gmxterminal.com",
-      about: "GMX explorer for stats and traders",
+      about: "VWAVE explorer for stats and traders",
       creatorLabel: "@vipineth",
       creatorLink: "https://t.me/vipineth",
       chainIds: [ARBITRUM],
     },
     {
-      title: "GMX Analytics",
+      title: "VWAVE Analytics",
       link: "https://www.gmxstats.com/",
       about: "Financial reports and protocol analytics",
       creatorLabel: "@CryptoMessiah",
@@ -144,7 +144,7 @@ export default function Ecosystem() {
     {
       title: "TokenTerminal",
       link: "https://tokenterminal.com/terminal/projects/gmx",
-      about: "GMX fundamentals",
+      about: "VWAVE fundamentals",
       creatorLabel: "@tokenterminal",
       creatorLink: "https://twitter.com/tokenterminal",
       chainIds: [ARBITRUM, AVALANCHE],
@@ -152,7 +152,7 @@ export default function Ecosystem() {
     {
       title: "CryptoFees",
       link: "https://cryptofees.info",
-      about: "Fees generated by GMX",
+      about: "Fees generated by VWAVE",
       creatorLabel: "@CryptoFeesInfo",
       creatorLink: "https://twitter.com/CryptoFeesInfo",
       chainIds: [ARBITRUM, AVALANCHE],
@@ -269,31 +269,31 @@ export default function Ecosystem() {
       link: "https://1inch.io/",
       about: "DEX Aggregator",
       announcementLabel: "https://twitter.com",
-      announcementLink: "https://twitter.com/GMX_IO/status/1522247451410845696",
+      announcementLink: "https://twitter.com/VGMX_IO/status/1522247451410845696",
       chainIds: [ARBITRUM, AVALANCHE],
     },
   ];
 
   const telegramGroups = [
     {
-      title: "GMX",
+      title: "VWAVE",
       link: "https://t.me/GMX_IO",
       about: "Telegram Group",
     },
     {
-      title: "GMX (Chinese)",
+      title: "VWAVE (Chinese)",
       link: "https://t.me/gmxch",
       about: "Telegram Group (Chinese)",
     },
     {
-      title: "GMX (Portuguese)",
+      title: "VWAVE (Portuguese)",
       link: "https://t.me/GMX_Portuguese",
       about: "Telegram Group (Portuguese)",
     },
     {
-      title: "GMX Trading Chat",
+      title: "VWAVE Trading Chat",
       link: "https://t.me/gambittradingchat",
-      about: "GMX community discussion",
+      about: "VWAVE community discussion",
     },
   ];
 
@@ -304,12 +304,12 @@ export default function Ecosystem() {
           <div className="section-title-block">
             <div className="section-title-icon"></div>
             <div className="section-title-content">
-              <div className="Page-title">GMX Pages</div>
-              <div className="Page-description">GMX ecosystem pages.</div>
+              <div className="Page-title">VWAVE Pages</div>
+              <div className="Page-description">VWAVE ecosystem pages.</div>
             </div>
           </div>
           <div className="DashboardV2-projects">
-            {gmxPages.map((item) => {
+            {vwavePages.map((item) => {
               const linkLabel = item.linkLabel ? item.linkLabel : item.link;
               return (
                 <div className="App-card" key={item.title}>
@@ -342,7 +342,7 @@ export default function Ecosystem() {
           </div>
           <div className="Tab-title-section">
             <div className="Page-title">Community Projects</div>
-            <div className="Page-description">Projects developed by the GMX community.</div>
+            <div className="Page-description">Projects developed by the VWAVE community.</div>
           </div>
           <div className="DashboardV2-projects">
             {communityProjects.map((item) => {
@@ -386,7 +386,7 @@ export default function Ecosystem() {
           </div>
           <div className="Tab-title-section">
             <div className="Page-title">Dashboards</div>
-            <div className="Page-description">GMX dashboards and analytics.</div>
+            <div className="Page-description">VWAVE dashboards and analytics.</div>
           </div>
           <div className="DashboardV2-projects">
             {dashboardProjects.map((item) => {
@@ -431,7 +431,7 @@ export default function Ecosystem() {
           </div>
           <div className="Tab-title-section">
             <div className="Page-title">Partnerships and Integrations</div>
-            <div className="Page-description">Projects integrated with GMX.</div>
+            <div className="Page-description">Projects integrated with VWAVE.</div>
           </div>
           <div className="DashboardV2-projects">
             {integrations.map((item) => {

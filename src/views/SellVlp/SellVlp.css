@@ -1,4 +1,4 @@
-.SellGlp-content {
+.SellVlp-content {
   display: grid;
   grid-template-columns: 1fr 43.4rem;
   grid-gap: 1.5rem;
@@ -7,16 +7,16 @@
   padding-top: 1.5rem;
 }
 
-.SellGlp-box {
+.SellVlp-box {
   padding: 1.5rem;
 }
 
-.SellGlp-cta {
+.SellVlp-cta {
   margin-top: 0.8rem;
 }
 
 @media (max-width: 900px) {
-  .SellGlp-content {
+  .SellVlp-content {
     grid-template-columns: 1fr;
   }
 }

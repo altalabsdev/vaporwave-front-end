@@ -18,11 +18,11 @@ import Vault from "../../abis/Vault.json";
 import ReaderV2 from "../../abis/ReaderV2.json";
 import RewardReader from "../../abis/RewardReader.json";
 import Token from "../../abis/Token.json";
-import GlpManager from "../../abis/GlpManager.json";
+import VlpManager from "../../abis/VlpManager.json";
 
 import { useWeb3React } from "@web3-react/core";
 
-import { useGmxPrice } from "../../Api";
+import { useVwavePrice } from "../../Api";
 
 import { getContract } from "../../Addresses";
 
@@ -34,48 +34,48 @@ export default function APRLabel({ chainId, label }) {
 
   const vaultAddress = getContract(chainId, "Vault");
   const nativeTokenAddress = getContract(chainId, "NATIVE_TOKEN");
-  const gmxAddress = getContract(chainId, "GMX");
-  const esGmxAddress = getContract(chainId, "ES_GMX");
-  const bnGmxAddress = getContract(chainId, "BN_GMX");
-  const glpAddress = getContract(chainId, "GLP");
+  const vwaveAddress = getContract(chainId, "VWAVE");
+  const esVwaveAddress = getContract(chainId, "ES_VWAVE");
+  const bnVwaveAddress = getContract(chainId, "BN_VWAVE");
+  const vlpAddress = getContract(chainId, "VLP");
 
-  const stakedGmxTrackerAddress = getContract(chainId, "StakedGmxTracker");
-  const bonusGmxTrackerAddress = getContract(chainId, "BonusGmxTracker");
-  const feeGmxTrackerAddress = getContract(chainId, "FeeGmxTracker");
+  const stakedVwaveTrackerAddress = getContract(chainId, "StakedVwaveTracker");
+  const bonusVwaveTrackerAddress = getContract(chainId, "BonusVwaveTracker");
+  const feeVwaveTrackerAddress = getContract(chainId, "FeeVwaveTracker");
 
-  const stakedGlpTrackerAddress = getContract(chainId, "StakedGlpTracker");
-  const feeGlpTrackerAddress = getContract(chainId, "FeeGlpTracker");
+  const stakedVlpTrackerAddress = getContract(chainId, "StakedVlpTracker");
+  const feeVlpTrackerAddress = getContract(chainId, "FeeVlpTracker");
 
-  const glpManagerAddress = getContract(chainId, "GlpManager");
+  const vlpManagerAddress = getContract(chainId, "VlpManager");
 
-  const gmxVesterAddress = getContract(chainId, "GmxVester");
-  const glpVesterAddress = getContract(chainId, "GlpVester");
+  const vwaveVesterAddress = getContract(chainId, "VwaveVester");
+  const vlpVesterAddress = getContract(chainId, "VlpVester");
 
-  const vesterAddresses = [gmxVesterAddress, glpVesterAddress];
+  const vesterAddresses = [vwaveVesterAddress, vlpVesterAddress];
 
-  const walletTokens = [gmxAddress, esGmxAddress, glpAddress, stakedGmxTrackerAddress];
+  const walletTokens = [vwaveAddress, esVwaveAddress, vlpAddress, stakedVwaveTrackerAddress];
   const depositTokens = [
-    gmxAddress,
-    esGmxAddress,
-    stakedGmxTrackerAddress,
-    bonusGmxTrackerAddress,
-    bnGmxAddress,
-    glpAddress,
+    vwaveAddress,
+    esVwaveAddress,
+    stakedVwaveTrackerAddress,
+    bonusVwaveTrackerAddress,
+    bnVwaveAddress,
+    vlpAddress,
   ];
   const rewardTrackersForDepositBalances = [
-    stakedGmxTrackerAddress,
-    stakedGmxTrackerAddress,
-    bonusGmxTrackerAddress,
-    feeGmxTrackerAddress,
-    feeGmxTrackerAddress,
-    feeGlpTrackerAddress,
+    stakedVwaveTrackerAddress,
+    stakedVwaveTrackerAddress,
+    bonusVwaveTrackerAddress,
+    feeVwaveTrackerAddress,
+    feeVwaveTrackerAddress,
+    feeVlpTrackerAddress,
   ];
   const rewardTrackersForStakingInfo = [
-    stakedGmxTrackerAddress,
-    bonusGmxTrackerAddress,
-    feeGmxTrackerAddress,
-    stakedGlpTrackerAddress,
-    feeGlpTrackerAddress,
+    stakedVwaveTrackerAddress,
+    bonusVwaveTrackerAddress,
+    feeVwaveTrackerAddress,
+    stakedVlpTrackerAddress,
+    feeVlpTrackerAddress,
   ];
 
   const { data: walletBalances } = useSWR(
@@ -99,15 +99,15 @@ export default function APRLabel({ chainId, label }) {
     }
   );
 
-  const { data: stakedGmxSupply } = useSWR(
-    [`StakeV2:stakedGmxSupply:${active}`, chainId, gmxAddress, "balanceOf", stakedGmxTrackerAddress],
+  const { data: stakedVwaveSupply } = useSWR(
+    [`StakeV2:stakedVwaveSupply:${active}`, chainId, vwaveAddress, "balanceOf", stakedVwaveTrackerAddress],
     {
       fetcher: fetcher(undefined, Token),
     }
   );
 
-  const { data: aums } = useSWR([`StakeV2:getAums:${active}`, chainId, glpManagerAddress, "getAums"], {
-    fetcher: fetcher(undefined, GlpManager),
+  const { data: aums } = useSWR([`StakeV2:getAums:${active}`, chainId, vlpManagerAddress, "getAums"], {
+    fetcher: fetcher(undefined, VlpManager),
   });
 
   const { data: nativeTokenPrice } = useSWR(
@@ -124,10 +124,10 @@ export default function APRLabel({ chainId, label }) {
     }
   );
 
-  const { gmxPrice } = useGmxPrice(chainId, {}, active);
+  const { vwavePrice } = useVwavePrice(chainId, {}, active);
 
-  const gmxSupplyUrl = getServerUrl(chainId, "/gmx_supply");
-  const { data: gmxSupply } = useSWR([gmxSupplyUrl], {
+  const vwaveSupplyUrl = getServerUrl(chainId, "/gmx_supply");
+  const { data: vwaveSupply } = useSWR([vwaveSupplyUrl], {
     fetcher: (...args) => fetch(...args).then((res) => res.text()),
   });
 
@@ -149,9 +149,9 @@ export default function APRLabel({ chainId, label }) {
     vestingData,
     aum,
     nativeTokenPrice,
-    stakedGmxSupply,
-    gmxPrice,
-    gmxSupply
+    stakedVwaveSupply,
+    vwavePrice,
+    vwaveSupply
   );
 
   return <>{`${formatKeyAmount(processedData, label, 2, 2, true)}%`}</>;

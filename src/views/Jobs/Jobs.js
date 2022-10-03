@@ -16,7 +16,7 @@ function Jobs() {
           <div className="section-title-icon"></div>
           <div className="section-title-content">
             <div className="Page-title">Jobs</div>
-            <div className="Page-description">Job openings at GMX.</div>
+            <div className="Page-description">Job openings at VWAVE.</div>
           </div>
         </div>
         <div className="jobs-page-body">
@@ -24,7 +24,7 @@ function Jobs() {
             <div className="body-para">
               <p className="subheading">What you will do:</p>
               <ul>
-                <li>Work closely with the GMX team on the GMX front-end website.</li>
+                <li>Work closely with the VWAVE team on the VWAVE front-end website.</li>
                 <li>Collaborate and discuss features to be worked on.</li>
                 <li>Remote full-time position, flexible working hours.</li>
               </ul>
@@ -38,7 +38,7 @@ function Jobs() {
                   <li>Must speak fluent English and available to start right away.</li>
                   <li>Comfortable making changes to the interface following our current design guidelines.</li>
                 </ul>
-                <p>The salary is 60,000 to 120,000 USD + 1,000 to 3,000 GMX a year.</p>
+                <p>The salary is 60,000 to 120,000 USD + 1,000 to 3,000 VWAVE a year.</p>
                 <p className="jobs-contact">
                   If the job suits you, please get in touch with{" "}
                   <a target="_blank" href="mailto:jobs@gmx.io" rel="noopener noreferrer">

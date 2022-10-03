@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import GlpSwap from "../../components/Glp/GlpSwap";
-import buyGLPIcon from "../../img/ic_buy_glp.svg";
+import VlpSwap from "../../components/Vlp/VlpSwap";
+import buyVLPIcon from "../../img/ic_buy_vlp.svg";
 import Footer from "../../Footer";
-import "./BuyGlp.css";
+import "./BuyVlp.css";
 
 import { useChainId } from "../../Helpers";
 import { getNativeToken } from "../../data/Tokens";
 
-export default function BuyGlp(props) {
+export default function BuyVlp(props) {
   const { chainId } = useChainId();
   const history = useHistory();
   const [isBuying, setIsBuying] = useState(true);
@@ -25,14 +25,14 @@ export default function BuyGlp(props) {
     <div className="default-container page-layout">
       <div className="section-title-block">
         <div className="section-title-icon">
-          <img src={buyGLPIcon} alt="buyGLPIcon" />
+          <img src={buyVLPIcon} alt="buyVLPIcon" />
         </div>
         <div className="section-title-content">
-          <div className="Page-title">Buy / Sell GLP</div>
+          <div className="Page-title">Buy / Sell VLP</div>
           <div className="Page-description">
             Purchase{" "}
-            <a href="https://gmxio.gitbook.io/gmx/glp" target="_blank" rel="noopener noreferrer">
-              GLP tokens
+            <a href="https://gmxio.gitbook.io/gmx/vlp" target="_blank" rel="noopener noreferrer">
+              VLP tokens
             </a>{" "}
             to earn {nativeTokenSymbol} fees from swaps and leverages trading.
             <br />
@@ -42,7 +42,7 @@ export default function BuyGlp(props) {
           </div>
         </div>
       </div>
-      <GlpSwap {...props} isBuying={isBuying} setIsBuying={setIsBuying} />
+      <VlpSwap {...props} isBuying={isBuying} setIsBuying={setIsBuying} />
       <Footer />
     </div>
   );
