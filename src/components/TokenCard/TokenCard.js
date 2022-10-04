@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 import cx from "classnames";
 
-import gmxBigIcon from "../../img/ic_gmx_custom.svg";
-import glpBigIcon from "../../img/ic_glp_custom.svg";
+import vwaveBigIcon from "../../img/ic_vwave_custom.svg";
+import vlpBigIcon from "../../img/ic_vlp_custom.svg";
 
 import { ARBITRUM, AVALANCHE, switchNetwork, useChainId, isHomeSite } from "../../Helpers";
 
@@ -53,22 +53,22 @@ export default function TokenCard({ showRedirectModal }) {
     <div className="Home-token-card-options">
       <div className="Home-token-card-option">
         <div className="Home-token-card-option-icon">
-          <img src={gmxBigIcon} alt="gmxBigIcon" /> GMX
+          <img src={vwaveBigIcon} alt="vwaveBigIcon" /> VWAVE
         </div>
         <div className="Home-token-card-option-info">
           <div className="Home-token-card-option-title">
-            GMX is the utility and governance token. Accrues 30% of the platform's generated fees.
+            VWAVE is the utility and governance token. Accrues 30% of the platform's generated fees.
           </div>
           <div className="Home-token-card-option-apr">
-            Arbitrum APR: <APRLabel chainId={ARBITRUM} label="gmxAprTotal" />, Avalanche APR:{" "}
-            <APRLabel chainId={AVALANCHE} label="gmxAprTotal" key="AVALANCHE" />
+            Arbitrum APR: <APRLabel chainId={ARBITRUM} label="vwaveAprTotal" />, Avalanche APR:{" "}
+            <APRLabel chainId={AVALANCHE} label="vwaveAprTotal" key="AVALANCHE" />
           </div>
           <div className="Home-token-card-option-action">
             <div className="buy">
-              <BuyLink to="/buy_gmx" className="default-btn" network={ARBITRUM}>
+              <BuyLink to="/buy_vwave" className="default-btn" network={ARBITRUM}>
                 Buy on Arbitrum
               </BuyLink>
-              <BuyLink to="/buy_gmx" className="default-btn" network={AVALANCHE}>
+              <BuyLink to="/buy_vwave" className="default-btn" network={AVALANCHE}>
                 Buy on Avalanche
               </BuyLink>
             </div>
@@ -85,22 +85,22 @@ export default function TokenCard({ showRedirectModal }) {
       </div>
       <div className="Home-token-card-option">
         <div className="Home-token-card-option-icon">
-          <img src={glpBigIcon} alt="glpBigIcon" /> GLP
+          <img src={vlpBigIcon} alt="vlpBigIcon" /> VLP
         </div>
         <div className="Home-token-card-option-info">
           <div className="Home-token-card-option-title">
-            GLP is the liquidity provider token. Accrues 70% of the platform's generated fees.
+            VLP is the liquidity provider token. Accrues 70% of the platform's generated fees.
           </div>
           <div className="Home-token-card-option-apr">
-            Arbitrum APR: <APRLabel chainId={ARBITRUM} label="glpAprTotal" key="ARBITRUM" />, Avalanche APR:{" "}
-            <APRLabel chainId={AVALANCHE} label="glpAprTotal" key="AVALANCHE" />
+            Arbitrum APR: <APRLabel chainId={ARBITRUM} label="vlpAprTotal" key="ARBITRUM" />, Avalanche APR:{" "}
+            <APRLabel chainId={AVALANCHE} label="vlpAprTotal" key="AVALANCHE" />
           </div>
           <div className="Home-token-card-option-action">
             <div className="buy">
-              <BuyLink to="/buy_glp" className="default-btn" network={ARBITRUM}>
+              <BuyLink to="/buy_vlp" className="default-btn" network={ARBITRUM}>
                 Buy on Arbitrum
               </BuyLink>
-              <BuyLink to="/buy_glp" className="default-btn" network={AVALANCHE}>
+              <BuyLink to="/buy_vlp" className="default-btn" network={AVALANCHE}>
                 Buy on Avalanche
               </BuyLink>
             </div>

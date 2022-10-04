@@ -58,11 +58,11 @@ import Actions from "./views/Actions/Actions";
 import OrdersOverview from "./views/OrdersOverview/OrdersOverview";
 import PositionsOverview from "./views/PositionsOverview/PositionsOverview";
 import Referrals from "./views/Referrals/Referrals";
-import BuyGlp from "./views/BuyGlp/BuyGlp";
-import BuyGMX from "./views/BuyGMX/BuyGMX";
+import BuyVlp from "./views/BuyVlp/BuyVlp";
+import BuyVWAVE from "./views/BuyVWAVE/BuyVWAVE";
 import Buy from "./views/Buy/Buy";
 import NftWallet from "./views/NftWallet/NftWallet";
-import ClaimEsGmx from "./views/ClaimEsGmx/ClaimEsGmx";
+import ClaimEsVwave from "./views/ClaimEsVwave/ClaimEsVwave";
 import BeginAccountTransfer from "./views/BeginAccountTransfer/BeginAccountTransfer";
 import CompleteAccountTransfer from "./views/CompleteAccountTransfer/CompleteAccountTransfer";
 
@@ -83,8 +83,9 @@ import "./App.css";
 import "./Input.css";
 import "./AppOrder.css";
 
-import logoImg from "./img/logo_GMX.svg";
-import logoSmallImg from "./img/logo_GMX_small.svg";
+import logoImg from "./img/vwave-logo-final.png";
+
+import logoSmallImg from "./img/logo_VWAVE_small.svg";
 import connectWalletImg from "./img/ic_wallet_24.svg";
 
 import metamaskImg from "./img/metamask.png";
@@ -154,7 +155,7 @@ function AppHeaderLinks({ HeaderLink, small, openSettings, clickCloseIcon }) {
             <FiX className="App-header-menu-icon" />
           </div>
           <HeaderLink isHomeLink={true} className="App-header-link-main" to="/">
-            <img src={logoImg} alt="GMX Logo" />
+            <img src={logoImg} alt="VWAVE Logo" />
           </HeaderLink>
         </div>
       )}
@@ -378,7 +379,7 @@ function FullApp() {
           <a href="https://metamask.io" target="_blank" rel="noopener noreferrer">
             Install MetaMask
           </a>
-          {userOnMobileDevice ? ", and use GMX with its built-in browser" : " to start using GMX"}.
+          {userOnMobileDevice ? ", and use VWAVE with its built-in browser" : " to start using VWAVE"}.
         </div>
       );
       return false;
@@ -395,7 +396,7 @@ function FullApp() {
           <a href="https://www.coinbase.com/wallet" target="_blank" rel="noopener noreferrer">
             Install Coinbase Wallet
           </a>
-          {userOnMobileDevice ? ", and use GMX with its built-in browser" : " to start using GMX"}.
+          {userOnMobileDevice ? ", and use VWAVE with its built-in browser" : " to start using VWAVE"}.
         </div>
       );
       return false;
@@ -693,8 +694,8 @@ function FullApp() {
             <div className="App-header large">
               <div className="App-header-container-left">
                 <HeaderLink isHomeLink={true} exact={true} className="App-header-link-main" to="/">
-                  <img src={logoImg} className="big" alt="GMX Logo" />
-                  <img src={logoSmallImg} className="small" alt="GMX Logo" />
+                  <img src={logoImg} className="big" alt="VWAVE Logo"/>
+                  {/* <img src={logoSmallImg} className="small" alt="VWAVE Logo" /> */}
                 </HeaderLink>
                 <AppHeaderLinks HeaderLink={HeaderLink} />
               </div>
@@ -722,8 +723,8 @@ function FullApp() {
                     {isDrawerVisible && <FaTimes className="App-header-menu-icon" />}
                   </div>
                   <div className="App-header-link-main clickable" onClick={() => setIsDrawerVisible(!isDrawerVisible)}>
-                    <img src={logoImg} className="big" alt="GMX Logo" />
-                    <img src={logoSmallImg} className="small" alt="GMX Logo" />
+                    <img src={logoImg} className="big" alt="VWAVE Logo" />
+                    <img src={logoSmallImg} className="small" alt="VWAVE Logo" />
                   </div>
                 </div>
                 <div className="App-header-container-right">
@@ -810,8 +811,8 @@ function FullApp() {
                   connectWallet={connectWallet}
                 />
               </Route>
-              <Route exact path="/buy_glp">
-                <BuyGlp
+              <Route exact path="/buy_vlp">
+                <BuyVlp
                   savedSlippageAmount={savedSlippageAmount}
                   setPendingTxns={setPendingTxns}
                   connectWallet={connectWallet}
@@ -820,8 +821,8 @@ function FullApp() {
               <Route exact path="/jobs">
                 <Jobs />
               </Route>
-              <Route exact path="/buy_gmx">
-                <BuyGMX />
+              <Route exact path="/buy_vwave">
+                <BuyVWAVE />
               </Route>
               <Route exact path="/ecosystem">
                 <Ecosystem />
@@ -835,8 +836,8 @@ function FullApp() {
               <Route exact path="/nft_wallet">
                 <NftWallet />
               </Route>
-              <Route exact path="/claim_es_gmx">
-                <ClaimEsGmx setPendingTxns={setPendingTxns} />
+              <Route exact path="/claim_es_vwave">
+                <ClaimEsVwave setPendingTxns={setPendingTxns} />
               </Route>
               <Route exact path="/actions">
                 <Actions />

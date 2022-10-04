@@ -47,45 +47,45 @@ export default function BeginAccountTransfer(props) {
     parsedReceiver = receiver;
   }
 
-  const gmxAddress = getContract(chainId, "GMX");
-  const gmxVesterAddress = getContract(chainId, "GmxVester");
-  const glpVesterAddress = getContract(chainId, "GlpVester");
+  const vwaveAddress = getContract(chainId, "VWAVE");
+  const vwaveVesterAddress = getContract(chainId, "VwaveVester");
+  const vlpVesterAddress = getContract(chainId, "VlpVester");
 
   const rewardRouterAddress = getContract(chainId, "RewardRouter");
 
-  const { data: gmxVesterBalance } = useSWR([active, chainId, gmxVesterAddress, "balanceOf", account], {
+  const { data: vwaveVesterBalance } = useSWR([active, chainId, vwaveVesterAddress, "balanceOf", account], {
     fetcher: fetcher(library, Token),
   });
 
-  const { data: glpVesterBalance } = useSWR([active, chainId, glpVesterAddress, "balanceOf", account], {
+  const { data: vlpVesterBalance } = useSWR([active, chainId, vlpVesterAddress, "balanceOf", account], {
     fetcher: fetcher(library, Token),
   });
 
-  const stakedGmxTrackerAddress = getContract(chainId, "StakedGmxTracker");
-  const { data: cumulativeGmxRewards } = useSWR(
-    [active, chainId, stakedGmxTrackerAddress, "cumulativeRewards", parsedReceiver],
+  const stakedVwaveTrackerAddress = getContract(chainId, "StakedVwaveTracker");
+  const { data: cumulativeVwaveRewards } = useSWR(
+    [active, chainId, stakedVwaveTrackerAddress, "cumulativeRewards", parsedReceiver],
     {
       fetcher: fetcher(library, RewardTracker),
     }
   );
 
-  const stakedGlpTrackerAddress = getContract(chainId, "StakedGlpTracker");
-  const { data: cumulativeGlpRewards } = useSWR(
-    [active, chainId, stakedGlpTrackerAddress, "cumulativeRewards", parsedReceiver],
+  const stakedVlpTrackerAddress = getContract(chainId, "StakedVlpTracker");
+  const { data: cumulativeVlpRewards } = useSWR(
+    [active, chainId, stakedVlpTrackerAddress, "cumulativeRewards", parsedReceiver],
     {
       fetcher: fetcher(library, RewardTracker),
     }
   );
 
-  const { data: transferredCumulativeGmxRewards } = useSWR(
-    [active, chainId, gmxVesterAddress, "transferredCumulativeRewards", parsedReceiver],
+  const { data: transferredCumulativeVwaveRewards } = useSWR(
+    [active, chainId, vwaveVesterAddress, "transferredCumulativeRewards", parsedReceiver],
     {
       fetcher: fetcher(library, Vester),
     }
   );
 
-  const { data: transferredCumulativeGlpRewards } = useSWR(
-    [active, chainId, glpVesterAddress, "transferredCumulativeRewards", parsedReceiver],
+  const { data: transferredCumulativeVlpRewards } = useSWR(
+    [active, chainId, vlpVesterAddress, "transferredCumulativeRewards", parsedReceiver],
     {
       fetcher: fetcher(library, Vester),
     }
@@ -95,38 +95,41 @@ export default function BeginAccountTransfer(props) {
     fetcher: fetcher(library, RewardRouter),
   });
 
-  const { data: gmxAllowance } = useSWR([active, chainId, gmxAddress, "allowance", account, stakedGmxTrackerAddress], {
-    fetcher: fetcher(library, Token),
-  });
+  const { data: vwaveAllowance } = useSWR(
+    [active, chainId, vwaveAddress, "allowance", account, stakedVwaveTrackerAddress],
+    {
+      fetcher: fetcher(library, Token),
+    }
+  );
 
-  const { data: gmxStaked } = useSWR(
-    [active, chainId, stakedGmxTrackerAddress, "depositBalances", account, gmxAddress],
+  const { data: vwaveStaked } = useSWR(
+    [active, chainId, stakedVwaveTrackerAddress, "depositBalances", account, vwaveAddress],
     {
       fetcher: fetcher(library, RewardTracker),
     }
   );
 
-  const needApproval = gmxAllowance && gmxStaked && gmxStaked.gt(gmxAllowance);
+  const needApproval = vwaveAllowance && vwaveStaked && vwaveStaked.gt(vwaveAllowance);
 
-  const hasVestedGmx = gmxVesterBalance && gmxVesterBalance.gt(0);
-  const hasVestedGlp = glpVesterBalance && glpVesterBalance.gt(0);
-  const hasStakedGmx =
-    (cumulativeGmxRewards && cumulativeGmxRewards.gt(0)) ||
-    (transferredCumulativeGmxRewards && transferredCumulativeGmxRewards.gt(0));
-  const hasStakedGlp =
-    (cumulativeGlpRewards && cumulativeGlpRewards.gt(0)) ||
-    (transferredCumulativeGlpRewards && transferredCumulativeGlpRewards.gt(0));
+  const hasVestedVwave = vwaveVesterBalance && vwaveVesterBalance.gt(0);
+  const hasVestedVlp = vlpVesterBalance && vlpVesterBalance.gt(0);
+  const hasStakedVwave =
+    (cumulativeVwaveRewards && cumulativeVwaveRewards.gt(0)) ||
+    (transferredCumulativeVwaveRewards && transferredCumulativeVwaveRewards.gt(0));
+  const hasStakedVlp =
+    (cumulativeVlpRewards && cumulativeVlpRewards.gt(0)) ||
+    (transferredCumulativeVlpRewards && transferredCumulativeVlpRewards.gt(0));
   const hasPendingReceiver = pendingReceiver && pendingReceiver !== ethers.constants.AddressZero;
 
   const getError = () => {
     if (!account) {
       return "Wallet is not connected";
     }
-    if (hasVestedGmx) {
-      return "Vested GMX not withdrawn";
+    if (hasVestedVwave) {
+      return "Vested VWAVE not withdrawn";
     }
-    if (hasVestedGlp) {
-      return "Vested GLP not withdrawn";
+    if (hasVestedVlp) {
+      return "Vested VLP not withdrawn";
     }
     if (!receiver || receiver.length === 0) {
       return "Enter Receiver Address";
@@ -134,7 +137,7 @@ export default function BeginAccountTransfer(props) {
     if (!ethers.utils.isAddress(receiver)) {
       return "Invalid Receiver Address";
     }
-    if (hasStakedGmx || hasStakedGlp) {
+    if (hasStakedVwave || hasStakedVlp) {
       return "Invalid Receiver";
     }
     if ((parsedReceiver || "").toString().toLowerCase() === (account || "").toString().toLowerCase()) {
@@ -169,7 +172,7 @@ export default function BeginAccountTransfer(props) {
       return error;
     }
     if (needApproval) {
-      return "Approve GMX";
+      return "Approve VWAVE";
     }
     if (isApproving) {
       return "Approving...";
@@ -186,8 +189,8 @@ export default function BeginAccountTransfer(props) {
       approveTokens({
         setIsApproving,
         library,
-        tokenAddress: gmxAddress,
-        spender: stakedGmxTrackerAddress,
+        tokenAddress: vwaveAddress,
+        spender: stakedVwaveTrackerAddress,
         chainId,
       });
       return;
@@ -231,9 +234,9 @@ export default function BeginAccountTransfer(props) {
         <div className="Page-description">
           Please only use this for full account transfers.
           <br />
-          This will transfer all your GMX, esGMX, GLP and Multiplier Points to your new account.
+          This will transfer all your VWAVE, esVWAVE, VLP and Multiplier Points to your new account.
           <br />
-          Transfers are only supported if the receiving account has not staked GMX or GLP tokens before.
+          Transfers are only supported if the receiving account has not staked VWAVE or VLP tokens before.
           <br />
           Transfers are one-way, you will not be able to transfer staked tokens back to the sending account.
         </div>
@@ -257,14 +260,14 @@ export default function BeginAccountTransfer(props) {
             </div>
           </div>
           <div className="BeginAccountTransfer-validations">
-            <ValidationRow isValid={!hasVestedGmx}>
-              Sender has withdrawn all tokens from GMX Vesting Vault
+            <ValidationRow isValid={!hasVestedVwave}>
+              Sender has withdrawn all tokens from VWAVE Vesting Vault
             </ValidationRow>
-            <ValidationRow isValid={!hasVestedGlp}>
-              Sender has withdrawn all tokens from GLP Vesting Vault
+            <ValidationRow isValid={!hasVestedVlp}>
+              Sender has withdrawn all tokens from VLP Vesting Vault
             </ValidationRow>
-            <ValidationRow isValid={!hasStakedGmx}>Receiver has not staked GMX tokens before</ValidationRow>
-            <ValidationRow isValid={!hasStakedGlp}>Receiver has not staked GLP tokens before</ValidationRow>
+            <ValidationRow isValid={!hasStakedVwave}>Receiver has not staked VWAVE tokens before</ValidationRow>
+            <ValidationRow isValid={!hasStakedVlp}>Receiver has not staked VLP tokens before</ValidationRow>
           </div>
           <div className="input-row">
             <button

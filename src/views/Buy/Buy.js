@@ -2,21 +2,21 @@ import React from "react";
 import Footer from "../../Footer";
 import "./Buy.css";
 import TokenCard from "../../components/TokenCard/TokenCard";
-import buyGMXIcon from "../../img/buy_gmx.svg";
+import buyVWAVEIcon from "../../img/buy_vwave.svg";
 import SEO from "../../components/Common/SEO";
 import { getPageTitle } from "../../Helpers";
 
-export default function BuyGMXGLP() {
+export default function BuyVWAVEVLP() {
   return (
-    <SEO title={getPageTitle("Buy GLP or GMX")}>
-      <div className="BuyGMXGLP page-layout">
-        <div className="BuyGMXGLP-container default-container">
+    <SEO title={getPageTitle("Buy VLP or VWAVE")}>
+      <div className="BuyVWAVEVLP page-layout">
+        <div className="BuyVWAVEVLP-container default-container">
           <div className="section-title-block">
             <div className="section-title-icon">
-              <img src={buyGMXIcon} alt="buyGMXIcon" />
+              <img src={buyVWAVEIcon} alt="buyVWAVEIcon" />
             </div>
             <div className="section-title-content">
-              <div className="Page-title">Buy GMX or GLP</div>
+              <div className="Page-title">Buy VWAVE or VLP</div>
             </div>
           </div>
           <TokenCard />

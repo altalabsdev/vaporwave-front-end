@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import Footer from "../../Footer";
-import "./BuyGMX.css";
+import "./BuyVWAVE.css";
 
 import { ARBITRUM, AVALANCHE, switchNetwork, useChainId } from "../../Helpers";
 
@@ -12,12 +12,12 @@ import Hop from "../../img/ic_hop.svg";
 import Banxa from "../../img/ic_banxa.svg";
 import Binance from "../../img/ic_binance_logo.svg";
 import avax30Icon from "../../img/ic_avax_30.svg";
-import gmxArbitrum from "../../img/ic_gmx_arbitrum.svg";
-import gmxAvax from "../../img/ic_gmx_avax.svg";
+import vwaveArbitrum from "../../img/ic_vwave_arbitrum.svg";
+import vwaveAvax from "../../img/ic_vwave_avax.svg";
 import ohmArbitrum from "../../img/ic_olympus_arbitrum.svg";
 import Button from "../../components/Common/Button";
 
-export default function BuyGMX() {
+export default function BuyVWAVE() {
   const { chainId } = useChainId();
   const { active } = useWeb3React();
 
@@ -32,28 +32,28 @@ export default function BuyGMX() {
   );
 
   return (
-    <div className="BuyGMXGLP default-container page-layout">
-      <div className="BuyGMXGLP-container">
+    <div className="BuyVWAVEVLP default-container page-layout">
+      <div className="BuyVWAVEVLP-container">
         {chainId === ARBITRUM && (
           <div className="section-title-block">
             <div className="section-title-content">
               <div className="Page-title">Buy / Transfer ETH</div>
               <div className="Page-description">
-                ETH is needed on Arbitrum to purchase GMX.
+                ETH is needed on Arbitrum to purchase VWAVE.
                 <br />
-                To purchase GMX on <span onClick={() => onNetworkSelect(AVALANCHE)}>Avalanche</span>, please change your
-                network.
+                To purchase VWAVE on <span onClick={() => onNetworkSelect(AVALANCHE)}>Avalanche</span>, please change
+                your network.
               </div>
             </div>
           </div>
         )}
         {chainId === ARBITRUM && (
-          <div className="BuyGMXGLP-panel">
+          <div className="BuyVWAVEVLP-panel">
             <div className="App-card no-height">
               <div className="App-card-title">Buy ETH</div>
               <div className="App-card-divider"></div>
               <div className="App-card-content">
-                <div className="BuyGMXGLP-description">
+                <div className="BuyVWAVEVLP-description">
                   You can buy ETH directly on{" "}
                   <a href="https://arbitrum.io/" target="_blank" rel="noopener noreferrer">
                     Arbitrum
@@ -74,7 +74,7 @@ export default function BuyGMX() {
               <div className="App-card-title">Transfer ETH</div>
               <div className="App-card-divider"></div>
               <div className="App-card-content">
-                <div className="BuyGMXGLP-description">
+                <div className="BuyVWAVEVLP-description">
                   You can also transfer ETH from other networks to Arbitrum using any of the below options:
                 </div>
                 <div className="bridge-options">
@@ -108,21 +108,21 @@ export default function BuyGMX() {
             <div className="section-title-content">
               <div className="Page-title">Buy / Transfer AVAX</div>
               <div className="Page-description">
-                Avax is needed on Avalanche to purchase GMX.
+                Avax is needed on Avalanche to purchase VWAVE.
                 <br />
-                To purchase GMX on <span onClick={() => onNetworkSelect(ARBITRUM)}>Arbitrum</span>, please change your
+                To purchase VWAVE on <span onClick={() => onNetworkSelect(ARBITRUM)}>Arbitrum</span>, please change your
                 network.
               </div>
             </div>
           </div>
         )}
         {chainId === AVALANCHE && (
-          <div className="BuyGMXGLP-panel">
+          <div className="BuyVWAVEVLP-panel">
             <div className="App-card no-height">
               <div className="App-card-title">Buy AVAX</div>
               <div className="App-card-divider"></div>
               <div className="App-card-content">
-                <div className="BuyGMXGLP-description">
+                <div className="BuyVWAVEVLP-description">
                   You can buy AVAX directly on{" "}
                   <a href="https://www.avax.network/" target="_blank" rel="noopener noreferrer">
                     Avalanche
@@ -143,7 +143,7 @@ export default function BuyGMX() {
               <div className="App-card-title">Transfer AVAX</div>
               <div className="App-card-divider"></div>
               <div className="App-card-content">
-                <div className="BuyGMXGLP-description">
+                <div className="BuyVWAVEVLP-description">
                   You can also transfer AVAX to Avalanche using any of the below options. <br />
                   <br />
                   If you use the Avalanche or Synapse bridges, you can transfer any other supported cryptocurrency, and
@@ -168,14 +168,14 @@ export default function BuyGMX() {
           </div>
         )}
         {chainId === AVALANCHE && (
-          <div className="BuyGMXGLP-panel">
+          <div className="BuyVWAVEVLP-panel">
             <div className="buy-card">
               <div className="section-title-content">
-                <div className="card-title">Buy GMX</div>
+                <div className="card-title">Buy VWAVE</div>
               </div>
               <div className="App-card no-height">
                 <div className="App-card-content no-title">
-                  <div className="BuyGMXGLP-description better-rates-description">
+                  <div className="BuyVWAVEVLP-description better-rates-description">
                     After you have AVAX, set your network to{" "}
                     <a
                       href="https://support.avax.network/en/articles/4626956-how-do-i-set-up-metamask-on-avalanche"
@@ -189,10 +189,10 @@ export default function BuyGMX() {
                   <div className="direct-purchase-options">
                     <Button
                       size="xl"
-                      imgSrc={gmxAvax}
+                      imgSrc={vwaveAvax}
                       href="https://traderjoexyz.com/trade?outputCurrency=0x62edc0692BD897D2295872a9FFCac5425011c661#/"
                     >
-                      Purchase GMX
+                      Purchase VWAVE
                     </Button>
                   </div>
                 </div>
@@ -202,27 +202,27 @@ export default function BuyGMX() {
         )}
 
         {chainId === ARBITRUM && (
-          <div className="BuyGMXGLP-panel">
+          <div className="BuyVWAVEVLP-panel">
             <div className="buy-card">
               <div className="section-title-content">
-                <div className="card-title">Buy GMX</div>
+                <div className="card-title">Buy VWAVE</div>
               </div>
               <div className="App-card no-height">
                 <div className="App-card-content no-title">
-                  <div className="BuyGMXGLP-description better-rates-description">
+                  <div className="BuyVWAVEVLP-description better-rates-description">
                     After you have ETH, set your network to{" "}
                     <a href="https://arbitrum.io/bridge-tutorial/" target="_blank" rel="noopener noreferrer">
                       Arbitrum
                     </a>{" "}
                     then click the button below:
                   </div>
-                  <div className="buy-gmx">
+                  <div className="buy-vwave">
                     <Button
                       size="xl"
-                      imgSrc={gmxArbitrum}
+                      imgSrc={vwaveArbitrum}
                       href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a"
                     >
-                      Purchase GMX
+                      Purchase VWAVE
                     </Button>
                   </div>
                 </div>
@@ -230,15 +230,15 @@ export default function BuyGMX() {
             </div>
             <div className="buy-card">
               <div className="section-title-content">
-                <div className="card-title">Buy GMX Bonds</div>
+                <div className="card-title">Buy VWAVE Bonds</div>
               </div>
               <div className="App-card no-height">
                 <div className="App-card-content no-title">
-                  <div className="BuyGMXGLP-description">
-                    GMX bonds can be bought on Olympus Pro with a discount and a small vesting period:
+                  <div className="BuyVWAVEVLP-description">
+                    VWAVE bonds can be bought on Olympus Pro with a discount and a small vesting period:
                   </div>
-                  <div className="buy-gmx">
-                    <Button size="xl" imgSrc={ohmArbitrum} href="https://pro.olympusdao.finance/#/partners/GMX">
+                  <div className="buy-vwave">
+                    <Button size="xl" imgSrc={ohmArbitrum} href="https://pro.olympusdao.finance/#/partners/VWAVE">
                       Olympus Pro
                     </Button>
                   </div>

@@ -57,7 +57,7 @@ async function getChartPricesFromStats(chainId, symbol, period) {
   if (["WBTC", "WETH", "WAVAX"].includes(symbol)) {
     symbol = symbol.substr(1);
   }
-  const hostname = "https://stats.gmx.io/";
+  const hostname = "https://stats.vaporwave.farm/";
   // const hostname = 'http://localhost:3113/'
   const timeDiff = CHART_PERIODS[period] * 3000;
   const from = Math.floor(Date.now() / 1000 - timeDiff);

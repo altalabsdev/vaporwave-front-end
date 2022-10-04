@@ -23,31 +23,37 @@ import {
   getChainName,
   useChainId,
   USD_DECIMALS,
-  GMX_DECIMALS,
-  GLP_DECIMALS,
+  VWAVE_DECIMALS,
+  VLP_DECIMALS,
   BASIS_POINTS_DIVISOR,
   ARBITRUM,
   AVALANCHE,
   getTotalVolumeSum,
-  GLPPOOLCOLORS,
+  VLPPOOLCOLORS,
   DEFAULT_MAX_USDG_AMOUNT,
   getPageTitle,
   importImage,
   arrayURLFetcher,
 } from "../../Helpers";
-import { useTotalGmxInLiquidity, useGmxPrice, useTotalGmxStaked, useTotalGmxSupply, useInfoTokens } from "../../Api";
+import {
+  useTotalVwaveInLiquidity,
+  useVwavePrice,
+  useTotalVwaveStaked,
+  useTotalVwaveSupply,
+  useInfoTokens,
+} from "../../Api";
 
 import { getContract } from "../../Addresses";
 
 import VaultV2 from "../../abis/VaultV2.json";
 import ReaderV2 from "../../abis/ReaderV2.json";
-import GlpManager from "../../abis/GlpManager.json";
+import VlpManager from "../../abis/VlpManager.json";
 import Footer from "../../Footer";
 
 import "./DashboardV2.css";
 
-import gmx40Icon from "../../img/ic_gmx_40.svg";
-import glp40Icon from "../../img/ic_glp_40.svg";
+import vwave40Icon from "../../img/ic_vwave_40.svg";
+import vlp40Icon from "../../img/ic_vlp_40.svg";
 import avalanche16Icon from "../../img/ic_avalanche_16.svg";
 import arbitrum16Icon from "../../img/ic_arbitrum_16.svg";
 import arbitrum24Icon from "../../img/ic_arbitrum_24.svg";
@@ -158,7 +164,7 @@ export default function DashboardV2() {
     fetcher: (...args) => fetch(...args).then((res) => res.json()),
   });
 
-  let { total: totalGmxSupply } = useTotalGmxSupply();
+  let { total: totalVwaveSupply } = useTotalVwaveSupply();
 
   const volumeInfo = getVolumeInfo(hourlyVolumes);
   const positionStatsInfo = getPositionStats(positionStats);
@@ -177,16 +183,16 @@ export default function DashboardV2() {
 
   const readerAddress = getContract(chainId, "Reader");
   const vaultAddress = getContract(chainId, "Vault");
-  const glpManagerAddress = getContract(chainId, "GlpManager");
+  const vlpManagerAddress = getContract(chainId, "VlpManager");
 
-  const gmxAddress = getContract(chainId, "GMX");
-  const glpAddress = getContract(chainId, "GLP");
+  const vwaveAddress = getContract(chainId, "VWAVE");
+  const vlpAddress = getContract(chainId, "VLP");
   const usdgAddress = getContract(chainId, "USDG");
 
-  const tokensForSupplyQuery = [gmxAddress, glpAddress, usdgAddress];
+  const tokensForSupplyQuery = [vwaveAddress, vlpAddress, usdgAddress];
 
-  const { data: aums } = useSWR([`Dashboard:getAums:${active}`, chainId, glpManagerAddress, "getAums"], {
-    fetcher: fetcher(library, GlpManager),
+  const { data: aums } = useSWR([`Dashboard:getAums:${active}`, chainId, vlpManagerAddress, "getAums"], {
+    fetcher: fetcher(library, VlpManager),
   });
 
   const { data: fees } = useSWR([`Dashboard:fees:${active}`, chainId, readerAddress, "getFees", vaultAddress], {
@@ -201,7 +207,7 @@ export default function DashboardV2() {
   );
 
   const { data: totalTokenWeights } = useSWR(
-    [`GlpSwap:totalTokenWeights:${active}`, chainId, vaultAddress, "totalTokenWeights"],
+    [`VlpSwap:totalTokenWeights:${active}`, chainId, vaultAddress, "totalTokenWeights"],
     {
       fetcher: fetcher(library, VaultV2),
     }
@@ -257,24 +263,24 @@ export default function DashboardV2() {
     totalFeesDistributed += parseFloat(feeHistory[i].feeUsd);
   }
 
-  const { gmxPrice, gmxPriceFromArbitrum, gmxPriceFromAvalanche } = useGmxPrice(
+  const { vwavePrice, vwavePriceFromArbitrum, vwavePriceFromAvalanche } = useVwavePrice(
     chainId,
     { arbitrum: chainId === ARBITRUM ? library : undefined },
     active
   );
 
-  let { total: totalGmxInLiquidity } = useTotalGmxInLiquidity(chainId, active);
+  let { total: totalVwaveInLiquidity } = useTotalVwaveInLiquidity(chainId, active);
 
-  let { avax: avaxStakedGmx, arbitrum: arbitrumStakedGmx, total: totalStakedGmx } = useTotalGmxStaked();
+  let { avax: avaxStakedVwave, arbitrum: arbitrumStakedVwave, total: totalStakedVwave } = useTotalVwaveStaked();
 
-  let gmxMarketCap;
-  if (gmxPrice && totalGmxSupply) {
-    gmxMarketCap = gmxPrice.mul(totalGmxSupply).div(expandDecimals(1, GMX_DECIMALS));
+  let vwaveMarketCap;
+  if (vwavePrice && totalVwaveSupply) {
+    vwaveMarketCap = vwavePrice.mul(totalVwaveSupply).div(expandDecimals(1, VWAVE_DECIMALS));
   }
 
-  let stakedGmxSupplyUsd;
-  if (gmxPrice && totalStakedGmx) {
-    stakedGmxSupplyUsd = totalStakedGmx.mul(gmxPrice).div(expandDecimals(1, GMX_DECIMALS));
+  let stakedVwaveSupplyUsd;
+  if (vwavePrice && totalStakedVwave) {
+    stakedVwaveSupplyUsd = totalStakedVwave.mul(vwavePrice).div(expandDecimals(1, VWAVE_DECIMALS));
   }
 
   let aum;
@@ -282,34 +288,34 @@ export default function DashboardV2() {
     aum = aums[0].add(aums[1]).div(2);
   }
 
-  let glpPrice;
-  let glpSupply;
-  let glpMarketCap;
+  let vlpPrice;
+  let vlpSupply;
+  let vlpMarketCap;
   if (aum && totalSupplies && totalSupplies[3]) {
-    glpSupply = totalSupplies[3];
-    glpPrice =
-      aum && aum.gt(0) && glpSupply.gt(0)
-        ? aum.mul(expandDecimals(1, GLP_DECIMALS)).div(glpSupply)
+    vlpSupply = totalSupplies[3];
+    vlpPrice =
+      aum && aum.gt(0) && vlpSupply.gt(0)
+        ? aum.mul(expandDecimals(1, VLP_DECIMALS)).div(vlpSupply)
         : expandDecimals(1, USD_DECIMALS);
-    glpMarketCap = glpPrice.mul(glpSupply).div(expandDecimals(1, GLP_DECIMALS));
+    vlpMarketCap = vlpPrice.mul(vlpSupply).div(expandDecimals(1, VLP_DECIMALS));
   }
 
   let tvl;
-  if (glpMarketCap && gmxPrice && totalStakedGmx) {
-    tvl = glpMarketCap.add(gmxPrice.mul(totalStakedGmx).div(expandDecimals(1, GMX_DECIMALS)));
+  if (vlpMarketCap && vwavePrice && totalStakedVwave) {
+    tvl = vlpMarketCap.add(vwavePrice.mul(totalStakedVwave).div(expandDecimals(1, VWAVE_DECIMALS)));
   }
 
   const ethFloorPriceFund = expandDecimals(350 + 148 + 384, 18);
-  const glpFloorPriceFund = expandDecimals(660001, 18);
+  const vlpFloorPriceFund = expandDecimals(660001, 18);
   const usdcFloorPriceFund = expandDecimals(784598 + 200000, 30);
 
   let totalFloorPriceFundUsd;
 
-  if (eth && eth.contractMinPrice && glpPrice) {
+  if (eth && eth.contractMinPrice && vlpPrice) {
     const ethFloorPriceFundUsd = ethFloorPriceFund.mul(eth.contractMinPrice).div(expandDecimals(1, eth.decimals));
-    const glpFloorPriceFundUsd = glpFloorPriceFund.mul(glpPrice).div(expandDecimals(1, 18));
+    const vlpFloorPriceFundUsd = vlpFloorPriceFund.mul(vlpPrice).div(expandDecimals(1, 18));
 
-    totalFloorPriceFundUsd = ethFloorPriceFundUsd.add(glpFloorPriceFundUsd).add(usdcFloorPriceFund);
+    totalFloorPriceFundUsd = ethFloorPriceFundUsd.add(vlpFloorPriceFundUsd).add(usdcFloorPriceFund);
   }
 
   let adjustedUsdgSupply = bigNumberify(0);
@@ -360,8 +366,8 @@ export default function DashboardV2() {
                   <br />
                   <br />
                   Get lower fees to{" "}
-                  <Link to="/buy_glp" target="_blank" rel="noopener noreferrer">
-                    buy GLP
+                  <Link to="/buy_vlp" target="_blank" rel="noopener noreferrer">
+                    buy VLP
                   </Link>{" "}
                   with {tokenInfo.symbol},&nbsp; and to{" "}
                   <Link to="/trade" target="_blank" rel="noopener noreferrer">
@@ -397,19 +403,19 @@ export default function DashboardV2() {
 
   let stakedPercent = 0;
 
-  if (totalGmxSupply && !totalGmxSupply.isZero() && !totalStakedGmx.isZero()) {
-    stakedPercent = totalStakedGmx.mul(100).div(totalGmxSupply).toNumber();
+  if (totalVwaveSupply && !totalVwaveSupply.isZero() && !totalStakedVwave.isZero()) {
+    stakedPercent = totalStakedVwave.mul(100).div(totalVwaveSupply).toNumber();
   }
 
   let liquidityPercent = 0;
 
-  if (totalGmxSupply && !totalGmxSupply.isZero() && totalGmxInLiquidity) {
-    liquidityPercent = totalGmxInLiquidity.mul(100).div(totalGmxSupply).toNumber();
+  if (totalVwaveSupply && !totalVwaveSupply.isZero() && totalVwaveInLiquidity) {
+    liquidityPercent = totalVwaveInLiquidity.mul(100).div(totalVwaveSupply).toNumber();
   }
 
   let notStakedPercent = 100 - stakedPercent - liquidityPercent;
 
-  let gmxDistributionData = [
+  let vwaveDistributionData = [
     {
       name: "staked",
       value: stakedPercent,
@@ -429,17 +435,17 @@ export default function DashboardV2() {
 
   const totalStatsStartDate = chainId === AVALANCHE ? "06 Jan 2022" : "01 Sep 2021";
 
-  let stableGlp = 0;
-  let totalGlp = 0;
+  let stableVlp = 0;
+  let totalVlp = 0;
 
-  let glpPool = tokenList.map((token) => {
+  let vlpPool = tokenList.map((token) => {
     const tokenInfo = infoTokens[token.address];
     if (tokenInfo.usdgAmount && adjustedUsdgSupply) {
       const currentWeightBps = tokenInfo.usdgAmount.mul(BASIS_POINTS_DIVISOR).div(adjustedUsdgSupply);
       if (tokenInfo.isStable) {
-        stableGlp += parseFloat(`${formatAmount(currentWeightBps, 2, 2, false)}`);
+        stableVlp += parseFloat(`${formatAmount(currentWeightBps, 2, 2, false)}`);
       }
-      totalGlp += parseFloat(`${formatAmount(currentWeightBps, 2, 2, false)}`);
+      totalVlp += parseFloat(`${formatAmount(currentWeightBps, 2, 2, false)}`);
       return {
         fullname: token.name,
         name: token.symbol,
@@ -449,40 +455,40 @@ export default function DashboardV2() {
     return null;
   });
 
-  let stablePercentage = totalGlp > 0 ? ((stableGlp * 100) / totalGlp).toFixed(2) : "0.0";
+  let stablePercentage = totalVlp > 0 ? ((stableVlp * 100) / totalVlp).toFixed(2) : "0.0";
 
-  glpPool = glpPool.filter(function (element) {
+  vlpPool = vlpPool.filter(function (element) {
     return element !== null;
   });
 
-  glpPool = glpPool.sort(function (a, b) {
+  vlpPool = vlpPool.sort(function (a, b) {
     if (a.value < b.value) return 1;
     else return -1;
   });
 
-  gmxDistributionData = gmxDistributionData.sort(function (a, b) {
+  vwaveDistributionData = vwaveDistributionData.sort(function (a, b) {
     if (a.value < b.value) return 1;
     else return -1;
   });
 
-  const [gmxActiveIndex, setGMXActiveIndex] = useState(null);
+  const [vwaveActiveIndex, setVWAVEActiveIndex] = useState(null);
 
-  const onGMXDistributionChartEnter = (_, index) => {
-    setGMXActiveIndex(index);
+  const onVWAVEDistributionChartEnter = (_, index) => {
+    setVWAVEActiveIndex(index);
   };
 
-  const onGMXDistributionChartLeave = (_, index) => {
-    setGMXActiveIndex(null);
+  const onVWAVEDistributionChartLeave = (_, index) => {
+    setVWAVEActiveIndex(null);
   };
 
-  const [glpActiveIndex, setGLPActiveIndex] = useState(null);
+  const [vlpActiveIndex, setVLPActiveIndex] = useState(null);
 
-  const onGLPPoolChartEnter = (_, index) => {
-    setGLPActiveIndex(index);
+  const onVLPPoolChartEnter = (_, index) => {
+    setVLPActiveIndex(index);
   };
 
-  const onGLPPoolChartLeave = (_, index) => {
-    setGLPActiveIndex(null);
+  const onVLPPoolChartLeave = (_, index) => {
+    setVLPActiveIndex(null);
   };
 
   const CustomTooltip = ({ active, payload }) => {
@@ -511,13 +517,13 @@ export default function DashboardV2() {
             <div className="Page-description">
               {chainName} Total Stats start from {totalStatsStartDate}.<br /> For detailed stats:{" "}
               {chainId === ARBITRUM && (
-                <a href="https://stats.gmx.io" target="_blank" rel="noopener noreferrer">
-                  https://stats.gmx.io
+                <a href="https://stats.vaporwave.farm" target="_blank" rel="noopener noreferrer">
+                  https://stats.vwave.io
                 </a>
               )}
               {chainId === AVALANCHE && (
-                <a href="https://stats.gmx.io/avalanche" target="_blank" rel="noopener noreferrer">
-                  https://stats.gmx.io/avalanche
+                <a href="https://stats.vaporwave.farm/avalanche" target="_blank" rel="noopener noreferrer">
+                  https://stats.vwave.io/avalanche
                 </a>
               )}
               .
@@ -536,17 +542,19 @@ export default function DashboardV2() {
                     <TooltipComponent
                       handle={`$${formatAmount(tvl, USD_DECIMALS, 0, true)}`}
                       position="right-bottom"
-                      renderContent={() => `Assets Under Management: GMX staked (All chains) + GLP pool (${chainName})`}
+                      renderContent={() =>
+                        `Assets Under Management: VWAVE staked (All chains) + VLP pool (${chainName})`
+                      }
                     />
                   </div>
                 </div>
                 <div className="App-card-row">
-                  <div className="label">GLP Pool</div>
+                  <div className="label">VLP Pool</div>
                   <div>
                     <TooltipComponent
                       handle={`$${formatAmount(aum, USD_DECIMALS, 0, true)}`}
                       position="right-bottom"
-                      renderContent={() => `Total value of tokens in GLP pool (${chainName})`}
+                      renderContent={() => `Total value of tokens in VLP pool (${chainName})`}
                     />
                   </div>
                 </div>
@@ -660,23 +668,23 @@ export default function DashboardV2() {
               Tokens {chainId === AVALANCHE && <img src={avalanche24Icon} alt="avalanche24Icon" />}
               {chainId === ARBITRUM && <img src={arbitrum24Icon} alt="arbitrum24Icon" />}
             </div>
-            <div className="Page-description">Platform and GLP index tokens.</div>
+            <div className="Page-description">Platform and VLP index tokens.</div>
           </div>
           <div className="DashboardV2-token-cards">
-            <div className="stats-wrapper stats-wrapper--gmx">
+            <div className="stats-wrapper stats-wrapper--vwave">
               <div className="App-card">
                 <div className="stats-block">
                   <div className="App-card-title">
                     <div className="App-card-title-mark">
                       <div className="App-card-title-mark-icon">
-                        <img src={gmx40Icon} alt="gmx40Icon" />
+                        <img src={vwave40Icon} alt="vwave40Icon" />
                       </div>
                       <div className="App-card-title-mark-info">
-                        <div className="App-card-title-mark-title">GMX</div>
-                        <div className="App-card-title-mark-subtitle">GMX</div>
+                        <div className="App-card-title-mark-title">VWAVE</div>
+                        <div className="App-card-title-mark-subtitle">VWAVE</div>
                       </div>
                       <div>
-                        <AssetDropdown assetSymbol="GMX" />
+                        <AssetDropdown assetSymbol="VWAVE" />
                       </div>
                     </div>
                   </div>
@@ -685,17 +693,17 @@ export default function DashboardV2() {
                     <div className="App-card-row">
                       <div className="label">Price</div>
                       <div>
-                        {!gmxPrice && "..."}
-                        {gmxPrice && (
+                        {!vwavePrice && "..."}
+                        {vwavePrice && (
                           <TooltipComponent
                             position="right-bottom"
                             className="nowrap"
-                            handle={"$" + formatAmount(gmxPrice, USD_DECIMALS, 2, true)}
+                            handle={"$" + formatAmount(vwavePrice, USD_DECIMALS, 2, true)}
                             renderContent={() => (
                               <>
-                                Price on Arbitrum: ${formatAmount(gmxPriceFromArbitrum, USD_DECIMALS, 2, true)}
+                                Price on Arbitrum: ${formatAmount(vwavePriceFromArbitrum, USD_DECIMALS, 2, true)}
                                 <br />
-                                Price on Avalanche: ${formatAmount(gmxPriceFromAvalanche, USD_DECIMALS, 2, true)}
+                                Price on Avalanche: ${formatAmount(vwavePriceFromAvalanche, USD_DECIMALS, 2, true)}
                               </>
                             )}
                           />
@@ -704,7 +712,7 @@ export default function DashboardV2() {
                     </div>
                     <div className="App-card-row">
                       <div className="label">Supply</div>
-                      <div>{formatAmount(totalGmxSupply, GMX_DECIMALS, 0, true)} GMX</div>
+                      <div>{formatAmount(totalVwaveSupply, VWAVE_DECIMALS, 0, true)} VWAVE</div>
                     </div>
                     <div className="App-card-row">
                       <div className="label">Total Staked</div>
@@ -712,21 +720,21 @@ export default function DashboardV2() {
                         <TooltipComponent
                           position="right-bottom"
                           className="nowrap"
-                          handle={`$${formatAmount(stakedGmxSupplyUsd, USD_DECIMALS, 0, true)}`}
+                          handle={`$${formatAmount(stakedVwaveSupplyUsd, USD_DECIMALS, 0, true)}`}
                           renderContent={() => (
                             <>
                               <p className="Tooltip-row">
                                 <span className="label">Staked on Arbitrum:</span>
-                                <span>{formatAmount(arbitrumStakedGmx, GMX_DECIMALS, 0, true)} GMX</span>
+                                <span>{formatAmount(arbitrumStakedVwave, VWAVE_DECIMALS, 0, true)} VWAVE</span>
                               </p>
                               <p className="Tooltip-row">
                                 <span className="label">Staked on Avalanche:</span>
-                                <span>{formatAmount(avaxStakedGmx, GMX_DECIMALS, 0, true)} GMX</span>
+                                <span>{formatAmount(avaxStakedVwave, VWAVE_DECIMALS, 0, true)} VWAVE</span>
                               </p>
                               <div className="Tooltip-divider" />
                               <p className="Tooltip-row">
                                 <span className="label">Total:</span>
-                                <span>{formatAmount(totalStakedGmx, GMX_DECIMALS, 0, true)} GMX</span>
+                                <span>{formatAmount(totalStakedVwave, VWAVE_DECIMALS, 0, true)} VWAVE</span>
                               </p>
                             </>
                           )}
@@ -735,15 +743,15 @@ export default function DashboardV2() {
                     </div>
                     <div className="App-card-row">
                       <div className="label">Market Cap</div>
-                      <div>${formatAmount(gmxMarketCap, USD_DECIMALS, 0, true)}</div>
+                      <div>${formatAmount(vwaveMarketCap, USD_DECIMALS, 0, true)}</div>
                     </div>
                   </div>
                 </div>
-                <div className="stats-piechart" onMouseLeave={onGMXDistributionChartLeave}>
-                  {gmxDistributionData.length > 0 && (
+                <div className="stats-piechart" onMouseLeave={onVWAVEDistributionChartLeave}>
+                  {vwaveDistributionData.length > 0 && (
                     <PieChart width={210} height={210}>
                       <Pie
-                        data={gmxDistributionData}
+                        data={vwaveDistributionData}
                         cx={100}
                         cy={100}
                         innerRadius={73}
@@ -753,23 +761,23 @@ export default function DashboardV2() {
                         startAngle={90}
                         endAngle={-270}
                         paddingAngle={2}
-                        onMouseEnter={onGMXDistributionChartEnter}
-                        onMouseOut={onGMXDistributionChartLeave}
-                        onMouseLeave={onGMXDistributionChartLeave}
+                        onMouseEnter={onVWAVEDistributionChartEnter}
+                        onMouseOut={onVWAVEDistributionChartLeave}
+                        onMouseLeave={onVWAVEDistributionChartLeave}
                       >
-                        {gmxDistributionData.map((entry, index) => (
+                        {vwaveDistributionData.map((entry, index) => (
                           <Cell
                             key={`cell-${index}`}
                             fill={entry.color}
                             style={{
                               filter:
-                                gmxActiveIndex === index
+                                vwaveActiveIndex === index
                                   ? `drop-shadow(0px 0px 6px ${hexToRgba(entry.color, 0.7)})`
                                   : "none",
                               cursor: "pointer",
                             }}
                             stroke={entry.color}
-                            strokeWidth={gmxActiveIndex === index ? 1 : 1}
+                            strokeWidth={vwaveActiveIndex === index ? 1 : 1}
                           />
                         ))}
                       </Pie>
@@ -786,7 +794,7 @@ export default function DashboardV2() {
                   <div className="App-card-title">
                     <div className="App-card-title-mark">
                       <div className="App-card-title-mark-icon">
-                        <img src={glp40Icon} alt="glp40Icon" />
+                        <img src={vlp40Icon} alt="vlp40Icon" />
                         {chainId === ARBITRUM ? (
                           <img src={arbitrum16Icon} alt="arbitrum16Icon" className="selected-network-symbol" />
                         ) : (
@@ -794,11 +802,11 @@ export default function DashboardV2() {
                         )}
                       </div>
                       <div className="App-card-title-mark-info">
-                        <div className="App-card-title-mark-title">GLP</div>
-                        <div className="App-card-title-mark-subtitle">GLP</div>
+                        <div className="App-card-title-mark-title">VLP</div>
+                        <div className="App-card-title-mark-subtitle">VLP</div>
                       </div>
                       <div>
-                        <AssetDropdown assetSymbol="GLP" />
+                        <AssetDropdown assetSymbol="VLP" />
                       </div>
                     </div>
                   </div>
@@ -806,19 +814,19 @@ export default function DashboardV2() {
                   <div className="App-card-content">
                     <div className="App-card-row">
                       <div className="label">Price</div>
-                      <div>${formatAmount(glpPrice, USD_DECIMALS, 3, true)}</div>
+                      <div>${formatAmount(vlpPrice, USD_DECIMALS, 3, true)}</div>
                     </div>
                     <div className="App-card-row">
                       <div className="label">Supply</div>
-                      <div>{formatAmount(glpSupply, GLP_DECIMALS, 0, true)} GLP</div>
+                      <div>{formatAmount(vlpSupply, VLP_DECIMALS, 0, true)} VLP</div>
                     </div>
                     <div className="App-card-row">
                       <div className="label">Total Staked</div>
-                      <div>${formatAmount(glpMarketCap, USD_DECIMALS, 0, true)}</div>
+                      <div>${formatAmount(vlpMarketCap, USD_DECIMALS, 0, true)}</div>
                     </div>
                     <div className="App-card-row">
                       <div className="label">Market Cap</div>
-                      <div>${formatAmount(glpMarketCap, USD_DECIMALS, 0, true)}</div>
+                      <div>${formatAmount(vlpMarketCap, USD_DECIMALS, 0, true)}</div>
                     </div>
                     <div className="App-card-row">
                       <div className="label">Stablecoin Percentage</div>
@@ -826,11 +834,11 @@ export default function DashboardV2() {
                     </div>
                   </div>
                 </div>
-                <div className="stats-piechart" onMouseOut={onGLPPoolChartLeave}>
-                  {glpPool.length > 0 && (
+                <div className="stats-piechart" onMouseOut={onVLPPoolChartLeave}>
+                  {vlpPool.length > 0 && (
                     <PieChart width={210} height={210}>
                       <Pie
-                        data={glpPool}
+                        data={vlpPool}
                         cx={100}
                         cy={100}
                         innerRadius={73}
@@ -839,29 +847,29 @@ export default function DashboardV2() {
                         dataKey="value"
                         startAngle={90}
                         endAngle={-270}
-                        onMouseEnter={onGLPPoolChartEnter}
-                        onMouseOut={onGLPPoolChartLeave}
-                        onMouseLeave={onGLPPoolChartLeave}
+                        onMouseEnter={onVLPPoolChartEnter}
+                        onMouseOut={onVLPPoolChartLeave}
+                        onMouseLeave={onVLPPoolChartLeave}
                         paddingAngle={2}
                       >
-                        {glpPool.map((entry, index) => (
+                        {vlpPool.map((entry, index) => (
                           <Cell
                             key={`cell-${index}`}
-                            fill={GLPPOOLCOLORS[entry.name]}
+                            fill={VLPPOOLCOLORS[entry.name]}
                             style={{
                               filter:
-                                glpActiveIndex === index
-                                  ? `drop-shadow(0px 0px 6px ${hexToRgba(GLPPOOLCOLORS[entry.name], 0.7)})`
+                                vlpActiveIndex === index
+                                  ? `drop-shadow(0px 0px 6px ${hexToRgba(VLPPOOLCOLORS[entry.name], 0.7)})`
                                   : "none",
                               cursor: "pointer",
                             }}
-                            stroke={GLPPOOLCOLORS[entry.name]}
-                            strokeWidth={glpActiveIndex === index ? 1 : 1}
+                            stroke={VLPPOOLCOLORS[entry.name]}
+                            strokeWidth={vlpActiveIndex === index ? 1 : 1}
                           />
                         ))}
                       </Pie>
                       <text x={"50%"} y={"50%"} fill="white" textAnchor="middle" dominantBaseline="middle">
-                        GLP Pool
+                        VLP Pool
                       </text>
                       <Tooltip content={<CustomTooltip />} />
                     </PieChart>
@@ -871,7 +879,7 @@ export default function DashboardV2() {
             </div>
             <div className="token-table-wrapper App-card">
               <div className="App-card-title">
-                GLP Index Composition {chainId === AVALANCHE && <img src={avalanche16Icon} alt="avalanche16Icon" />}
+                VLP Index Composition {chainId === AVALANCHE && <img src={avalanche16Icon} alt="avalanche16Icon" />}
                 {chainId === ARBITRUM && <img src={arbitrum16Icon} alt="arbitrum16Icon" />}
               </div>
               <div className="App-card-divider"></div>

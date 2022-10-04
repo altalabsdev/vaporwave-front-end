@@ -1,15 +1,15 @@
-.BuyGMXGLP {
+.BuyVWAVEVLP {
   background: #101124;
   justify-content: space-between;
 }
 
-.BuyGMXGLP-container {
+.BuyVWAVEVLP-container {
   padding-top: 4.65rem;
   padding-bottom: 3.1rem;
   width: 100%;
 }
 
-.BuyGMXGLP-panel {
+.BuyVWAVEVLP-panel {
   padding-top: 0;
   padding-bottom: 3.875rem;
   border-bottom-left-radius: 0.8rem;
@@ -17,31 +17,31 @@
   display: flex;
   justify-content: space-between;
 }
-.BuyGMXGLP-panel .App-card:first-child {
+.BuyVWAVEVLP-panel .App-card:first-child {
   margin-right: 2rem;
 }
 
-.BuyGMXGLP-panel .App-card {
+.BuyVWAVEVLP-panel .App-card {
   max-width: 59rem;
   width: 100%;
   height: fit-content;
   flex: auto;
 }
 
-.BuyGMXGLP-panel .App-card.no-height {
+.BuyVWAVEVLP-panel .App-card.no-height {
   height: unset;
 }
 
-.BuyGMXGLP-panel:last-child {
+.BuyVWAVEVLP-panel:last-child {
   padding-bottom: 0;
 }
 
-.BuyGMXGLP-description {
+.BuyVWAVEVLP-description {
   letter-spacing: 0px;
   color: #a9a9b0;
 }
 
-.BuyGMXGLP-description a {
+.BuyVWAVEVLP-description a {
   text-decoration: none;
   position: relative;
 }
@@ -52,7 +52,7 @@
   grid-template-columns: 1fr 1fr;
   margin-top: 1.5rem;
 }
-.buy-gmx {
+.buy-vwave {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,7 +74,7 @@
   margin: 3.1rem 0;
 }
 
-.GMX-btn {
+.VWAVE-btn {
   display: flex;
   align-items: center;
   background: #ffffff0a;
@@ -86,21 +86,21 @@
   margin: 3.1rem 0;
 }
 
-.GMX-btn:hover {
+.VWAVE-btn:hover {
   background: #ffffff14;
 }
 
-.GMX-btn:focus,
-.GMX-btn:active {
+.VWAVE-btn:focus,
+.VWAVE-btn:active {
   background: #ffffff1f;
 }
 
-.GMX-btn-icon-block {
+.VWAVE-btn-icon-block {
   display: flex;
   margin-right: 1.165rem;
 }
 
-.GMX-btn-icon {
+.VWAVE-btn-icon {
   display: flex;
   position: relative;
   width: 3rem;
@@ -109,21 +109,21 @@
   justify-content: center;
 }
 
-.GMX-btn-icon-network {
+.VWAVE-btn-icon-network {
   position: absolute;
   bottom: 0;
   right: 0;
   display: flex;
 }
 
-.GMX-btn-label {
+.VWAVE-btn-label {
   letter-spacing: 0px;
   color: #ffffff;
   font-size: 1.85rem;
   line-height: 2.325rem;
 }
 
-.GMX-block-section {
+.VWAVE-block-section {
   display: flex;
   justify-content: center;
 }
@@ -136,13 +136,13 @@
   display: none !important;
 }
 
-.BuyGMXGLP-panel .buy-card {
+.BuyVWAVEVLP-panel .buy-card {
   display: flex;
   flex-direction: column;
 }
 
-.BuyGMXGLP-panel .buy-card:first-child,
-.BuyGMXGLP-panel .section-title-block:first-child {
+.BuyVWAVEVLP-panel .buy-card:first-child,
+.BuyVWAVEVLP-panel .section-title-block:first-child {
   margin-right: 2rem;
 }
 
@@ -166,18 +166,18 @@
   .section-title-block {
     margin-bottom: 1.5rem !important;
   }
-  .BuyGMXGLP-panel {
+  .BuyVWAVEVLP-panel {
     flex-direction: column;
   }
-  .BuyGMXGLP-panel .App-card:first-child {
+  .BuyVWAVEVLP-panel .App-card:first-child {
     margin-right: 0;
     margin-bottom: 2rem;
   }
-  .BuyGMXGLP-panel .App-card {
+  .BuyVWAVEVLP-panel .App-card {
     max-width: 100%;
   }
-  .BuyGMXGLP-panel .buy-card:first-child,
-  .BuyGMXGLP-panel .section-title-block:first-child {
+  .BuyVWAVEVLP-panel .buy-card:first-child,
+  .BuyVWAVEVLP-panel .section-title-block:first-child {
     margin-right: 0;
     margin-bottom: 2rem;
   }
@@ -190,12 +190,12 @@
 }
 
 @media (max-width: 400px) {
-  .BuyGMXGLP-container {
+  .BuyVWAVEVLP-container {
     padding-left: 1.6rem !important;
     padding-right: 1.6rem !important;
   }
 
-  .BuyGMXGLP-description {
+  .BuyVWAVEVLP-description {
     font-size: 1.5rem;
     line-height: 2rem;
   }
