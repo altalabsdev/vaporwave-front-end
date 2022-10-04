@@ -5,7 +5,7 @@ function SEO(props) {
   const meta = {
     title: "Vaporwave | Decentralized Perpetual Exchange",
     description: `Trade spot or perpetual BTC, ETH, AVAX and other top cryptocurrencies with up to 30x leverage directly from your wallet on Aurora.`,
-    image: "https://gmx.io/og.png",
+    image: "https://vaporwave.farm/og.png",
     type: "exchange",
     ...customMeta,
   };

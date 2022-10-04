@@ -517,12 +517,12 @@ export default function DashboardV2() {
             <div className="Page-description">
               {chainName} Total Stats start from {totalStatsStartDate}.<br /> For detailed stats:{" "}
               {chainId === ARBITRUM && (
-                <a href="https://stats.gmx.io" target="_blank" rel="noopener noreferrer">
+                <a href="https://stats.vaporwave.farm" target="_blank" rel="noopener noreferrer">
                   https://stats.vwave.io
                 </a>
               )}
               {chainId === AVALANCHE && (
-                <a href="https://stats.gmx.io/avalanche" target="_blank" rel="noopener noreferrer">
+                <a href="https://stats.vaporwave.farm/avalanche" target="_blank" rel="noopener noreferrer">
                   https://stats.vwave.io/avalanche
                 </a>
               )}

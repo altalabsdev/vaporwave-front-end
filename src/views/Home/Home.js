@@ -46,7 +46,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
   // }, {
   //   id: 3,
   //   question: "What is the VLP Token? ",
-  //   answer: "The VLP token represents the liquidity users provide to the VWAVE platform for Swaps and Margin Trading.<br><br>To provide liquidity to VLP you <a href='https://gmx.io/buy_glp' target='_blank'>trade</a> your crypto asset BTC, ETH, LINK, UNI, USDC, USDT, MIM, or FRAX to the liquidity pool, in exchange, you gain exposure to a diversified index of tokens while earning 50% of the platform trading fees and esVWAVE."
+  //   answer: "The VLP token represents the liquidity users provide to the VWAVE platform for Swaps and Margin Trading.<br><br>To provide liquidity to VLP you <a href='https://vaporwave.farm/buy_glp' target='_blank'>trade</a> your crypto asset BTC, ETH, LINK, UNI, USDC, USDT, MIM, or FRAX to the liquidity pool, in exchange, you gain exposure to a diversified index of tokens while earning 50% of the platform trading fees and esVWAVE."
   // }, {
   //   id: 4,
   //   question: "What can I trade on VWAVE? ",

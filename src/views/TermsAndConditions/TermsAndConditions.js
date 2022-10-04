@@ -256,7 +256,7 @@ export default function TermsAndConditions() {
                     5.2. VWAVE.io may revise these Terms from time to time. We will notify you by updating the date at
                     the top of the Terms and by maintaining a current version of the Terms. The changes will not be
                     retroactive, and the most current version of the Terms, which will always be at
-                    https://gmx.io/#/referral-terms. All modifications will be effective when they are posted. By
+                    https://vaporwave.farm/#/referral-terms. All modifications will be effective when they are posted. By
                     continuing to access or use the Site or the Interface after those revisions become effective, you
                     agree to be bound by the revised Terms.
                   </p>

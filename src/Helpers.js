@@ -1230,7 +1230,7 @@ const RPC_PROVIDERS = {
   [AVALANCHE]: AVALANCHE_RPC_PROVIDERS,
 };
 
-const alchemyWhitelistedDomains = ["gmx.io", "app.gmx.io"];
+const alchemyWhitelistedDomains = ["vaporwave.farm", "app.vaporwave.farm"];
 
 export function getAlchemyHttpUrl() {
   if (alchemyWhitelistedDomains.includes(window.location.host)) {
@@ -2699,7 +2699,7 @@ export function useDebounce(value, delay) {
 }
 
 export function isDevelopment() {
-  return !window.location.host?.includes("gmx.io") && !window.location.host?.includes("ipfs.io");
+  return !window.location.host?.includes("vaporwave.farm") && !window.location.host?.includes("ipfs.io");
 }
 
 export function isLocal() {
@@ -2711,7 +2711,7 @@ export function getHomeUrl() {
     return "http://localhost:3010";
   }
 
-  return "https://gmx.io";
+  return "https://vaporwave.farm";
 }
 
 export function getAppBaseUrl() {
@@ -2719,7 +2719,7 @@ export function getAppBaseUrl() {
     return "http://localhost:3011/#";
   }
 
-  return "https://app.gmx.io/#";
+  return "https://app.vaporwave.farm/#";
 }
 
 export function getTradePageUrl() {
@@ -2727,7 +2727,7 @@ export function getTradePageUrl() {
     return "http://localhost:3011/#/trade";
   }
 
-  return "https://app.gmx.io/#/trade";
+  return "https://app.vaporwave.farm/#/trade";
 }
 
 export function importImage(name) {

@@ -11,7 +11,7 @@ export const homeEventsData = [
     buttons: [
       {
         text: "Read More",
-        link: "https://medium.com/@gmx.io/gmx-frontend-updates-8d13f2346e1e",
+        link: "https://medium.com/@vaporwave.farm/gmx-frontend-updates-8d13f2346e1e",
         newTab: true,
       },
     ],
@@ -33,7 +33,7 @@ export const appEventsData = [
   //     },
   //     {
   //       text: "Trade Now",
-  //       link: "https://gmx.io/trade",
+  //       link: "https://vaporwave.farm/trade",
   //     },
   //   ],
   // },
@@ -46,7 +46,7 @@ export const appEventsData = [
   //   buttons: [
   //     {
   //       text: "Trade Now",
-  //       link: "https://gmx.io/trade",
+  //       link: "https://vaporwave.farm/trade",
   //     },
   //   ],
   // },
@@ -73,11 +73,11 @@ export const appEventsData = [
   //   buttons: [
   //     {
   //       text: "Read More",
-  //       link: "https://gmx.io/referrals",
+  //       link: "https://vaporwave.farm/referrals",
   //     },
   //     {
   //       text: "Join Now",
-  //       link: "https://gmx.io/referrals",
+  //       link: "https://vaporwave.farm/referrals",
   //     },
   //   ],
   // },
@@ -91,7 +91,7 @@ export const appEventsData = [
   //   buttons: [
   //     {
   //       text: "Read More",
-  //       link: "https://medium.com/@gmx.io/gmx-arbitrum-odyssey-fc12cba2d10d",
+  //       link: "https://medium.com/@vaporwave.farm/gmx-arbitrum-odyssey-fc12cba2d10d",
   //     },
   //   ],
   // },
@@ -134,7 +134,7 @@ export const appEventsData = [
   //   buttons: [
   //     {
   //       text: "Read More",
-  //       link: "https://medium.com/@gmx.io/gmx-frontend-updates-8d13f2346e1e",
+  //       link: "https://medium.com/@vaporwave.farm/gmx-frontend-updates-8d13f2346e1e",
   //       newTab: true,
   //     },
   //   ],
@@ -169,7 +169,7 @@ export const appEventsData = [
     buttons: [
       {
         text: "Read More",
-        link: "https://medium.com/@gmx.io/gmx-frontend-updates-8d13f2346e1e",
+        link: "https://medium.com/@vaporwave.farm/gmx-frontend-updates-8d13f2346e1e",
         newTab: true,
       },
     ],

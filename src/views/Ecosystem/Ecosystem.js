@@ -23,13 +23,13 @@ export default function Ecosystem() {
   const vwavePages = [
     {
       title: "VWAVE Governance",
-      link: "https://gov.gmx.io/",
+      link: "https://gov.vaporwave.farm/",
       about: "VWAVE Governance Page",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
       title: "VWAVE Stats",
-      link: "https://stats.gmx.io/",
+      link: "https://stats.vaporwave.farm/",
       about: "VWAVE Stats Page",
       chainIds: [ARBITRUM, AVALANCHE],
     },

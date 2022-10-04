@@ -11,7 +11,7 @@ export default function ExchangeBanner(props) {
         Trade on Vaporwave and win <span className="ExchangeBanner-price">$250.000</span> in prizes! Live until November
         30th,{" "}
         <a
-          href="https://medium.com/@gmx.io/gmx-trading-competition-win-250-000-usd-in-prizes-1346504b96f6"
+          href="https://medium.com/@vaporwave.farm/gmx-trading-competition-win-250-000-usd-in-prizes-1346504b96f6"
           target="_blank"
           className="ExchangeBanner-link"
           rel="noreferrer"
