@@ -33,7 +33,7 @@ export function RedirectPopupModal({
       <br />
       The website is a community deployed and maintained instance of the open source{" "}
       <a href="https://github.com/gmx-io/gmx-interface" target="_blank" rel="noopener noreferrer">
-        VWAVE front end
+        Vaporwave front end
       </a>
       , hosted and served on the distributed, peer-to-peer{" "}
       <a href="https://ipfs.io/" target="_blank" rel="noopener noreferrer">

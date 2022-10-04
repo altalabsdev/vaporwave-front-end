@@ -7,7 +7,7 @@ export const homeEventsData = [
     isActive: true,
     validTill: "10 Jul 2022, 12:00",
     bodyText:
-      "Updates have been applied to the VWAVE frontend to inform users of the separation between vwave.io and app.vwave.io",
+      "Updates have been applied to the vaporwave frontend to inform users of the separation between vwave.io and app.vwave.io",
     buttons: [
       {
         text: "Read More",
