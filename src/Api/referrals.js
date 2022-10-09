@@ -6,7 +6,6 @@ import useSWR from "swr";
 import ReferralStorage from "../abis/ReferralStorage.json";
 import {
   ARBITRUM,
-  AVALANCHE,
   MAX_REFERRAL_CODE_LENGTH,
   bigNumberify,
   isAddressZero,
@@ -16,22 +15,21 @@ import {
   isHashZero,
   REFERRAL_CODE_KEY,
 } from "../Helpers";
-import { arbitrumReferralsGraphClient, avalancheReferralsGraphClient } from "./common";
+import { arbitrumReferralsGraphClient } from "./common";
 import { getContract } from "../Addresses";
 import { callContract } from ".";
 import { REGEX_VERIFY_BYTES32 } from "../components/Referrals/referralsHelper";
 
-const ACTIVE_CHAINS = [ARBITRUM, AVALANCHE];
+const ACTIVE_CHAINS = [ARBITRUM];
 const DISTRIBUTION_TYPE_REBATES = "1";
 const DISTRIBUTION_TYPE_DISCOUNT = "2";
 
 function getGraphClient(chainId) {
-  if (chainId === ARBITRUM) {
+  try {
     return arbitrumReferralsGraphClient;
-  } else if (chainId === AVALANCHE) {
-    return avalancheReferralsGraphClient;
-  }
+  } catch {
   throw new Error(`Unsupported chain ${chainId}`);
+  }
 }
 
 export function decodeReferralCode(hexCode) {
@@ -99,7 +97,7 @@ export function useUserCodesOnAllChain(account) {
   `;
   useEffect(() => {
     async function main() {
-      const [arbitrumCodes, avalancheCodes] = await Promise.all(
+      const [avalancheCodes] = await Promise.all(
         ACTIVE_CHAINS.map((chainId) => {
           return getGraphClient(chainId)
             .query({ query, variables: { account: (account || "").toLowerCase() } })
@@ -108,17 +106,12 @@ export function useUserCodesOnAllChain(account) {
             });
         })
       );
-      const [codeOwnersOnAvax = [], codeOwnersOnArbitrum = []] = await Promise.all([
-        getCodeOwnersData(AVALANCHE, account, arbitrumCodes),
+      const [codeOwnersOnAvax = []] = await Promise.all([
         getCodeOwnersData(ARBITRUM, account, avalancheCodes),
       ]);
 
       setData({
         [ARBITRUM]: codeOwnersOnAvax.reduce((acc, cv) => {
-          acc[cv.code] = cv;
-          return acc;
-        }, {}),
-        [AVALANCHE]: codeOwnersOnArbitrum.reduce((acc, cv) => {
           acc[cv.code] = cv;
           return acc;
         }, {}),

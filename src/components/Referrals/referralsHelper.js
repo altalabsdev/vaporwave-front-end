@@ -5,7 +5,6 @@ import {
   USD_DECIMALS,
   MAX_REFERRAL_CODE_LENGTH,
   ARBITRUM,
-  AVALANCHE,
 } from "../../Helpers";
 import { encodeReferralCode, getReferralCodeOwner } from "../../Api/referrals";
 
@@ -21,22 +20,17 @@ export function isRecentReferralCodeNotExpired(referralCodeInfo) {
 
 export async function getReferralCodeTakenStatus(account, referralCode, chainId) {
   const referralCodeBytes32 = encodeReferralCode(referralCode);
-  const [ownerArbitrum, ownerAvax] = await Promise.all([
+  const [ownerArbitrum,] = await Promise.all([
     getReferralCodeOwner(ARBITRUM, referralCodeBytes32),
-    getReferralCodeOwner(AVALANCHE, referralCodeBytes32),
   ]);
 
   const takenOnArb =
-    !isAddressZero(ownerArbitrum) && (ownerArbitrum !== account || (ownerArbitrum === account && chainId === ARBITRUM));
-  const takenOnAvax =
-    !isAddressZero(ownerAvax) && (ownerAvax !== account || (ownerAvax === account && chainId === AVALANCHE));
+    !isAddressZero(ownerArbitrum) && (ownerArbitrum !== account || (ownerArbitrum === account));
 
   const referralCodeTakenInfo = {
     [ARBITRUM]: takenOnArb,
-    [AVALANCHE]: takenOnAvax,
-    both: takenOnArb && takenOnAvax,
+    both: false,
     ownerArbitrum,
-    ownerAvax,
   };
 
   if (referralCodeTakenInfo.both) {
@@ -44,9 +38,6 @@ export async function getReferralCodeTakenStatus(account, referralCode, chainId)
   }
   if (referralCodeTakenInfo[chainId]) {
     return { status: "current", info: referralCodeTakenInfo };
-  }
-  if (chainId === AVALANCHE ? referralCodeTakenInfo[ARBITRUM] : referralCodeTakenInfo[AVALANCHE]) {
-    return { status: "other", info: referralCodeTakenInfo };
   }
   return { status: "none", info: referralCodeTakenInfo };
 }

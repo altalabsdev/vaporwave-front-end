@@ -37,10 +37,6 @@
   background: rgba(41, 160, 240, 0.2);
 }
 
-.ClaimEsVwave-vesting-options .Checkbox.btn-lg.selected.avalanche {
-  background: rgba(232, 65, 65, 0.2);
-}
-
 .ClaimEsVwave-vesting-options .Checkbox img {
   height: 1.5rem;
 }
@@ -58,10 +54,6 @@
 
 .ClaimEsVwave-vesting-options .Checkbox.arbitrum .Checkbox-icon.active {
   color: #29a0f0;
-}
-
-.ClaimEsVwave-vesting-options .Checkbox.avalanche .Checkbox-icon.active {
-  color: #e84141;
 }
 
 .ClaimEsVwave button {

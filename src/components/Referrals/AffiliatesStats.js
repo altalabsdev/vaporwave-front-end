@@ -1,13 +1,11 @@
 import { useMemo, useRef, useState } from "react";
 import { FiPlus, FiTwitter } from "react-icons/fi";
 import { useCopyToClipboard } from "react-use";
-import { IoWarningOutline } from "react-icons/io5";
-import { BiCopy, BiErrorCircle } from "react-icons/bi";
+import { BiCopy } from "react-icons/bi";
 import Card from "../Common/Card";
 import Modal from "../Modal/Modal";
 import { getNativeToken, getToken } from "../../data/Tokens";
 import {
-  AVALANCHE,
   bigNumberify,
   formatAmount,
   formatDate,
@@ -26,7 +24,6 @@ import {
   tierRebateInfo,
 } from "./referralsHelper";
 import { AffiliateCodeForm } from "./AddAffiliateCode";
-import TooltipWithPortal from "../Tooltip/TooltipWithPortal";
 
 function AffiliatesStats({
   referralsData,
@@ -132,7 +129,6 @@ function AffiliatesStats({
               </thead>
               <tbody>
                 {finalAffiliatesTotalStats.map((stat, index) => {
-                  const ownerOnOtherChain = stat?.ownerOnOtherChain;
                   let referrerRebate = bigNumberify(0);
                   if (stat && stat.totalRebateUsd && stat.discountUsd) {
                     referrerRebate = stat.totalRebateUsd.sub(stat.discountUsd);
@@ -159,40 +155,6 @@ function AffiliatesStats({
                           >
                             <FiTwitter />
                           </a>
-                          {ownerOnOtherChain && !ownerOnOtherChain?.isTaken && (
-                            <div className="info">
-                              <TooltipWithPortal
-                                position="right"
-                                handle={<IoWarningOutline color="#ffba0e" size={16} />}
-                                renderContent={() => (
-                                  <div>
-                                    This code is not yet registered on{" "}
-                                    {chainId === AVALANCHE ? "Arbitrum" : "Avalanche"}, you will not receive rebates
-                                    there.
-                                    <br />
-                                    <br />
-                                    Switch your network to create this code on{" "}
-                                    {chainId === AVALANCHE ? "Arbitrum" : "Avalanche"}.
-                                  </div>
-                                )}
-                              />
-                            </div>
-                          )}
-                          {ownerOnOtherChain && ownerOnOtherChain?.isTaken && !ownerOnOtherChain?.isTakenByCurrentUser && (
-                            <div className="info">
-                              <TooltipWithPortal
-                                position="right"
-                                handle={<BiErrorCircle color="#e82e56" size={16} />}
-                                renderContent={() => (
-                                  <div>
-                                    This code has been taken by someone else on{" "}
-                                    {chainId === AVALANCHE ? "Arbitrum" : "Avalanche"}, you will not receive rebates
-                                    from traders using this code on {chainId === AVALANCHE ? "Arbitrum" : "Avalanche"}.
-                                  </div>
-                                )}
-                              />
-                            </div>
-                          )}
                         </div>
                       </td>
                       <td data-label="Total Volume">{getUSDValue(stat.volume)}</td>

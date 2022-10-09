@@ -10,7 +10,6 @@ import PositionManager from "../abis/PositionManager.json";
 import Vault from "../abis/Vault.json";
 import Router from "../abis/Router.json";
 import UniPool from "../abis/UniPool.json";
-import UniswapV2 from "../abis/UniswapV2.json";
 import Token from "../abis/Token.json";
 import VaultReader from "../abis/VaultReader.json";
 import PositionRouter from "../abis/PositionRouter.json";
@@ -20,7 +19,6 @@ import { getConstant } from "../Constants";
 import {
   UI_VERSION,
   ARBITRUM,
-  AVALANCHE,
   // DEFAULT_GAS_LIMIT,
   bigNumberify,
   getExplorerUrl,
@@ -45,19 +43,18 @@ import {
 } from "../Helpers";
 import { getTokens, getTokenBySymbol, getWhitelistedTokens } from "../data/Tokens";
 
-import { nissohGraphClient, arbitrumGraphClient, avalancheGraphClient } from "./common";
+import { nissohGraphClient, arbitrumGraphClient } from "./common";
 import { groupBy } from "lodash";
 export * from "./prices";
 
 const { AddressZero } = ethers.constants;
 
 function getVwaveGraphClient(chainId) {
-  if (chainId === ARBITRUM) {
+  try {
     return arbitrumGraphClient;
-  } else if (chainId === AVALANCHE) {
-    return avalancheGraphClient;
+  } catch {
+    throw new Error(`Unsupported chain ${chainId}`);
   }
-  throw new Error(`Unsupported chain ${chainId}`);
 }
 
 export function useAllOrdersStats(chainId) {
@@ -437,11 +434,6 @@ export function useMinExecutionFee(library, active, chainId, infoTokens) {
     multiplier = 65000;
   }
 
-  // multiplier for Avalanche is just the average gas usage
-  if (chainId === AVALANCHE) {
-    multiplier = 700000;
-  }
-
   let finalExecutionFee = minExecutionFee;
 
   if (gasPrice && minExecutionFee) {
@@ -475,24 +467,13 @@ export function useStakedVwaveSupply(library, active) {
     }
   );
 
-  const vwaveAddressAvax = getContract(AVALANCHE, "VWAVE");
-  const stakedVwaveTrackerAddressAvax = getContract(AVALANCHE, "StakedVwaveTracker");
-
-  const { data: avaxData, mutate: avaxMutate } = useSWR(
-    [`StakeV2:stakedVwaveSupply:${active}`, AVALANCHE, vwaveAddressAvax, "balanceOf", stakedVwaveTrackerAddressAvax],
-    {
-      fetcher: fetcher(undefined, Token),
-    }
-  );
-
   let data;
-  if (arbData && avaxData) {
-    data = arbData.add(avaxData);
+  if (arbData) {
+    data = arbData;
   }
 
   const mutate = () => {
     arbMutate();
-    avaxMutate();
   };
 
   return { data, mutate };
@@ -519,23 +500,18 @@ export function useVwavePrice(chainId, libraries, active) {
     arbitrumLibrary,
     active
   );
-  const { data: vwavePriceFromAvalanche, mutate: mutateFromAvalanche } = useVwavePriceFromAvalanche();
-
-  const vwavePrice = chainId === ARBITRUM ? vwavePriceFromArbitrum : vwavePriceFromAvalanche;
+  const vwavePrice = vwavePriceFromArbitrum;
   const mutate = useCallback(() => {
-    mutateFromAvalanche();
     mutateFromArbitrum();
-  }, [mutateFromAvalanche, mutateFromArbitrum]);
+  }, [mutateFromArbitrum]);
 
   return {
     vwavePrice,
     vwavePriceFromArbitrum,
-    vwavePriceFromAvalanche,
     mutate,
   };
 }
 
-// use only the supply endpoint on arbitrum, it includes the supply on avalanche
 export function useTotalVwaveSupply() {
   const vwaveSupplyUrlArbitrum = getServerUrl(ARBITRUM, "/vwave_supply");
 
@@ -551,7 +527,6 @@ export function useTotalVwaveSupply() {
 
 export function useTotalVwaveStaked() {
   const stakedVwaveTrackerAddressArbitrum = getContract(ARBITRUM, "StakedVwaveTracker");
-  const stakedVwaveTrackerAddressAvax = getContract(AVALANCHE, "StakedVwaveTracker");
   let totalStakedVwave = useRef(bigNumberify(0));
   const { data: stakedVwaveSupplyArbitrum, mutate: updateStakedVwaveSupplyArbitrum } = useSWR(
     [
@@ -565,31 +540,17 @@ export function useTotalVwaveStaked() {
       fetcher: fetcher(undefined, Token),
     }
   );
-  const { data: stakedVwaveSupplyAvax, mutate: updateStakedVwaveSupplyAvax } = useSWR(
-    [
-      `StakeV2:stakedVwaveSupply:${AVALANCHE}`,
-      AVALANCHE,
-      getContract(AVALANCHE, "VWAVE"),
-      "balanceOf",
-      stakedVwaveTrackerAddressAvax,
-    ],
-    {
-      fetcher: fetcher(undefined, Token),
-    }
-  );
 
   const mutate = useCallback(() => {
     updateStakedVwaveSupplyArbitrum();
-    updateStakedVwaveSupplyAvax();
-  }, [updateStakedVwaveSupplyArbitrum, updateStakedVwaveSupplyAvax]);
+  }, [updateStakedVwaveSupplyArbitrum]);
 
-  if (stakedVwaveSupplyArbitrum && stakedVwaveSupplyAvax) {
-    let total = bigNumberify(stakedVwaveSupplyArbitrum).add(stakedVwaveSupplyAvax);
+  if (stakedVwaveSupplyArbitrum) {
+    let total = bigNumberify(stakedVwaveSupplyArbitrum);
     totalStakedVwave.current = total;
   }
 
   return {
-    avax: stakedVwaveSupplyAvax,
     arbitrum: stakedVwaveSupplyArbitrum,
     total: totalStakedVwave.current,
     mutate,
@@ -598,7 +559,6 @@ export function useTotalVwaveStaked() {
 
 export function useTotalVwaveInLiquidity() {
   let poolAddressArbitrum = getContract(ARBITRUM, "UniswapVwaveEthPool");
-  let poolAddressAvax = getContract(AVALANCHE, "TraderJoeVwaveAvaxPool");
   let totalVWAVE = useRef(bigNumberify(0));
 
   const { data: vwaveInLiquidityOnArbitrum, mutate: mutateVWAVEInLiquidityOnArbitrum } = useSWR(
@@ -613,61 +573,20 @@ export function useTotalVwaveInLiquidity() {
       fetcher: fetcher(undefined, Token),
     }
   );
-  const { data: vwaveInLiquidityOnAvax, mutate: mutateVWAVEInLiquidityOnAvax } = useSWR(
-    [`StakeV2:vwaveInLiquidity:${AVALANCHE}`, AVALANCHE, getContract(AVALANCHE, "VWAVE"), "balanceOf", poolAddressAvax],
-    {
-      fetcher: fetcher(undefined, Token),
-    }
-  );
+
   const mutate = useCallback(() => {
     mutateVWAVEInLiquidityOnArbitrum();
-    mutateVWAVEInLiquidityOnAvax();
-  }, [mutateVWAVEInLiquidityOnArbitrum, mutateVWAVEInLiquidityOnAvax]);
+  }, [mutateVWAVEInLiquidityOnArbitrum]);
 
-  if (vwaveInLiquidityOnAvax && vwaveInLiquidityOnArbitrum) {
-    let total = bigNumberify(vwaveInLiquidityOnArbitrum).add(vwaveInLiquidityOnAvax);
+  if (vwaveInLiquidityOnArbitrum) {
+    let total = bigNumberify(vwaveInLiquidityOnArbitrum);
     totalVWAVE.current = total;
   }
   return {
-    avax: vwaveInLiquidityOnAvax,
     arbitrum: vwaveInLiquidityOnArbitrum,
     total: totalVWAVE.current,
     mutate,
   };
-}
-
-function useVwavePriceFromAvalanche() {
-  const poolAddress = getContract(AVALANCHE, "TraderJoeVwaveAvaxPool");
-
-  const { data, mutate: updateReserves } = useSWR(
-    ["TraderJoeVwaveAvaxReserves", AVALANCHE, poolAddress, "getReserves"],
-    {
-      fetcher: fetcher(undefined, UniswapV2),
-    }
-  );
-  const { _reserve0: vwaveReserve, _reserve1: avaxReserve } = data || {};
-
-  const vaultAddress = getContract(AVALANCHE, "Vault");
-  const avaxAddress = getTokenBySymbol(AVALANCHE, "WAVAX").address;
-  const { data: avaxPrice, mutate: updateAvaxPrice } = useSWR(
-    [`StakeV2:avaxPrice`, AVALANCHE, vaultAddress, "getMinPrice", avaxAddress],
-    {
-      fetcher: fetcher(undefined, Vault),
-    }
-  );
-
-  const PRECISION = bigNumberify(10).pow(18);
-  let vwavePrice;
-  if (avaxReserve && vwaveReserve && avaxPrice) {
-    vwavePrice = avaxReserve.mul(PRECISION).div(vwaveReserve).mul(avaxPrice).div(PRECISION);
-  }
-
-  const mutate = useCallback(() => {
-    updateReserves(undefined, true);
-    updateAvaxPrice(undefined, true);
-  }, [updateReserves, updateAvaxPrice]);
-
-  return { data: vwavePrice, mutate };
 }
 
 function useVwavePriceFromArbitrum(library, active) {

@@ -27,7 +27,6 @@ import {
   VLP_DECIMALS,
   BASIS_POINTS_DIVISOR,
   ARBITRUM,
-  AVALANCHE,
   getTotalVolumeSum,
   VLPPOOLCOLORS,
   DEFAULT_MAX_USDG_AMOUNT,
@@ -54,15 +53,13 @@ import "./DashboardV2.css";
 
 import vwave40Icon from "../../img/ic_vwave_40.svg";
 import vlp40Icon from "../../img/ic_vlp_40.svg";
-import avalanche16Icon from "../../img/ic_avalanche_16.svg";
 import arbitrum16Icon from "../../img/ic_arbitrum_16.svg";
 import arbitrum24Icon from "../../img/ic_arbitrum_24.svg";
-import avalanche24Icon from "../../img/ic_avalanche_24.svg";
 
 import AssetDropdown from "./AssetDropdown";
 import SEO from "../../components/Common/SEO";
 import TooltipCard from "./TooltipCard";
-const ACTIVE_CHAIN_IDS = [ARBITRUM, AVALANCHE];
+const ACTIVE_CHAIN_IDS = [ARBITRUM];
 
 const { AddressZero } = ethers.constants;
 
@@ -215,10 +212,9 @@ export default function DashboardV2() {
 
   const { infoTokens } = useInfoTokens(library, chainId, active, undefined, undefined);
   const { infoTokens: infoTokensArbitrum } = useInfoTokens(null, ARBITRUM, active, undefined, undefined);
-  const { infoTokens: infoTokensAvax } = useInfoTokens(null, AVALANCHE, active, undefined, undefined);
 
   const { data: feesInfo } = useSWR(
-    infoTokensArbitrum[AddressZero].contractMinPrice && infoTokensAvax[AddressZero].contractMinPrice
+    infoTokensArbitrum[AddressZero].contractMinPrice
       ? "Dashboard:feesInfo"
       : null,
     {
@@ -239,7 +235,7 @@ export default function DashboardV2() {
               const feeUSD = getCurrentFeesUsd(
                 getWhitelistedTokenAddresses(ACTIVE_CHAIN_IDS[i]),
                 cv,
-                ACTIVE_CHAIN_IDS[i] === ARBITRUM ? infoTokensArbitrum : infoTokensAvax
+                infoTokensArbitrum,
               );
               acc[ACTIVE_CHAIN_IDS[i]] = feeUSD;
               acc.total = acc.total.add(feeUSD);
@@ -433,7 +429,7 @@ export default function DashboardV2() {
     },
   ];
 
-  const totalStatsStartDate = chainId === AVALANCHE ? "06 Jan 2022" : "01 Sep 2021";
+  const totalStatsStartDate = "01 Sep 2021";
 
   let stableVlp = 0;
   let totalVlp = 0;
@@ -511,19 +507,13 @@ export default function DashboardV2() {
           <div className="section-title-icon"></div>
           <div className="section-title-content">
             <div className="Page-title">
-              Stats {chainId === AVALANCHE && <img src={avalanche24Icon} alt="avalanche24Icon" />}
-              {chainId === ARBITRUM && <img src={arbitrum24Icon} alt="arbitrum24Icon" />}
+              Stats {chainId === ARBITRUM && <img src={arbitrum24Icon} alt="arbitrum24Icon" />}
             </div>
             <div className="Page-description">
               {chainName} Total Stats start from {totalStatsStartDate}.<br /> For detailed stats:{" "}
               {chainId === ARBITRUM && (
                 <a href="https://stats.vaporwave.farm" target="_blank" rel="noopener noreferrer">
                   https://stats.vwave.io
-                </a>
-              )}
-              {chainId === AVALANCHE && (
-                <a href="https://stats.vaporwave.farm/avalanche" target="_blank" rel="noopener noreferrer">
-                  https://stats.vwave.io/avalanche
                 </a>
               )}
               .
@@ -569,7 +559,6 @@ export default function DashboardV2() {
                         <TooltipCard
                           title="Volume"
                           arbitrum={volumeInfo?.[ARBITRUM].totalVolume}
-                          avax={volumeInfo?.[AVALANCHE].totalVolume}
                           total={volumeInfo?.totalVolume}
                         />
                       )}
@@ -592,7 +581,6 @@ export default function DashboardV2() {
                         <TooltipCard
                           title="Long Positions"
                           arbitrum={positionStatsInfo?.[ARBITRUM].totalLongPositionSizes}
-                          avax={positionStatsInfo?.[AVALANCHE].totalLongPositionSizes}
                           total={positionStatsInfo?.totalLongPositionSizes}
                         />
                       )}
@@ -615,7 +603,6 @@ export default function DashboardV2() {
                         <TooltipCard
                           title="Short Positions"
                           arbitrum={positionStatsInfo?.[ARBITRUM].totalShortPositionSizes}
-                          avax={positionStatsInfo?.[AVALANCHE].totalShortPositionSizes}
                           total={positionStatsInfo?.totalShortPositionSizes}
                         />
                       )}
@@ -634,7 +621,6 @@ export default function DashboardV2() {
                           <TooltipCard
                             title="Fees"
                             arbitrum={feesInfo?.[ARBITRUM]}
-                            avax={feesInfo?.[AVALANCHE]}
                             total={feesInfo?.total}
                           />
                         )}
@@ -665,8 +651,7 @@ export default function DashboardV2() {
           </div>
           <div className="Tab-title-section">
             <div className="Page-title">
-              Tokens {chainId === AVALANCHE && <img src={avalanche24Icon} alt="avalanche24Icon" />}
-              {chainId === ARBITRUM && <img src={arbitrum24Icon} alt="arbitrum24Icon" />}
+              Tokens {chainId === ARBITRUM && <img src={arbitrum24Icon} alt="arbitrum24Icon" />}
             </div>
             <div className="Page-description">Platform and VLP index tokens.</div>
           </div>
@@ -795,11 +780,7 @@ export default function DashboardV2() {
                     <div className="App-card-title-mark">
                       <div className="App-card-title-mark-icon">
                         <img src={vlp40Icon} alt="vlp40Icon" />
-                        {chainId === ARBITRUM ? (
                           <img src={arbitrum16Icon} alt="arbitrum16Icon" className="selected-network-symbol" />
-                        ) : (
-                          <img src={avalanche16Icon} alt="avalanche16Icon" className="selected-network-symbol" />
-                        )}
                       </div>
                       <div className="App-card-title-mark-info">
                         <div className="App-card-title-mark-title">VLP</div>
@@ -879,8 +860,7 @@ export default function DashboardV2() {
             </div>
             <div className="token-table-wrapper App-card">
               <div className="App-card-title">
-                VLP Index Composition {chainId === AVALANCHE && <img src={avalanche16Icon} alt="avalanche16Icon" />}
-                {chainId === ARBITRUM && <img src={arbitrum16Icon} alt="arbitrum16Icon" />}
+                VLP Index Composition {chainId === ARBITRUM && <img src={arbitrum16Icon} alt="arbitrum16Icon" />}
               </div>
               <div className="App-card-divider"></div>
               <table className="token-table">

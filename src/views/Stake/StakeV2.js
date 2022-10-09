@@ -1047,7 +1047,7 @@ export default function StakeV2({ setPendingTxns, connectWallet }) {
     }
   );
 
-  const { vwavePrice, vwavePriceFromArbitrum, vwavePriceFromAvalanche } = useVwavePrice(
+  const { vwavePrice, vwavePriceFromArbitrum } = useVwavePrice(
     chainId,
     { arbitrum: chainId === ARBITRUM ? library : undefined },
     active
@@ -1055,7 +1055,7 @@ export default function StakeV2({ setPendingTxns, connectWallet }) {
 
   let { total: totalVwaveSupply } = useTotalVwaveSupply();
 
-  let { avax: avaxVwaveStaked, arbitrum: arbitrumVwaveStaked, total: totalVwaveStaked } = useTotalVwaveStaked();
+  let { arbitrum: arbitrumVwaveStaked, total: totalVwaveStaked } = useTotalVwaveStaked();
 
   const vwaveSupplyUrl = getServerUrl(chainId, "/vwave_supply");
   const { data: vwaveSupply } = useSWR([vwaveSupplyUrl], {
@@ -1456,8 +1456,6 @@ export default function StakeV2({ setPendingTxns, connectWallet }) {
                       renderContent={() => (
                         <>
                           Price on Arbitrum: ${formatAmount(vwavePriceFromArbitrum, USD_DECIMALS, 2, true)}
-                          <br />
-                          Price on Avalanche: ${formatAmount(vwavePriceFromAvalanche, USD_DECIMALS, 2, true)}
                         </>
                       )}
                     />
@@ -1603,8 +1601,6 @@ export default function StakeV2({ setPendingTxns, connectWallet }) {
                       renderContent={() => (
                         <>
                           Arbitrum: {formatAmount(arbitrumVwaveStaked, 18, 0, true)} VWAVE
-                          <br />
-                          Avalanche: {formatAmount(avaxVwaveStaked, 18, 0, true)} VWAVE
                         </>
                       )}
                     />

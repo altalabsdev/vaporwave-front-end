@@ -4,7 +4,6 @@ import { ethers } from "ethers";
 import { useWeb3React } from "@web3-react/core";
 import {
   ARBITRUM,
-  AVALANCHE,
   PLACEHOLDER_ACCOUNT,
   useChainId,
   fetcher,
@@ -26,7 +25,6 @@ import Checkbox from "../../components/Checkbox/Checkbox";
 import "./ClaimEsVwave.css";
 
 import arbitrumIcon from "../../img/ic_arbitrum_96.svg";
-import avaIcon from "../../img/ic_avalanche_96.svg";
 
 const VEST_WITH_VWAVE_ARB = "VEST_WITH_VWAVE_ARB";
 const VEST_WITH_VLP_ARB = "VEST_WITH_VLP_ARB";
@@ -155,10 +153,8 @@ export default function ClaimEsVwave({ setPendingTxns }) {
   );
 
   const arbRewardReaderAddress = getContract(ARBITRUM, "RewardReader");
-  const avaxRewardReaderAddress = getContract(AVALANCHE, "RewardReader");
 
   const arbVesterAdddresses = [getContract(ARBITRUM, "VwaveVester"), getContract(ARBITRUM, "VlpVester")];
-  const avaxVesterAdddresses = [getContract(AVALANCHE, "VwaveVester"), getContract(AVALANCHE, "VlpVester")];
 
   const { data: arbVestingInfo } = useSWR(
     [
@@ -173,21 +169,7 @@ export default function ClaimEsVwave({ setPendingTxns }) {
     }
   );
 
-  const { data: avaxVestingInfo } = useSWR(
-    [
-      `StakeV2:vestingInfo:${active}`,
-      AVALANCHE,
-      avaxRewardReaderAddress,
-      "getVestingInfoV2",
-      account || PLACEHOLDER_ACCOUNT,
-    ],
-    {
-      fetcher: fetcher(undefined, RewardReader, [avaxVesterAdddresses]),
-    }
-  );
-
   const arbVestingData = getVestingDataV2(arbVestingInfo);
-  const avaxVestingData = getVestingDataV2(avaxVestingInfo);
 
   let amount = parseValue(value, 18);
 
@@ -222,34 +204,6 @@ export default function ClaimEsVwave({ setPendingTxns }) {
       minRatio: bigNumberify(320),
       amount,
       vestingDataItem: arbVestingData.vlpVester,
-    });
-
-    if (result) {
-      ({ maxVestableAmount, currentRatio, nextMaxVestableEsVwave, nextRatio, initialStakingAmount, nextStakingAmount } =
-        result);
-    }
-
-    stakingToken = "VLP";
-  }
-
-  if (selectedOption === VEST_WITH_VWAVE_AVAX && avaxVestingData) {
-    const result = getVestingValues({
-      minRatio: bigNumberify(4),
-      amount,
-      vestingDataItem: avaxVestingData.vwaveVester,
-    });
-
-    if (result) {
-      ({ maxVestableAmount, currentRatio, nextMaxVestableEsVwave, nextRatio, initialStakingAmount, nextStakingAmount } =
-        result);
-    }
-  }
-
-  if (selectedOption === VEST_WITH_VLP_AVAX && avaxVestingData) {
-    const result = getVestingValues({
-      minRatio: bigNumberify(320),
-      amount,
-      vestingDataItem: avaxVestingData.vlpVester,
     });
 
     if (result) {
@@ -389,22 +343,6 @@ export default function ClaimEsVwave({ setPendingTxns }) {
               >
                 <div className="ClaimEsVwave-option-label">Vest with VLP on Arbitrum</div>
                 <img src={arbitrumIcon} alt="arbitrum" />
-              </Checkbox>
-              <Checkbox
-                className="avalanche btn btn-primary btn-left btn-lg"
-                isChecked={selectedOption === VEST_WITH_VWAVE_AVAX}
-                setIsChecked={() => setSelectedOption(VEST_WITH_VWAVE_AVAX)}
-              >
-                <div className="ClaimEsVwave-option-label">Vest with VWAVE on Avalanche</div>
-                <img src={avaIcon} alt="avalanche" />
-              </Checkbox>
-              <Checkbox
-                className="avalanche btn btn-primary btn-left btn-lg"
-                isChecked={selectedOption === VEST_WITH_VLP_AVAX}
-                setIsChecked={() => setSelectedOption(VEST_WITH_VLP_AVAX)}
-              >
-                <div className="ClaimEsVwave-option-label avalanche">Vest with VLP on Avalanche</div>
-                <img src={avaIcon} alt="avalanche" />
               </Checkbox>
             </div>
             <br />

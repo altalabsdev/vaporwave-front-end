@@ -27,7 +27,6 @@ export const UI_VERSION = "1.3";
 export const PLACEHOLDER_ACCOUNT = ethers.Wallet.createRandom().address;
 
 export const MAINNET = 56;
-export const AVALANCHE = 43114;
 export const TESTNET = 97;
 export const ARBITRUM_TESTNET = 421611;
 export const ARBITRUM = 42161;
@@ -44,20 +43,17 @@ const CHAIN_NAMES_MAP = {
   [TESTNET]: "BSC Testnet",
   [ARBITRUM_TESTNET]: "Arbitrum Testnet",
   [ARBITRUM]: "Arbitrum",
-  [AVALANCHE]: "Avalanche",
 };
 
 const GAS_PRICE_ADJUSTMENT_MAP = {
   [ARBITRUM]: "0",
-  [AVALANCHE]: "3000000000", // 3 gwei
 };
 
 const MAX_GAS_PRICE_MAP = {
-  [AVALANCHE]: "200000000000", // 200 gwei
+  [ARBITRUM]: "200000000000", // 200 gwei
 };
 
 const ARBITRUM_RPC_PROVIDERS = ["https://arb1.arbitrum.io/rpc"];
-const AVALANCHE_RPC_PROVIDERS = ["https://api.avax.network/ext/bc/C/rpc"];
 export const WALLET_CONNECT_LOCALSTORAGE_KEY = "walletconnect";
 export const WALLET_LINK_LOCALSTORAGE_PREFIX = "-walletlink";
 export const SHOULD_EAGER_CONNECT_LOCALSTORAGE_KEY = "eagerconnect";
@@ -143,7 +139,6 @@ export const VLPPOOLCOLORS = {
 
 export const HIGH_EXECUTION_FEES_MAP = {
   [ARBITRUM]: 3, // 3 USD
-  [AVALANCHE]: 3, // 3 USD
 };
 
 export const ICONLINKS = {
@@ -191,38 +186,6 @@ export const ICONLINKS = {
       arbitrum: "https://arbiscan.io/address/0x17fc002b466eec40dae837fc4be5c67993ddbd6f",
     },
   },
-  43114: {
-    VWAVE: {
-      coingecko: "https://www.coingecko.com/en/coins/gmx",
-      avalanche: "https://snowtrace.io/address/0x62edc0692bd897d2295872a9ffcac5425011c661",
-    },
-    VLP: {
-      avalanche: "https://snowtrace.io/address/0x9e295B5B976a184B14aD8cd72413aD846C299660",
-    },
-    AVAX: {
-      coingecko: "https://www.coingecko.com/en/coins/avalanche",
-    },
-    ETH: {
-      coingecko: "https://www.coingecko.com/en/coins/weth",
-      avalanche: "https://snowtrace.io/address/0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab",
-    },
-    BTC: {
-      coingecko: "https://www.coingecko.com/en/coins/wrapped-bitcoin",
-      avalanche: "https://snowtrace.io/address/0x50b7545627a5162f82a992c33b87adc75187b218",
-    },
-    MIM: {
-      coingecko: "https://www.coingecko.com/en/coins/magic-internet-money",
-      avalanche: "https://snowtrace.io/address/0x130966628846bfd36ff31a822705796e8cb8c18d",
-    },
-    "USDC.e": {
-      coingecko: "https://www.coingecko.com/en/coins/usd-coin-avalanche-bridged-usdc-e",
-      avalanche: "https://snowtrace.io/address/0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664",
-    },
-    USDC: {
-      coingecko: "https://www.coingecko.com/en/coins/usd-coin",
-      avalanche: "https://snowtrace.io/address/0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
-    },
-  },
 };
 
 export const platformTokens = {
@@ -243,26 +206,9 @@ export const platformTokens = {
       imageUrl: "https://github.com/gmx-io/gmx-assets/blob/main/VWAVE-Assets/PNG/VLP_LOGO%20ONLY.png?raw=true",
     },
   },
-  43114: {
-    // avalanche
-    VWAVE: {
-      name: "VWAVE",
-      symbol: "VWAVE",
-      decimals: 18,
-      address: getContract(AVALANCHE, "VWAVE"),
-      imageUrl: "https://assets.coingecko.com/coins/images/18323/small/arbit.png?1631532468",
-    },
-    VLP: {
-      name: "VWAVE LP",
-      symbol: "VLP",
-      decimals: 18,
-      address: getContract(AVALANCHE, "StakedVlpTracker"), // address of fsVLP token because user only holds fsVLP
-      imageUrl: "https://github.com/gmx-io/gmx-assets/blob/main/VWAVE-Assets/PNG/VLP_LOGO%20ONLY.png?raw=true",
-    },
-  },
 };
 
-const supportedChainIds = [ARBITRUM, AVALANCHE];
+const supportedChainIds = [ARBITRUM];
 const injectedConnector = new InjectedConnector({
   supportedChainIds,
 });
@@ -271,7 +217,6 @@ const getWalletConnectConnector = () => {
   const chainId = localStorage.getItem(SELECTED_NETWORK_LOCAL_STORAGE_KEY) || DEFAULT_CHAIN_ID;
   return new WalletConnectConnector({
     rpc: {
-      [AVALANCHE]: AVALANCHE_RPC_PROVIDERS[0],
       [ARBITRUM]: ARBITRUM_RPC_PROVIDERS[0],
     },
     qrcode: true,
@@ -418,8 +363,6 @@ export function getServerBaseUrl(chainId) {
     return "https://gambit-l2.as.r.appspot.com";
   } else if (chainId === ARBITRUM) {
     return "https://gmx-server-mainnet.uw.r.appspot.com";
-  } else if (chainId === AVALANCHE) {
-    return "https://gmx-avax-server.uc.r.appspot.com";
   }
   return "https://gmx-server-mainnet.uw.r.appspot.com";
 }
@@ -1227,7 +1170,6 @@ export const BSC_RPC_PROVIDERS = [
 const RPC_PROVIDERS = {
   [MAINNET]: BSC_RPC_PROVIDERS,
   [ARBITRUM]: ARBITRUM_RPC_PROVIDERS,
-  [AVALANCHE]: AVALANCHE_RPC_PROVIDERS,
 };
 
 const alchemyWhitelistedDomains = ["vaporwave.farm", "app.vaporwave.farm"];
@@ -1248,7 +1190,6 @@ export function getAlchemyWsUrl() {
 
 const FALLBACK_PROVIDERS = {
   [ARBITRUM]: [getAlchemyHttpUrl()],
-  [AVALANCHE]: ["https://avax-mainnet.gateway.pokt.network/v1/lb/626f37766c499d003aada23b"],
 };
 
 export function shortenAddress(address, length) {
@@ -1911,8 +1852,6 @@ export function getExplorerUrl(chainId) {
     return "https://rinkeby-explorer.arbitrum.io/";
   } else if (chainId === ARBITRUM) {
     return "https://arbiscan.io/";
-  } else if (chainId === AVALANCHE) {
-    return "https://snowtrace.io/";
   }
   return "https://etherscan.io/";
 }
@@ -2121,17 +2060,6 @@ const NETWORK_METADATA = {
     },
     rpcUrls: ARBITRUM_RPC_PROVIDERS,
     blockExplorerUrls: [getExplorerUrl(ARBITRUM)],
-  },
-  [AVALANCHE]: {
-    chainId: "0x" + AVALANCHE.toString(16),
-    chainName: "Avalanche",
-    nativeCurrency: {
-      name: "AVAX",
-      symbol: "AVAX",
-      decimals: 18,
-    },
-    rpcUrls: AVALANCHE_RPC_PROVIDERS,
-    blockExplorerUrls: [getExplorerUrl(AVALANCHE)],
   },
 };
 

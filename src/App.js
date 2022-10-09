@@ -12,7 +12,6 @@ import { Switch, Route, NavLink, HashRouter as Router, Redirect, useLocation, us
 
 import {
   ARBITRUM,
-  AVALANCHE,
   DEFAULT_SLIPPAGE_AMOUNT,
   SLIPPAGE_BPS_KEY,
   IS_PNL_IN_LEVERAGE_KEY,
@@ -131,7 +130,6 @@ const Zoom = cssTransition({
 
 const arbWsProvider = new ethers.providers.WebSocketProvider(getAlchemyWsUrl());
 
-const avaxWsProvider = new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc");
 
 function getWsProvider(active, chainId) {
   if (!active) {
@@ -139,10 +137,6 @@ function getWsProvider(active, chainId) {
   }
   if (chainId === ARBITRUM) {
     return arbWsProvider;
-  }
-
-  if (chainId === AVALANCHE) {
-    return avaxWsProvider;
   }
 }
 
@@ -214,12 +208,6 @@ function AppHeaderUser({
       value: ARBITRUM,
       icon: "ic_arbitrum_24.svg",
       color: "#264f79",
-    },
-    {
-      label: "Avalanche",
-      value: AVALANCHE,
-      icon: "ic_avalanche_24.svg",
-      color: "#E841424D",
     },
   ];
 

@@ -59,7 +59,6 @@ import vlp24Icon from "../../img/ic_vlp_24.svg";
 import vlp40Icon from "../../img/ic_vlp_40.svg";
 import arrowIcon from "../../img/ic_convert_down.svg";
 
-import avalanche16Icon from "../../img/ic_avalanche_16.svg";
 import arbitrum16Icon from "../../img/ic_arbitrum_16.svg";
 
 import "./VlpSwap.css";
@@ -672,11 +671,7 @@ export default function VlpSwap(props) {
             <div className="App-card-title-mark">
               <div className="App-card-title-mark-icon">
                 <img src={vlp40Icon} alt="vlp40Icon" />
-                {chainId === ARBITRUM ? (
                   <img src={arbitrum16Icon} alt="arbitrum16Icon" className="selected-network-symbol" />
-                ) : (
-                  <img src={avalanche16Icon} alt="avalanche16Icon" className="selected-network-symbol" />
-                )}
               </div>
               <div className="App-card-title-mark-info">
                 <div className="App-card-title-mark-title">VLP</div>

@@ -15,8 +15,6 @@ function getDotColor(network) {
   switch (network) {
     case "Arbitrum":
       return "#4275a8";
-    case "Avalanche":
-      return "#E84142";
     default:
       return "";
   }
