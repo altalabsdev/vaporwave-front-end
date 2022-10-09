@@ -26,10 +26,8 @@ export const UI_VERSION = "1.3";
 // use a random placeholder account instead of the zero address as the zero address might have tokens
 export const PLACEHOLDER_ACCOUNT = ethers.Wallet.createRandom().address;
 
-export const MAINNET = 56;
-export const TESTNET = 97;
-export const AURORA_TESTNET = 421611;
-export const AURORA = 42161;
+export const AURORA_TESTNET = 1313161555;
+export const AURORA = 1313161554;
 // TODO take it from web3
 export const DEFAULT_CHAIN_ID = AURORA;
 export const CHAIN_ID = DEFAULT_CHAIN_ID;
@@ -39,8 +37,6 @@ export const MIN_PROFIT_TIME = 0;
 const SELECTED_NETWORK_LOCAL_STORAGE_KEY = "SELECTED_NETWORK";
 
 const CHAIN_NAMES_MAP = {
-  [MAINNET]: "BSC",
-  [TESTNET]: "BSC Testnet",
   [AURORA_TESTNET]: "Aurora Testnet",
   [AURORA]: "Aurora",
 };
@@ -53,7 +49,7 @@ const MAX_GAS_PRICE_MAP = {
   [AURORA]: "200000000000", // 200 gwei
 };
 
-const AURORA_RPC_PROVIDERS = ["https://arb1.aurora.io/rpc"];
+const AURORA_RPC_PROVIDERS = ["https://mainnet.aurora.dev"];
 export const WALLET_CONNECT_LOCALSTORAGE_KEY = "walletconnect";
 export const WALLET_LINK_LOCALSTORAGE_PREFIX = "-walletlink";
 export const SHOULD_EAGER_CONNECT_LOCALSTORAGE_KEY = "eagerconnect";
@@ -63,13 +59,11 @@ export function getChainName(chainId) {
   return CHAIN_NAMES_MAP[chainId];
 }
 
-export const USDG_ADDRESS = getContract(CHAIN_ID, "USDG");
 export const MAX_LEVERAGE = 100 * 10000;
 
 export const MAX_PRICE_DEVIATION_BASIS_POINTS = 250;
 export const DEFAULT_GAS_LIMIT = 1 * 1000 * 1000;
 export const SECONDS_PER_YEAR = 31536000;
-export const USDG_DECIMALS = 18;
 export const USD_DECIMALS = 30;
 export const BASIS_POINTS_DIVISOR = 10000;
 export const DEPOSIT_FEE = 30;
@@ -142,7 +136,7 @@ export const HIGH_EXECUTION_FEES_MAP = {
 };
 
 export const ICONLINKS = {
-  42161: {
+  1313161554: {
     VWAVE: {
       coingecko: "https://www.coingecko.com/en/coins/gmx",
       aurora: "https://arbiscan.io/address/0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a",
@@ -189,7 +183,7 @@ export const ICONLINKS = {
 };
 
 export const platformTokens = {
-  42161: {
+  1313161554: {
     // aurora
     VWAVE: {
       name: "VWAVE",
@@ -357,14 +351,12 @@ export function getServerBaseUrl(chainId) {
       return fromLocalStorage;
     }
   }
-  if (chainId === MAINNET) {
-    return "https://gambit-server-staging.uc.r.appspot.com";
-  } else if (chainId === AURORA_TESTNET) {
-    return "https://gambit-l2.as.r.appspot.com";
+  if (chainId === AURORA_TESTNET) {
+    return "https://gambit-l2.as.r.appspot.com"; // TODO
   } else if (chainId === AURORA) {
-    return "https://gmx-server-mainnet.uw.r.appspot.com";
+    return "https://gmx-server-mainnet.uw.r.appspot.com"; // TODO
   }
-  return "https://gmx-server-mainnet.uw.r.appspot.com";
+  return "https://gmx-server-mainnet.uw.r.appspot.com"; // TODO
 }
 
 export function getServerUrl(chainId, path) {
@@ -373,7 +365,7 @@ export function getServerUrl(chainId, path) {
 
 export function isTriggerRatioInverted(fromTokenInfo, toTokenInfo) {
   if (!toTokenInfo || !fromTokenInfo) return false;
-  if (toTokenInfo.isStable || toTokenInfo.isUsdg) return true;
+  if (toTokenInfo.isStable) return true;
   if (toTokenInfo.maxPrice) return toTokenInfo.maxPrice.lt(fromTokenInfo.maxPrice);
   return false;
 }
@@ -408,7 +400,7 @@ export function getMostAbundantStableToken(chainId, infoTokens) {
 }
 
 export function shouldInvertTriggerRatio(tokenA, tokenB) {
-  if (tokenB.isStable || tokenB.isUsdg) return true;
+  if (tokenB.isStable) return true;
   if (tokenB.maxPrice && tokenA.maxPrice && tokenB.maxPrice.lt(tokenA.maxPrice)) return true;
   return false;
 }
@@ -419,7 +411,7 @@ export function getExchangeRateDisplay(rate, tokenA, tokenB, opts = {}) {
     [tokenA, tokenB] = [tokenB, tokenA];
     rate = PRECISION.mul(PRECISION).div(rate);
   }
-  const rateValue = formatAmount(rate, USD_DECIMALS, tokenA.isStable || tokenA.isUsdg ? 2 : 4, true);
+  const rateValue = formatAmount(rate, USD_DECIMALS, tokenA.isStable ? 2 : 4, true);
   if (opts.omitSymbols) {
     return rateValue;
   }
@@ -509,10 +501,10 @@ export function getBuyVlpToAmount(fromAmount, swapTokenAddress, infoTokens, vlpP
   }
 
   let vlpAmount = fromAmount.mul(swapToken.minPrice).div(vlpPrice);
-  vlpAmount = adjustForDecimals(vlpAmount, swapToken.decimals, USDG_DECIMALS);
+  vlpAmount = adjustForDecimals(vlpAmount, swapToken.decimals, 18);
 
   let usdgAmount = fromAmount.mul(swapToken.minPrice).div(PRECISION);
-  usdgAmount = adjustForDecimals(usdgAmount, swapToken.decimals, USDG_DECIMALS);
+  usdgAmount = adjustForDecimals(usdgAmount, swapToken.decimals, 18);
   const feeBasisPoints = getFeeBasisPoints(
     swapToken,
     usdgAmount,
@@ -540,10 +532,10 @@ export function getSellVlpFromAmount(toAmount, swapTokenAddress, infoTokens, vlp
   }
 
   let vlpAmount = toAmount.mul(swapToken.maxPrice).div(vlpPrice);
-  vlpAmount = adjustForDecimals(vlpAmount, swapToken.decimals, USDG_DECIMALS);
+  vlpAmount = adjustForDecimals(vlpAmount, swapToken.decimals, 18);
 
   let usdgAmount = toAmount.mul(swapToken.maxPrice).div(PRECISION);
-  usdgAmount = adjustForDecimals(usdgAmount, swapToken.decimals, USDG_DECIMALS);
+  usdgAmount = adjustForDecimals(usdgAmount, swapToken.decimals, 18);
   const feeBasisPoints = getFeeBasisPoints(
     swapToken,
     usdgAmount,
@@ -681,7 +673,7 @@ export function getNextFromAmount(
     ratio && !ratio.isZero() ? fromAmountBasedOnRatio : toAmount.mul(toTokenMaxPrice).div(fromTokenMinPrice);
 
   let usdgAmount = fromAmount.mul(fromTokenMinPrice).div(PRECISION);
-  usdgAmount = adjustForDecimals(usdgAmount, toToken.decimals, USDG_DECIMALS);
+  usdgAmount = adjustForDecimals(usdgAmount, toToken.decimals, 18);
   const swapFeeBasisPoints =
     fromToken.isStable && toToken.isStable ? STABLE_SWAP_FEE_BASIS_POINTS : SWAP_FEE_BASIS_POINTS;
   const taxBasisPoints = fromToken.isStable && toToken.isStable ? STABLE_TAX_BASIS_POINTS : TAX_BASIS_POINTS;
@@ -768,96 +760,13 @@ export function getNextToAmount(
     toAmountBasedOnRatio = fromAmount.mul(PRECISION).div(ratio);
   }
 
-  if (toTokenAddress === USDG_ADDRESS) {
-    const feeBasisPoints = getSwapFeeBasisPoints(fromToken.isStable);
-
-    if (ratio && !ratio.isZero()) {
-      const toAmount = toAmountBasedOnRatio;
-      return {
-        amount: adjustDecimals(toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints).div(BASIS_POINTS_DIVISOR)),
-        feeBasisPoints,
-      };
-    }
-
-    const toAmount = fromAmount.mul(fromTokenMinPrice).div(PRECISION);
-    return {
-      amount: adjustDecimals(toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints).div(BASIS_POINTS_DIVISOR)),
-      feeBasisPoints,
-    };
-  }
-
-  if (fromTokenAddress === USDG_ADDRESS) {
-    const redemptionValue = toToken.redemptionAmount
-      .mul(toTokenPriceUsd || toTokenMaxPrice)
-      .div(expandDecimals(1, toToken.decimals));
-
-    if (redemptionValue.gt(THRESHOLD_REDEMPTION_VALUE)) {
-      const feeBasisPoints = getSwapFeeBasisPoints(toToken.isStable);
-
-      const toAmount =
-        ratio && !ratio.isZero()
-          ? toAmountBasedOnRatio
-          : fromAmount.mul(toToken.redemptionAmount).div(expandDecimals(1, toToken.decimals));
-
-      return {
-        amount: adjustDecimals(toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints).div(BASIS_POINTS_DIVISOR)),
-        feeBasisPoints,
-      };
-    }
-
-    const expectedAmount = fromAmount;
-
-    const stableToken = getMostAbundantStableToken(chainId, infoTokens);
-    if (!stableToken || stableToken.availableAmount.lt(expectedAmount)) {
-      const toAmount =
-        ratio && !ratio.isZero()
-          ? toAmountBasedOnRatio
-          : fromAmount.mul(toToken.redemptionAmount).div(expandDecimals(1, toToken.decimals));
-      const feeBasisPoints = getSwapFeeBasisPoints(toToken.isStable);
-      return {
-        amount: adjustDecimals(toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints).div(BASIS_POINTS_DIVISOR)),
-        feeBasisPoints,
-      };
-    }
-
-    const feeBasisPoints0 = getSwapFeeBasisPoints(true);
-    const feeBasisPoints1 = getSwapFeeBasisPoints(false);
-
-    if (ratio && !ratio.isZero()) {
-      const toAmount = toAmountBasedOnRatio
-        .mul(BASIS_POINTS_DIVISOR - feeBasisPoints0 - feeBasisPoints1)
-        .div(BASIS_POINTS_DIVISOR);
-      return {
-        amount: adjustDecimals(toAmount),
-        path: [USDG_ADDRESS, stableToken.address, toToken.address],
-        feeBasisPoints: feeBasisPoints0 + feeBasisPoints1,
-      };
-    }
-
-    // get toAmount for USDG => stableToken
-    let toAmount = fromAmount.mul(PRECISION).div(stableToken.maxPrice);
-    // apply USDG => stableToken fees
-    toAmount = toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints0).div(BASIS_POINTS_DIVISOR);
-
-    // get toAmount for stableToken => toToken
-    toAmount = toAmount.mul(stableToken.minPrice).div(toTokenPriceUsd || toTokenMaxPrice);
-    // apply stableToken => toToken fees
-    toAmount = toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints1).div(BASIS_POINTS_DIVISOR);
-
-    return {
-      amount: adjustDecimals(toAmount),
-      path: [USDG_ADDRESS, stableToken.address, toToken.address],
-      feeBasisPoints: feeBasisPoints0 + feeBasisPoints1,
-    };
-  }
-
   const toAmount =
     ratio && !ratio.isZero()
       ? toAmountBasedOnRatio
       : fromAmount.mul(fromTokenMinPrice).div(toTokenPriceUsd || toTokenMaxPrice);
 
   let usdgAmount = fromAmount.mul(fromTokenMinPrice).div(PRECISION);
-  usdgAmount = adjustForDecimals(usdgAmount, fromToken.decimals, USDG_DECIMALS);
+  usdgAmount = adjustForDecimals(usdgAmount, fromToken.decimals, 18);
   const swapFeeBasisPoints =
     fromToken.isStable && toToken.isStable ? STABLE_SWAP_FEE_BASIS_POINTS : SWAP_FEE_BASIS_POINTS;
   const taxBasisPoints = fromToken.isStable && toToken.isStable ? STABLE_TAX_BASIS_POINTS : TAX_BASIS_POINTS;
@@ -1111,9 +1020,6 @@ export function getUsd(amount, tokenAddress, max, infoTokens, orderOption, trigg
   if (!amount) {
     return;
   }
-  if (tokenAddress === USDG_ADDRESS) {
-    return amount.mul(PRECISION).div(expandDecimals(1, 18));
-  }
   const info = getTokenInfo(infoTokens, tokenAddress);
   const price = getTriggerPrice(tokenAddress, max, info, orderOption, triggerPriceUsd);
   if (!price) {
@@ -1140,35 +1046,7 @@ export function getSwapFeeBasisPoints(isStable) {
   return isStable ? STABLE_SWAP_FEE_BASIS_POINTS : SWAP_FEE_BASIS_POINTS;
 }
 
-// BSC TESTNET
-// const RPC_PROVIDERS = [
-//   "https://data-seed-prebsc-1-s1.binance.org:8545",
-//   "https://data-seed-prebsc-2-s1.binance.org:8545",
-//   "https://data-seed-prebsc-1-s2.binance.org:8545",
-//   "https://data-seed-prebsc-2-s2.binance.org:8545",
-//   "https://data-seed-prebsc-1-s3.binance.org:8545",
-//   "https://data-seed-prebsc-2-s3.binance.org:8545"
-// ]
-
-// BSC MAINNET
-export const BSC_RPC_PROVIDERS = [
-  "https://bsc-dataseed.binance.org",
-  "https://bsc-dataseed1.defibit.io",
-  "https://bsc-dataseed1.ninicoin.io",
-  "https://bsc-dataseed2.defibit.io",
-  "https://bsc-dataseed3.defibit.io",
-  "https://bsc-dataseed4.defibit.io",
-  "https://bsc-dataseed2.ninicoin.io",
-  "https://bsc-dataseed3.ninicoin.io",
-  "https://bsc-dataseed4.ninicoin.io",
-  "https://bsc-dataseed1.binance.org",
-  "https://bsc-dataseed2.binance.org",
-  "https://bsc-dataseed3.binance.org",
-  "https://bsc-dataseed4.binance.org",
-];
-
 const RPC_PROVIDERS = {
-  [MAINNET]: BSC_RPC_PROVIDERS,
   [AURORA]: AURORA_RPC_PROVIDERS,
 };
 
@@ -1176,16 +1054,16 @@ const alchemyWhitelistedDomains = ["vaporwave.farm", "app.vaporwave.farm"];
 
 export function getAlchemyHttpUrl() {
   if (alchemyWhitelistedDomains.includes(window.location.host)) {
-    return "https://arb-mainnet.g.alchemy.com/v2/ha7CFsr1bx5ZItuR6VZBbhKozcKDY4LZ";
+    return "https://arb-mainnet.g.alchemy.com/v2/ha7CFsr1bx5ZItuR6VZBbhKozcKDY4LZ"; // TODO
   }
-  return "https://arb-mainnet.g.alchemy.com/v2/EmVYwUw0N2tXOuG0SZfe5Z04rzBsCbr2";
+  return "https://arb-mainnet.g.alchemy.com/v2/EmVYwUw0N2tXOuG0SZfe5Z04rzBsCbr2"; // TODO
 }
 
 export function getAlchemyWsUrl() {
   if (alchemyWhitelistedDomains.includes(window.location.host)) {
-    return "wss://arb-mainnet.g.alchemy.com/v2/ha7CFsr1bx5ZItuR6VZBbhKozcKDY4LZ";
+    return "wss://arb-mainnet.g.alchemy.com/v2/ha7CFsr1bx5ZItuR6VZBbhKozcKDY4LZ"; // TODO
   }
-  return "wss://arb-mainnet.g.alchemy.com/v2/EmVYwUw0N2tXOuG0SZfe5Z04rzBsCbr2";
+  return "wss://arb-mainnet.g.alchemy.com/v2/EmVYwUw0N2tXOuG0SZfe5Z04rzBsCbr2"; // TODO
 }
 
 const FALLBACK_PROVIDERS = {
@@ -1844,14 +1722,10 @@ export function getExplorerUrl(chainId) {
     return "https://ropsten.etherscan.io/";
   } else if (chainId === 42) {
     return "https://kovan.etherscan.io/";
-  } else if (chainId === MAINNET) {
-    return "https://bscscan.com/";
-  } else if (chainId === TESTNET) {
-    return "https://testnet.bscscan.com/";
   } else if (chainId === AURORA_TESTNET) {
-    return "https://rinkeby-explorer.aurora.io/";
+    return "https://testnet.aurorascan.dev/";
   } else if (chainId === AURORA) {
-    return "https://arbiscan.io/";
+    return "https://aurorascan.dev/";
   }
   return "https://etherscan.io/";
 }
@@ -2017,28 +1891,6 @@ export const getTokenInfo = (infoTokens, tokenAddress, replaceNative, nativeToke
 };
 
 const NETWORK_METADATA = {
-  [MAINNET]: {
-    chainId: "0x" + MAINNET.toString(16),
-    chainName: "BSC",
-    nativeCurrency: {
-      name: "BNB",
-      symbol: "BNB",
-      decimals: 18,
-    },
-    rpcUrls: BSC_RPC_PROVIDERS,
-    blockExplorerUrls: ["https://bscscan.com"],
-  },
-  [TESTNET]: {
-    chainId: "0x" + TESTNET.toString(16),
-    chainName: "BSC Testnet",
-    nativeCurrency: {
-      name: "BNB",
-      symbol: "BNB",
-      decimals: 18,
-    },
-    rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
-    blockExplorerUrls: ["https://testnet.bscscan.com/"],
-  },
   [AURORA_TESTNET]: {
     chainId: "0x" + AURORA_TESTNET.toString(16),
     chainName: "Aurora Testnet",
@@ -2047,8 +1899,8 @@ const NETWORK_METADATA = {
       symbol: "ETH",
       decimals: 18,
     },
-    rpcUrls: ["https://rinkeby.aurora.io/rpc"],
-    blockExplorerUrls: ["https://rinkeby-explorer.aurora.io/"],
+    rpcUrls: ["https://testnet.aurora.dev"],
+    blockExplorerUrls: ["https://testnet.aurorascan.dev/"],
   },
   [AURORA]: {
     chainId: "0x" + AURORA.toString(16),
@@ -2061,10 +1913,6 @@ const NETWORK_METADATA = {
     rpcUrls: AURORA_RPC_PROVIDERS,
     blockExplorerUrls: [getExplorerUrl(AURORA)],
   },
-};
-
-export const addBscNetwork = async () => {
-  return addNetwork(NETWORK_METADATA[MAINNET]);
 };
 
 export const addNetwork = async (metadata) => {
@@ -2206,10 +2054,6 @@ export function getInfoTokens(
     const token = JSON.parse(JSON.stringify(tokens[i]));
     if (tokenBalances) {
       token.balance = tokenBalances[i];
-    }
-    if (token.address === USDG_ADDRESS) {
-      token.minPrice = expandDecimals(1, USD_DECIMALS);
-      token.maxPrice = expandDecimals(1, USD_DECIMALS);
     }
     infoTokens[token.address] = token;
   }

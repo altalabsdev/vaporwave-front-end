@@ -59,7 +59,7 @@ export default function BuyVWAVE() {
                 </div>
                 <div className="bridge-options">
                   <Button
-                    href="https://synapseprotocol.com/?inputCurrency=ETH&outputCurrency=ETH&outputChain=42161"
+                    href="https://synapseprotocol.com/?inputCurrency=ETH&outputCurrency=ETH&outputChain=1313161554"
                     align="left"
                     imgSrc={Synapse}
                   >

@@ -12,7 +12,7 @@ function AssetDropdown({ assetSymbol, assetInfo }) {
   const { chainId } = useChainId();
   let { coingecko, aurora } = ICONLINKS[chainId][assetSymbol];
   const unavailableTokenSymbols = {
-    42161: ["ETH"],
+    1313161554: ["ETH"],
   };
 
   return (
