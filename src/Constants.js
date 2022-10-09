@@ -1,26 +1,10 @@
 import { ethers } from "ethers";
 
-import { MAINNET, TESTNET, AURORA_TESTNET, AURORA } from "./Helpers";
+import {AURORA_TESTNET, AURORA } from "./Helpers";
 
 const { parseEther } = ethers.utils;
 
 const constants = {
-  [MAINNET]: {
-    nativeTokenSymbol: "BNB",
-    defaultCollateralSymbol: "BUSD",
-    defaultFlagOrdersEnabled: false,
-    positionReaderPropsLength: 8,
-    v2: false,
-  },
-
-  [TESTNET]: {
-    nativeTokenSymbol: "BNB",
-    defaultCollateralSymbol: "BUSD",
-    defaultFlagOrdersEnabled: true,
-    positionReaderPropsLength: 8,
-    v2: false,
-  },
-
   [AURORA_TESTNET]: {
     nativeTokenSymbol: "ETH",
     defaultCollateralSymbol: "USDC",
