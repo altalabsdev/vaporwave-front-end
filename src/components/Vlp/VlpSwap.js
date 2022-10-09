@@ -34,7 +34,6 @@ import {
   BASIS_POINTS_DIVISOR,
   VLP_COOLDOWN_DURATION,
   SECONDS_PER_YEAR,
-  USDG_DECIMALS,
   AURORA,
   PLACEHOLDER_ACCOUNT,
   importImage,
@@ -246,7 +245,7 @@ export default function VlpSwap(props) {
   let isSwapTokenCapReached;
   if (swapTokenInfo.managedUsd && swapTokenInfo.maxUsdgAmount) {
     isSwapTokenCapReached = swapTokenInfo.managedUsd.gt(
-      adjustForDecimals(swapTokenInfo.maxUsdgAmount, USDG_DECIMALS, USD_DECIMALS)
+      adjustForDecimals(swapTokenInfo.maxUsdgAmount, 18, USD_DECIMALS)
     );
   }
 
@@ -431,7 +430,7 @@ export default function VlpSwap(props) {
       }
 
       if (swapTokenInfo.maxUsdgAmount && swapTokenInfo.usdgAmount && swapUsdMin) {
-        const usdgFromAmount = adjustForDecimals(swapUsdMin, USD_DECIMALS, USDG_DECIMALS);
+        const usdgFromAmount = adjustForDecimals(swapUsdMin, USD_DECIMALS, 18);
         const nextUsdgAmount = swapTokenInfo.usdgAmount.add(usdgFromAmount);
         if (swapTokenInfo.maxUsdgAmount.gt(0) && nextUsdgAmount.gt(swapTokenInfo.maxUsdgAmount)) {
           return [`${swapTokenInfo.symbol} pool exceeded, try different token`, true];
@@ -1013,7 +1012,7 @@ export default function VlpSwap(props) {
 
               let amountLeftToDeposit;
               if (tokenInfo.maxUsdgAmount && tokenInfo.maxUsdgAmount.gt(0)) {
-                amountLeftToDeposit = adjustForDecimals(tokenInfo.maxUsdgAmount, USDG_DECIMALS, USD_DECIMALS).sub(
+                amountLeftToDeposit = adjustForDecimals(tokenInfo.maxUsdgAmount, 18, USD_DECIMALS).sub(
                   tokenInfo.managedUsd
                 );
               }
@@ -1180,7 +1179,7 @@ export default function VlpSwap(props) {
 
             let amountLeftToDeposit;
             if (tokenInfo.maxUsdgAmount && tokenInfo.maxUsdgAmount.gt(0)) {
-              amountLeftToDeposit = adjustForDecimals(tokenInfo.maxUsdgAmount, USDG_DECIMALS, USD_DECIMALS).sub(
+              amountLeftToDeposit = adjustForDecimals(tokenInfo.maxUsdgAmount, 18, USD_DECIMALS).sub(
                 tokenInfo.managedUsd
               );
             }

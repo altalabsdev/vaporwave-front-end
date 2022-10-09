@@ -11,7 +11,6 @@ import {
   USD_DECIMALS,
   DUST_USD,
   BASIS_POINTS_DIVISOR,
-  USDG_ADDRESS,
   SLIPPAGE_BPS_KEY,
   TRIGGER_PREFIX_BELOW,
   TRIGGER_PREFIX_ABOVE,
@@ -56,9 +55,6 @@ const orderOptionLabels = {
 function getTokenAmount(usdAmount, tokenAddress, max, infoTokens) {
   if (!usdAmount) {
     return;
-  }
-  if (tokenAddress === USDG_ADDRESS) {
-    return usdAmount.mul(expandDecimals(1, 18)).div(PRECISION);
   }
   const info = getTokenInfo(infoTokens, tokenAddress);
   if (!info) {

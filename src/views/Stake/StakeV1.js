@@ -22,7 +22,7 @@ import {
   PRECISION,
 } from "../../Helpers";
 
-import { getContract, XGMT_EXCLUDED_ACCOUNTS } from "../../Addresses";
+import { getContract } from "../../Addresses";
 import { getTokenBySymbol } from "../../data/Tokens";
 
 import Reader from "../../abis/Reader.json";
@@ -619,7 +619,7 @@ export default function StakeV1() {
   const { data: xgmtSupply, mutate: updateXgmtSupply } = useSWR(
     [active, chainId, readerAddress, "getTokenSupply", xgmtAddress],
     {
-      fetcher: fetcher(library, Reader, [XGMT_EXCLUDED_ACCOUNTS]),
+      fetcher: fetcher(library, Reader),
     }
   );
 

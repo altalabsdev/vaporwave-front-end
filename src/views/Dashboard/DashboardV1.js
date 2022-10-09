@@ -15,7 +15,7 @@ import {
   getServerUrl,
   helperToast,
 } from "../../Helpers";
-import { getContract, XGMT_EXCLUDED_ACCOUNTS } from "../../Addresses";
+import { getContract } from "../../Addresses";
 import { getToken, getTokens } from "../../data/Tokens";
 import { getFeeHistory } from "../../data/Fees";
 
@@ -315,7 +315,7 @@ export default function DashboardV1() {
   const { data: xgmtSupply, mutate: updateXgmtSupply } = useSWR(
     ["Dashboard:xgmtSupply", chainId, readerAddress, "getTokenSupply", xgmtAddress],
     {
-      fetcher: fetcher(library, Reader, [XGMT_EXCLUDED_ACCOUNTS]),
+      fetcher: fetcher(library, Reader),
     }
   );
 

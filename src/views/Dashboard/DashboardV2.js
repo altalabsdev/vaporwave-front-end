@@ -184,9 +184,8 @@ export default function DashboardV2() {
 
   const vwaveAddress = getContract(chainId, "VWAVE");
   const vlpAddress = getContract(chainId, "VLP");
-  const usdgAddress = getContract(chainId, "USDG");
 
-  const tokensForSupplyQuery = [vwaveAddress, vlpAddress, usdgAddress];
+  const tokensForSupplyQuery = [vwaveAddress, vlpAddress];
 
   const { data: aums } = useSWR([`Dashboard:getAums:${active}`, chainId, vlpManagerAddress, "getAums"], {
     fetcher: fetcher(library, VlpManager),
