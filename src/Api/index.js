@@ -10,7 +10,6 @@ import PositionManager from "../abis/PositionManager.json";
 import Vault from "../abis/Vault.json";
 import Router from "../abis/Router.json";
 import UniPool from "../abis/UniPool.json";
-import UniswapV2 from "../abis/UniswapV2.json";
 import Token from "../abis/Token.json";
 import VaultReader from "../abis/VaultReader.json";
 import PositionRouter from "../abis/PositionRouter.json";
@@ -19,8 +18,7 @@ import { getContract } from "../Addresses";
 import { getConstant } from "../Constants";
 import {
   UI_VERSION,
-  ARBITRUM,
-  AVALANCHE,
+  AURORA,
   // DEFAULT_GAS_LIMIT,
   bigNumberify,
   getExplorerUrl,
@@ -45,19 +43,18 @@ import {
 } from "../Helpers";
 import { getTokens, getTokenBySymbol, getWhitelistedTokens } from "../data/Tokens";
 
-import { nissohGraphClient, arbitrumGraphClient, avalancheGraphClient } from "./common";
+import { nissohGraphClient, auroraGraphClient } from "./common";
 import { groupBy } from "lodash";
 export * from "./prices";
 
 const { AddressZero } = ethers.constants;
 
 function getVwaveGraphClient(chainId) {
-  if (chainId === ARBITRUM) {
-    return arbitrumGraphClient;
-  } else if (chainId === AVALANCHE) {
-    return avalancheGraphClient;
+  try {
+    return auroraGraphClient;
+  } catch {
+    throw new Error(`Unsupported chain ${chainId}`);
   }
-  throw new Error(`Unsupported chain ${chainId}`);
 }
 
 export function useAllOrdersStats(chainId) {
@@ -429,17 +426,12 @@ export function useMinExecutionFee(library, active, chainId, infoTokens) {
 
   let multiplier;
 
-  // if gas prices on Arbitrum are high, the main transaction costs would come from the L2 gas usage
+  // if gas prices on Aurora are high, the main transaction costs would come from the L2 gas usage
   // for executing positions this is around 65,000 gas
   // if gas prices on Ethereum are high, than the gas usage might be higher, this calculation doesn't deal with that
   // case yet
-  if (chainId === ARBITRUM) {
+  if (chainId === AURORA) {
     multiplier = 65000;
-  }
-
-  // multiplier for Avalanche is just the average gas usage
-  if (chainId === AVALANCHE) {
-    multiplier = 700000;
   }
 
   let finalExecutionFee = minExecutionFee;
@@ -465,41 +457,30 @@ export function useMinExecutionFee(library, active, chainId, infoTokens) {
 }
 
 export function useStakedVwaveSupply(library, active) {
-  const vwaveAddressArb = getContract(ARBITRUM, "VWAVE");
-  const stakedVwaveTrackerAddressArb = getContract(ARBITRUM, "StakedVwaveTracker");
+  const vwaveAddressArb = getContract(AURORA, "VWAVE");
+  const stakedVwaveTrackerAddressArb = getContract(AURORA, "StakedVwaveTracker");
 
   const { data: arbData, mutate: arbMutate } = useSWR(
-    [`StakeV2:stakedVwaveSupply:${active}`, ARBITRUM, vwaveAddressArb, "balanceOf", stakedVwaveTrackerAddressArb],
+    [`StakeV2:stakedVwaveSupply:${active}`, AURORA, vwaveAddressArb, "balanceOf", stakedVwaveTrackerAddressArb],
     {
       fetcher: fetcher(library, Token),
     }
   );
 
-  const vwaveAddressAvax = getContract(AVALANCHE, "VWAVE");
-  const stakedVwaveTrackerAddressAvax = getContract(AVALANCHE, "StakedVwaveTracker");
-
-  const { data: avaxData, mutate: avaxMutate } = useSWR(
-    [`StakeV2:stakedVwaveSupply:${active}`, AVALANCHE, vwaveAddressAvax, "balanceOf", stakedVwaveTrackerAddressAvax],
-    {
-      fetcher: fetcher(undefined, Token),
-    }
-  );
-
   let data;
-  if (arbData && avaxData) {
-    data = arbData.add(avaxData);
+  if (arbData) {
+    data = arbData;
   }
 
   const mutate = () => {
     arbMutate();
-    avaxMutate();
   };
 
   return { data, mutate };
 }
 
 export function useHasOutdatedUi() {
-  const url = getServerUrl(ARBITRUM, "/ui_version");
+  const url = getServerUrl(AURORA, "/ui_version");
   const { data, mutate } = useSWR([url], {
     fetcher: (...args) => fetch(...args).then((res) => res.text()),
   });
@@ -514,32 +495,24 @@ export function useHasOutdatedUi() {
 }
 
 export function useVwavePrice(chainId, libraries, active) {
-  const arbitrumLibrary = libraries && libraries.arbitrum ? libraries.arbitrum : undefined;
-  const { data: vwavePriceFromArbitrum, mutate: mutateFromArbitrum } = useVwavePriceFromArbitrum(
-    arbitrumLibrary,
-    active
-  );
-  const { data: vwavePriceFromAvalanche, mutate: mutateFromAvalanche } = useVwavePriceFromAvalanche();
-
-  const vwavePrice = chainId === ARBITRUM ? vwavePriceFromArbitrum : vwavePriceFromAvalanche;
+  const auroraLibrary = libraries && libraries.aurora ? libraries.aurora : undefined;
+  const { data: vwavePriceFromAurora, mutate: mutateFromAurora } = useVwavePriceFromAurora(auroraLibrary, active);
+  const vwavePrice = vwavePriceFromAurora;
   const mutate = useCallback(() => {
-    mutateFromAvalanche();
-    mutateFromArbitrum();
-  }, [mutateFromAvalanche, mutateFromArbitrum]);
+    mutateFromAurora();
+  }, [mutateFromAurora]);
 
   return {
     vwavePrice,
-    vwavePriceFromArbitrum,
-    vwavePriceFromAvalanche,
+    vwavePriceFromAurora,
     mutate,
   };
 }
 
-// use only the supply endpoint on arbitrum, it includes the supply on avalanche
 export function useTotalVwaveSupply() {
-  const vwaveSupplyUrlArbitrum = getServerUrl(ARBITRUM, "/vwave_supply");
+  const vwaveSupplyUrlAurora = getServerUrl(AURORA, "/vwave_supply");
 
-  const { data: vwaveSupply, mutate: updateVwaveSupply } = useSWR([vwaveSupplyUrlArbitrum], {
+  const { data: vwaveSupply, mutate: updateVwaveSupply } = useSWR([vwaveSupplyUrlAurora], {
     fetcher: (...args) => fetch(...args).then((res) => res.text()),
   });
 
@@ -550,28 +523,15 @@ export function useTotalVwaveSupply() {
 }
 
 export function useTotalVwaveStaked() {
-  const stakedVwaveTrackerAddressArbitrum = getContract(ARBITRUM, "StakedVwaveTracker");
-  const stakedVwaveTrackerAddressAvax = getContract(AVALANCHE, "StakedVwaveTracker");
+  const stakedVwaveTrackerAddressAurora = getContract(AURORA, "StakedVwaveTracker");
   let totalStakedVwave = useRef(bigNumberify(0));
-  const { data: stakedVwaveSupplyArbitrum, mutate: updateStakedVwaveSupplyArbitrum } = useSWR(
+  const { data: stakedVwaveSupplyAurora, mutate: updateStakedVwaveSupplyAurora } = useSWR(
     [
-      `StakeV2:stakedVwaveSupply:${ARBITRUM}`,
-      ARBITRUM,
-      getContract(ARBITRUM, "VWAVE"),
+      `StakeV2:stakedVwaveSupply:${AURORA}`,
+      AURORA,
+      getContract(AURORA, "VWAVE"),
       "balanceOf",
-      stakedVwaveTrackerAddressArbitrum,
-    ],
-    {
-      fetcher: fetcher(undefined, Token),
-    }
-  );
-  const { data: stakedVwaveSupplyAvax, mutate: updateStakedVwaveSupplyAvax } = useSWR(
-    [
-      `StakeV2:stakedVwaveSupply:${AVALANCHE}`,
-      AVALANCHE,
-      getContract(AVALANCHE, "VWAVE"),
-      "balanceOf",
-      stakedVwaveTrackerAddressAvax,
+      stakedVwaveTrackerAddressAurora,
     ],
     {
       fetcher: fetcher(undefined, Token),
@@ -579,110 +539,60 @@ export function useTotalVwaveStaked() {
   );
 
   const mutate = useCallback(() => {
-    updateStakedVwaveSupplyArbitrum();
-    updateStakedVwaveSupplyAvax();
-  }, [updateStakedVwaveSupplyArbitrum, updateStakedVwaveSupplyAvax]);
+    updateStakedVwaveSupplyAurora();
+  }, [updateStakedVwaveSupplyAurora]);
 
-  if (stakedVwaveSupplyArbitrum && stakedVwaveSupplyAvax) {
-    let total = bigNumberify(stakedVwaveSupplyArbitrum).add(stakedVwaveSupplyAvax);
+  if (stakedVwaveSupplyAurora) {
+    let total = bigNumberify(stakedVwaveSupplyAurora);
     totalStakedVwave.current = total;
   }
 
   return {
-    avax: stakedVwaveSupplyAvax,
-    arbitrum: stakedVwaveSupplyArbitrum,
+    aurora: stakedVwaveSupplyAurora,
     total: totalStakedVwave.current,
     mutate,
   };
 }
 
 export function useTotalVwaveInLiquidity() {
-  let poolAddressArbitrum = getContract(ARBITRUM, "UniswapVwaveEthPool");
-  let poolAddressAvax = getContract(AVALANCHE, "TraderJoeVwaveAvaxPool");
+  let poolAddressAurora = getContract(AURORA, "UniswapVwaveEthPool");
   let totalVWAVE = useRef(bigNumberify(0));
 
-  const { data: vwaveInLiquidityOnArbitrum, mutate: mutateVWAVEInLiquidityOnArbitrum } = useSWR(
-    [
-      `StakeV2:vwaveInLiquidity:${ARBITRUM}`,
-      ARBITRUM,
-      getContract(ARBITRUM, "VWAVE"),
-      "balanceOf",
-      poolAddressArbitrum,
-    ],
+  const { data: vwaveInLiquidityOnAurora, mutate: mutateVWAVEInLiquidityOnAurora } = useSWR(
+    [`StakeV2:vwaveInLiquidity:${AURORA}`, AURORA, getContract(AURORA, "VWAVE"), "balanceOf", poolAddressAurora],
     {
       fetcher: fetcher(undefined, Token),
     }
   );
-  const { data: vwaveInLiquidityOnAvax, mutate: mutateVWAVEInLiquidityOnAvax } = useSWR(
-    [`StakeV2:vwaveInLiquidity:${AVALANCHE}`, AVALANCHE, getContract(AVALANCHE, "VWAVE"), "balanceOf", poolAddressAvax],
-    {
-      fetcher: fetcher(undefined, Token),
-    }
-  );
-  const mutate = useCallback(() => {
-    mutateVWAVEInLiquidityOnArbitrum();
-    mutateVWAVEInLiquidityOnAvax();
-  }, [mutateVWAVEInLiquidityOnArbitrum, mutateVWAVEInLiquidityOnAvax]);
 
-  if (vwaveInLiquidityOnAvax && vwaveInLiquidityOnArbitrum) {
-    let total = bigNumberify(vwaveInLiquidityOnArbitrum).add(vwaveInLiquidityOnAvax);
+  const mutate = useCallback(() => {
+    mutateVWAVEInLiquidityOnAurora();
+  }, [mutateVWAVEInLiquidityOnAurora]);
+
+  if (vwaveInLiquidityOnAurora) {
+    let total = bigNumberify(vwaveInLiquidityOnAurora);
     totalVWAVE.current = total;
   }
   return {
-    avax: vwaveInLiquidityOnAvax,
-    arbitrum: vwaveInLiquidityOnArbitrum,
+    aurora: vwaveInLiquidityOnAurora,
     total: totalVWAVE.current,
     mutate,
   };
 }
 
-function useVwavePriceFromAvalanche() {
-  const poolAddress = getContract(AVALANCHE, "TraderJoeVwaveAvaxPool");
-
-  const { data, mutate: updateReserves } = useSWR(
-    ["TraderJoeVwaveAvaxReserves", AVALANCHE, poolAddress, "getReserves"],
-    {
-      fetcher: fetcher(undefined, UniswapV2),
-    }
-  );
-  const { _reserve0: vwaveReserve, _reserve1: avaxReserve } = data || {};
-
-  const vaultAddress = getContract(AVALANCHE, "Vault");
-  const avaxAddress = getTokenBySymbol(AVALANCHE, "WAVAX").address;
-  const { data: avaxPrice, mutate: updateAvaxPrice } = useSWR(
-    [`StakeV2:avaxPrice`, AVALANCHE, vaultAddress, "getMinPrice", avaxAddress],
-    {
-      fetcher: fetcher(undefined, Vault),
-    }
-  );
-
-  const PRECISION = bigNumberify(10).pow(18);
-  let vwavePrice;
-  if (avaxReserve && vwaveReserve && avaxPrice) {
-    vwavePrice = avaxReserve.mul(PRECISION).div(vwaveReserve).mul(avaxPrice).div(PRECISION);
-  }
-
-  const mutate = useCallback(() => {
-    updateReserves(undefined, true);
-    updateAvaxPrice(undefined, true);
-  }, [updateReserves, updateAvaxPrice]);
-
-  return { data: vwavePrice, mutate };
-}
-
-function useVwavePriceFromArbitrum(library, active) {
-  const poolAddress = getContract(ARBITRUM, "UniswapVwaveEthPool");
+function useVwavePriceFromAurora(library, active) {
+  const poolAddress = getContract(AURORA, "UniswapVwaveEthPool");
   const { data: uniPoolSlot0, mutate: updateUniPoolSlot0 } = useSWR(
-    [`StakeV2:uniPoolSlot0:${active}`, ARBITRUM, poolAddress, "slot0"],
+    [`StakeV2:uniPoolSlot0:${active}`, AURORA, poolAddress, "slot0"],
     {
       fetcher: fetcher(library, UniPool),
     }
   );
 
-  const vaultAddress = getContract(ARBITRUM, "Vault");
-  const ethAddress = getTokenBySymbol(ARBITRUM, "WETH").address;
+  const vaultAddress = getContract(AURORA, "Vault");
+  const ethAddress = getTokenBySymbol(AURORA, "WETH").address;
   const { data: ethPrice, mutate: updateEthPrice } = useSWR(
-    [`StakeV2:ethPrice:${active}`, ARBITRUM, vaultAddress, "getMinPrice", ethAddress],
+    [`StakeV2:ethPrice:${active}`, AURORA, vaultAddress, "getMinPrice", ethAddress],
     {
       fetcher: fetcher(library, Vault),
     }
@@ -690,10 +600,10 @@ function useVwavePriceFromArbitrum(library, active) {
 
   const vwavePrice = useMemo(() => {
     if (uniPoolSlot0 && ethPrice) {
-      const tokenA = new UniToken(ARBITRUM, ethAddress, 18, "SYMBOL", "NAME");
+      const tokenA = new UniToken(AURORA, ethAddress, 18, "SYMBOL", "NAME");
 
-      const vwaveAddress = getContract(ARBITRUM, "VWAVE");
-      const tokenB = new UniToken(ARBITRUM, vwaveAddress, 18, "SYMBOL", "NAME");
+      const vwaveAddress = getContract(AURORA, "VWAVE");
+      const tokenB = new UniToken(AURORA, vwaveAddress, 18, "SYMBOL", "NAME");
 
       const pool = new Pool(
         tokenA, // tokenA
@@ -1060,11 +970,11 @@ export async function callContract(chainId, contract, method, params, opts) {
       case NOT_ENOUGH_FUNDS:
         failMsg = (
           <div>
-            There is not enough ETH in your account on Arbitrum to send this transaction.
+            There is not enough ETH in your account on Aurora to send this transaction.
             <br />
             <br />
-            <a href={"https://arbitrum.io/bridge-tutorial/"} target="_blank" rel="noopener noreferrer">
-              Bridge ETH to Arbitrum
+            <a href={"https://aurora.io/bridge-tutorial/"} target="_blank" rel="noopener noreferrer">
+              Bridge ETH to Aurora
             </a>
           </div>
         );

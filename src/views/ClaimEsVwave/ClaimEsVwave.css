@@ -33,12 +33,8 @@
   padding-top: 0.465rem;
 }
 
-.ClaimEsVwave-vesting-options .Checkbox.btn-lg.selected.arbitrum {
+.ClaimEsVwave-vesting-options .Checkbox.btn-lg.selected.aurora {
   background: rgba(41, 160, 240, 0.2);
-}
-
-.ClaimEsVwave-vesting-options .Checkbox.btn-lg.selected.avalanche {
-  background: rgba(232, 65, 65, 0.2);
 }
 
 .ClaimEsVwave-vesting-options .Checkbox img {
@@ -56,12 +52,8 @@
   opacity: 1;
 }
 
-.ClaimEsVwave-vesting-options .Checkbox.arbitrum .Checkbox-icon.active {
+.ClaimEsVwave-vesting-options .Checkbox.aurora .Checkbox-icon.active {
   color: #29a0f0;
-}
-
-.ClaimEsVwave-vesting-options .Checkbox.avalanche .Checkbox-icon.active {
-  color: #e84141;
 }
 
 .ClaimEsVwave button {

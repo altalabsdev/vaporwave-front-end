@@ -26,13 +26,10 @@ export const UI_VERSION = "1.3";
 // use a random placeholder account instead of the zero address as the zero address might have tokens
 export const PLACEHOLDER_ACCOUNT = ethers.Wallet.createRandom().address;
 
-export const MAINNET = 56;
-export const AVALANCHE = 43114;
-export const TESTNET = 97;
-export const ARBITRUM_TESTNET = 421611;
-export const ARBITRUM = 42161;
+export const AURORA_TESTNET = 1313161555;
+export const AURORA = 1313161554;
 // TODO take it from web3
-export const DEFAULT_CHAIN_ID = ARBITRUM;
+export const DEFAULT_CHAIN_ID = AURORA;
 export const CHAIN_ID = DEFAULT_CHAIN_ID;
 
 export const MIN_PROFIT_TIME = 0;
@@ -40,24 +37,19 @@ export const MIN_PROFIT_TIME = 0;
 const SELECTED_NETWORK_LOCAL_STORAGE_KEY = "SELECTED_NETWORK";
 
 const CHAIN_NAMES_MAP = {
-  [MAINNET]: "BSC",
-  [TESTNET]: "BSC Testnet",
-  [ARBITRUM_TESTNET]: "Arbitrum Testnet",
-  [ARBITRUM]: "Arbitrum",
-  [AVALANCHE]: "Avalanche",
+  [AURORA_TESTNET]: "Aurora Testnet",
+  [AURORA]: "Aurora",
 };
 
 const GAS_PRICE_ADJUSTMENT_MAP = {
-  [ARBITRUM]: "0",
-  [AVALANCHE]: "3000000000", // 3 gwei
+  [AURORA]: "0",
 };
 
 const MAX_GAS_PRICE_MAP = {
-  [AVALANCHE]: "200000000000", // 200 gwei
+  [AURORA]: "200000000000", // 200 gwei
 };
 
-const ARBITRUM_RPC_PROVIDERS = ["https://arb1.arbitrum.io/rpc"];
-const AVALANCHE_RPC_PROVIDERS = ["https://api.avax.network/ext/bc/C/rpc"];
+const AURORA_RPC_PROVIDERS = ["https://mainnet.aurora.dev"];
 export const WALLET_CONNECT_LOCALSTORAGE_KEY = "walletconnect";
 export const WALLET_LINK_LOCALSTORAGE_PREFIX = "-walletlink";
 export const SHOULD_EAGER_CONNECT_LOCALSTORAGE_KEY = "eagerconnect";
@@ -67,13 +59,11 @@ export function getChainName(chainId) {
   return CHAIN_NAMES_MAP[chainId];
 }
 
-export const USDG_ADDRESS = getContract(CHAIN_ID, "USDG");
 export const MAX_LEVERAGE = 100 * 10000;
 
 export const MAX_PRICE_DEVIATION_BASIS_POINTS = 250;
 export const DEFAULT_GAS_LIMIT = 1 * 1000 * 1000;
 export const SECONDS_PER_YEAR = 31536000;
-export const USDG_DECIMALS = 18;
 export const USD_DECIMALS = 30;
 export const BASIS_POINTS_DIVISOR = 10000;
 export const DEPOSIT_FEE = 30;
@@ -142,127 +132,77 @@ export const VLPPOOLCOLORS = {
 };
 
 export const HIGH_EXECUTION_FEES_MAP = {
-  [ARBITRUM]: 3, // 3 USD
-  [AVALANCHE]: 3, // 3 USD
+  [AURORA]: 3, // 3 USD
 };
 
 export const ICONLINKS = {
-  42161: {
+  1313161554: {
     VWAVE: {
       coingecko: "https://www.coingecko.com/en/coins/gmx",
-      arbitrum: "https://arbiscan.io/address/0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a",
+      aurora: "https://arbiscan.io/address/0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a",
     },
     VLP: {
-      arbitrum: "https://arbiscan.io/token/0x1aDDD80E6039594eE970E5872D247bf0414C8903",
+      aurora: "https://arbiscan.io/token/0x1aDDD80E6039594eE970E5872D247bf0414C8903",
     },
     ETH: {
       coingecko: "https://www.coingecko.com/en/coins/ethereum",
     },
     BTC: {
       coingecko: "https://www.coingecko.com/en/coins/wrapped-bitcoin",
-      arbitrum: "https://arbiscan.io/address/0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f",
+      aurora: "https://arbiscan.io/address/0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f",
     },
     LINK: {
       coingecko: "https://www.coingecko.com/en/coins/chainlink",
-      arbitrum: "https://arbiscan.io/address/0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
+      aurora: "https://arbiscan.io/address/0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
     },
     UNI: {
       coingecko: "https://www.coingecko.com/en/coins/uniswap",
-      arbitrum: "https://arbiscan.io/address/0xfa7f8980b0f1e64a2062791cc3b0871572f1f7f0",
+      aurora: "https://arbiscan.io/address/0xfa7f8980b0f1e64a2062791cc3b0871572f1f7f0",
     },
     USDC: {
       coingecko: "https://www.coingecko.com/en/coins/usd-coin",
-      arbitrum: "https://arbiscan.io/address/0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+      aurora: "https://arbiscan.io/address/0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
     },
     USDT: {
       coingecko: "https://www.coingecko.com/en/coins/tether",
-      arbitrum: "https://arbiscan.io/address/0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+      aurora: "https://arbiscan.io/address/0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
     },
     DAI: {
       coingecko: "https://www.coingecko.com/en/coins/dai",
-      arbitrum: "https://arbiscan.io/address/0xda10009cbd5d07dd0cecc66161fc93d7c9000da1",
+      aurora: "https://arbiscan.io/address/0xda10009cbd5d07dd0cecc66161fc93d7c9000da1",
     },
     MIM: {
       coingecko: "https://www.coingecko.com/en/coins/magic-internet-money",
-      arbitrum: "https://arbiscan.io/address/0xfea7a6a0b346362bf88a9e4a88416b77a57d6c2a",
+      aurora: "https://arbiscan.io/address/0xfea7a6a0b346362bf88a9e4a88416b77a57d6c2a",
     },
     FRAX: {
       coingecko: "https://www.coingecko.com/en/coins/frax",
-      arbitrum: "https://arbiscan.io/address/0x17fc002b466eec40dae837fc4be5c67993ddbd6f",
-    },
-  },
-  43114: {
-    VWAVE: {
-      coingecko: "https://www.coingecko.com/en/coins/gmx",
-      avalanche: "https://snowtrace.io/address/0x62edc0692bd897d2295872a9ffcac5425011c661",
-    },
-    VLP: {
-      avalanche: "https://snowtrace.io/address/0x9e295B5B976a184B14aD8cd72413aD846C299660",
-    },
-    AVAX: {
-      coingecko: "https://www.coingecko.com/en/coins/avalanche",
-    },
-    ETH: {
-      coingecko: "https://www.coingecko.com/en/coins/weth",
-      avalanche: "https://snowtrace.io/address/0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab",
-    },
-    BTC: {
-      coingecko: "https://www.coingecko.com/en/coins/wrapped-bitcoin",
-      avalanche: "https://snowtrace.io/address/0x50b7545627a5162f82a992c33b87adc75187b218",
-    },
-    MIM: {
-      coingecko: "https://www.coingecko.com/en/coins/magic-internet-money",
-      avalanche: "https://snowtrace.io/address/0x130966628846bfd36ff31a822705796e8cb8c18d",
-    },
-    "USDC.e": {
-      coingecko: "https://www.coingecko.com/en/coins/usd-coin-avalanche-bridged-usdc-e",
-      avalanche: "https://snowtrace.io/address/0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664",
-    },
-    USDC: {
-      coingecko: "https://www.coingecko.com/en/coins/usd-coin",
-      avalanche: "https://snowtrace.io/address/0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+      aurora: "https://arbiscan.io/address/0x17fc002b466eec40dae837fc4be5c67993ddbd6f",
     },
   },
 };
 
 export const platformTokens = {
-  42161: {
-    // arbitrum
+  1313161554: {
+    // aurora
     VWAVE: {
       name: "VWAVE",
       symbol: "VWAVE",
       decimals: 18,
-      address: getContract(ARBITRUM, "VWAVE"),
+      address: getContract(AURORA, "VWAVE"),
       imageUrl: "https://assets.coingecko.com/coins/images/18323/small/arbit.png?1631532468",
     },
     VLP: {
       name: "VWAVE LP",
       symbol: "VLP",
       decimals: 18,
-      address: getContract(ARBITRUM, "StakedVlpTracker"), // address of fsVLP token because user only holds fsVLP
-      imageUrl: "https://github.com/gmx-io/gmx-assets/blob/main/VWAVE-Assets/PNG/VLP_LOGO%20ONLY.png?raw=true",
-    },
-  },
-  43114: {
-    // avalanche
-    VWAVE: {
-      name: "VWAVE",
-      symbol: "VWAVE",
-      decimals: 18,
-      address: getContract(AVALANCHE, "VWAVE"),
-      imageUrl: "https://assets.coingecko.com/coins/images/18323/small/arbit.png?1631532468",
-    },
-    VLP: {
-      name: "VWAVE LP",
-      symbol: "VLP",
-      decimals: 18,
-      address: getContract(AVALANCHE, "StakedVlpTracker"), // address of fsVLP token because user only holds fsVLP
+      address: getContract(AURORA, "StakedVlpTracker"), // address of fsVLP token because user only holds fsVLP
       imageUrl: "https://github.com/gmx-io/gmx-assets/blob/main/VWAVE-Assets/PNG/VLP_LOGO%20ONLY.png?raw=true",
     },
   },
 };
 
-const supportedChainIds = [ARBITRUM, AVALANCHE];
+const supportedChainIds = [AURORA];
 const injectedConnector = new InjectedConnector({
   supportedChainIds,
 });
@@ -271,8 +211,7 @@ const getWalletConnectConnector = () => {
   const chainId = localStorage.getItem(SELECTED_NETWORK_LOCAL_STORAGE_KEY) || DEFAULT_CHAIN_ID;
   return new WalletConnectConnector({
     rpc: {
-      [AVALANCHE]: AVALANCHE_RPC_PROVIDERS[0],
-      [ARBITRUM]: ARBITRUM_RPC_PROVIDERS[0],
+      [AURORA]: AURORA_RPC_PROVIDERS[0],
     },
     qrcode: true,
     chainId,
@@ -412,16 +351,12 @@ export function getServerBaseUrl(chainId) {
       return fromLocalStorage;
     }
   }
-  if (chainId === MAINNET) {
-    return "https://gambit-server-staging.uc.r.appspot.com";
-  } else if (chainId === ARBITRUM_TESTNET) {
-    return "https://gambit-l2.as.r.appspot.com";
-  } else if (chainId === ARBITRUM) {
-    return "https://gmx-server-mainnet.uw.r.appspot.com";
-  } else if (chainId === AVALANCHE) {
-    return "https://gmx-avax-server.uc.r.appspot.com";
+  if (chainId === AURORA_TESTNET) {
+    return "https://gambit-l2.as.r.appspot.com"; // TODO
+  } else if (chainId === AURORA) {
+    return "https://gmx-server-mainnet.uw.r.appspot.com"; // TODO
   }
-  return "https://gmx-server-mainnet.uw.r.appspot.com";
+  return "https://gmx-server-mainnet.uw.r.appspot.com"; // TODO
 }
 
 export function getServerUrl(chainId, path) {
@@ -430,7 +365,7 @@ export function getServerUrl(chainId, path) {
 
 export function isTriggerRatioInverted(fromTokenInfo, toTokenInfo) {
   if (!toTokenInfo || !fromTokenInfo) return false;
-  if (toTokenInfo.isStable || toTokenInfo.isUsdg) return true;
+  if (toTokenInfo.isStable) return true;
   if (toTokenInfo.maxPrice) return toTokenInfo.maxPrice.lt(fromTokenInfo.maxPrice);
   return false;
 }
@@ -465,7 +400,7 @@ export function getMostAbundantStableToken(chainId, infoTokens) {
 }
 
 export function shouldInvertTriggerRatio(tokenA, tokenB) {
-  if (tokenB.isStable || tokenB.isUsdg) return true;
+  if (tokenB.isStable) return true;
   if (tokenB.maxPrice && tokenA.maxPrice && tokenB.maxPrice.lt(tokenA.maxPrice)) return true;
   return false;
 }
@@ -476,7 +411,7 @@ export function getExchangeRateDisplay(rate, tokenA, tokenB, opts = {}) {
     [tokenA, tokenB] = [tokenB, tokenA];
     rate = PRECISION.mul(PRECISION).div(rate);
   }
-  const rateValue = formatAmount(rate, USD_DECIMALS, tokenA.isStable || tokenA.isUsdg ? 2 : 4, true);
+  const rateValue = formatAmount(rate, USD_DECIMALS, tokenA.isStable ? 2 : 4, true);
   if (opts.omitSymbols) {
     return rateValue;
   }
@@ -566,10 +501,10 @@ export function getBuyVlpToAmount(fromAmount, swapTokenAddress, infoTokens, vlpP
   }
 
   let vlpAmount = fromAmount.mul(swapToken.minPrice).div(vlpPrice);
-  vlpAmount = adjustForDecimals(vlpAmount, swapToken.decimals, USDG_DECIMALS);
+  vlpAmount = adjustForDecimals(vlpAmount, swapToken.decimals, 18);
 
   let usdgAmount = fromAmount.mul(swapToken.minPrice).div(PRECISION);
-  usdgAmount = adjustForDecimals(usdgAmount, swapToken.decimals, USDG_DECIMALS);
+  usdgAmount = adjustForDecimals(usdgAmount, swapToken.decimals, 18);
   const feeBasisPoints = getFeeBasisPoints(
     swapToken,
     usdgAmount,
@@ -597,10 +532,10 @@ export function getSellVlpFromAmount(toAmount, swapTokenAddress, infoTokens, vlp
   }
 
   let vlpAmount = toAmount.mul(swapToken.maxPrice).div(vlpPrice);
-  vlpAmount = adjustForDecimals(vlpAmount, swapToken.decimals, USDG_DECIMALS);
+  vlpAmount = adjustForDecimals(vlpAmount, swapToken.decimals, 18);
 
   let usdgAmount = toAmount.mul(swapToken.maxPrice).div(PRECISION);
-  usdgAmount = adjustForDecimals(usdgAmount, swapToken.decimals, USDG_DECIMALS);
+  usdgAmount = adjustForDecimals(usdgAmount, swapToken.decimals, 18);
   const feeBasisPoints = getFeeBasisPoints(
     swapToken,
     usdgAmount,
@@ -738,7 +673,7 @@ export function getNextFromAmount(
     ratio && !ratio.isZero() ? fromAmountBasedOnRatio : toAmount.mul(toTokenMaxPrice).div(fromTokenMinPrice);
 
   let usdgAmount = fromAmount.mul(fromTokenMinPrice).div(PRECISION);
-  usdgAmount = adjustForDecimals(usdgAmount, toToken.decimals, USDG_DECIMALS);
+  usdgAmount = adjustForDecimals(usdgAmount, toToken.decimals, 18);
   const swapFeeBasisPoints =
     fromToken.isStable && toToken.isStable ? STABLE_SWAP_FEE_BASIS_POINTS : SWAP_FEE_BASIS_POINTS;
   const taxBasisPoints = fromToken.isStable && toToken.isStable ? STABLE_TAX_BASIS_POINTS : TAX_BASIS_POINTS;
@@ -825,96 +760,13 @@ export function getNextToAmount(
     toAmountBasedOnRatio = fromAmount.mul(PRECISION).div(ratio);
   }
 
-  if (toTokenAddress === USDG_ADDRESS) {
-    const feeBasisPoints = getSwapFeeBasisPoints(fromToken.isStable);
-
-    if (ratio && !ratio.isZero()) {
-      const toAmount = toAmountBasedOnRatio;
-      return {
-        amount: adjustDecimals(toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints).div(BASIS_POINTS_DIVISOR)),
-        feeBasisPoints,
-      };
-    }
-
-    const toAmount = fromAmount.mul(fromTokenMinPrice).div(PRECISION);
-    return {
-      amount: adjustDecimals(toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints).div(BASIS_POINTS_DIVISOR)),
-      feeBasisPoints,
-    };
-  }
-
-  if (fromTokenAddress === USDG_ADDRESS) {
-    const redemptionValue = toToken.redemptionAmount
-      .mul(toTokenPriceUsd || toTokenMaxPrice)
-      .div(expandDecimals(1, toToken.decimals));
-
-    if (redemptionValue.gt(THRESHOLD_REDEMPTION_VALUE)) {
-      const feeBasisPoints = getSwapFeeBasisPoints(toToken.isStable);
-
-      const toAmount =
-        ratio && !ratio.isZero()
-          ? toAmountBasedOnRatio
-          : fromAmount.mul(toToken.redemptionAmount).div(expandDecimals(1, toToken.decimals));
-
-      return {
-        amount: adjustDecimals(toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints).div(BASIS_POINTS_DIVISOR)),
-        feeBasisPoints,
-      };
-    }
-
-    const expectedAmount = fromAmount;
-
-    const stableToken = getMostAbundantStableToken(chainId, infoTokens);
-    if (!stableToken || stableToken.availableAmount.lt(expectedAmount)) {
-      const toAmount =
-        ratio && !ratio.isZero()
-          ? toAmountBasedOnRatio
-          : fromAmount.mul(toToken.redemptionAmount).div(expandDecimals(1, toToken.decimals));
-      const feeBasisPoints = getSwapFeeBasisPoints(toToken.isStable);
-      return {
-        amount: adjustDecimals(toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints).div(BASIS_POINTS_DIVISOR)),
-        feeBasisPoints,
-      };
-    }
-
-    const feeBasisPoints0 = getSwapFeeBasisPoints(true);
-    const feeBasisPoints1 = getSwapFeeBasisPoints(false);
-
-    if (ratio && !ratio.isZero()) {
-      const toAmount = toAmountBasedOnRatio
-        .mul(BASIS_POINTS_DIVISOR - feeBasisPoints0 - feeBasisPoints1)
-        .div(BASIS_POINTS_DIVISOR);
-      return {
-        amount: adjustDecimals(toAmount),
-        path: [USDG_ADDRESS, stableToken.address, toToken.address],
-        feeBasisPoints: feeBasisPoints0 + feeBasisPoints1,
-      };
-    }
-
-    // get toAmount for USDG => stableToken
-    let toAmount = fromAmount.mul(PRECISION).div(stableToken.maxPrice);
-    // apply USDG => stableToken fees
-    toAmount = toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints0).div(BASIS_POINTS_DIVISOR);
-
-    // get toAmount for stableToken => toToken
-    toAmount = toAmount.mul(stableToken.minPrice).div(toTokenPriceUsd || toTokenMaxPrice);
-    // apply stableToken => toToken fees
-    toAmount = toAmount.mul(BASIS_POINTS_DIVISOR - feeBasisPoints1).div(BASIS_POINTS_DIVISOR);
-
-    return {
-      amount: adjustDecimals(toAmount),
-      path: [USDG_ADDRESS, stableToken.address, toToken.address],
-      feeBasisPoints: feeBasisPoints0 + feeBasisPoints1,
-    };
-  }
-
   const toAmount =
     ratio && !ratio.isZero()
       ? toAmountBasedOnRatio
       : fromAmount.mul(fromTokenMinPrice).div(toTokenPriceUsd || toTokenMaxPrice);
 
   let usdgAmount = fromAmount.mul(fromTokenMinPrice).div(PRECISION);
-  usdgAmount = adjustForDecimals(usdgAmount, fromToken.decimals, USDG_DECIMALS);
+  usdgAmount = adjustForDecimals(usdgAmount, fromToken.decimals, 18);
   const swapFeeBasisPoints =
     fromToken.isStable && toToken.isStable ? STABLE_SWAP_FEE_BASIS_POINTS : SWAP_FEE_BASIS_POINTS;
   const taxBasisPoints = fromToken.isStable && toToken.isStable ? STABLE_TAX_BASIS_POINTS : TAX_BASIS_POINTS;
@@ -1168,9 +1020,6 @@ export function getUsd(amount, tokenAddress, max, infoTokens, orderOption, trigg
   if (!amount) {
     return;
   }
-  if (tokenAddress === USDG_ADDRESS) {
-    return amount.mul(PRECISION).div(expandDecimals(1, 18));
-  }
   const info = getTokenInfo(infoTokens, tokenAddress);
   const price = getTriggerPrice(tokenAddress, max, info, orderOption, triggerPriceUsd);
   if (!price) {
@@ -1197,58 +1046,28 @@ export function getSwapFeeBasisPoints(isStable) {
   return isStable ? STABLE_SWAP_FEE_BASIS_POINTS : SWAP_FEE_BASIS_POINTS;
 }
 
-// BSC TESTNET
-// const RPC_PROVIDERS = [
-//   "https://data-seed-prebsc-1-s1.binance.org:8545",
-//   "https://data-seed-prebsc-2-s1.binance.org:8545",
-//   "https://data-seed-prebsc-1-s2.binance.org:8545",
-//   "https://data-seed-prebsc-2-s2.binance.org:8545",
-//   "https://data-seed-prebsc-1-s3.binance.org:8545",
-//   "https://data-seed-prebsc-2-s3.binance.org:8545"
-// ]
-
-// BSC MAINNET
-export const BSC_RPC_PROVIDERS = [
-  "https://bsc-dataseed.binance.org",
-  "https://bsc-dataseed1.defibit.io",
-  "https://bsc-dataseed1.ninicoin.io",
-  "https://bsc-dataseed2.defibit.io",
-  "https://bsc-dataseed3.defibit.io",
-  "https://bsc-dataseed4.defibit.io",
-  "https://bsc-dataseed2.ninicoin.io",
-  "https://bsc-dataseed3.ninicoin.io",
-  "https://bsc-dataseed4.ninicoin.io",
-  "https://bsc-dataseed1.binance.org",
-  "https://bsc-dataseed2.binance.org",
-  "https://bsc-dataseed3.binance.org",
-  "https://bsc-dataseed4.binance.org",
-];
-
 const RPC_PROVIDERS = {
-  [MAINNET]: BSC_RPC_PROVIDERS,
-  [ARBITRUM]: ARBITRUM_RPC_PROVIDERS,
-  [AVALANCHE]: AVALANCHE_RPC_PROVIDERS,
+  [AURORA]: AURORA_RPC_PROVIDERS,
 };
 
 const alchemyWhitelistedDomains = ["vaporwave.farm", "app.vaporwave.farm"];
 
 export function getAlchemyHttpUrl() {
   if (alchemyWhitelistedDomains.includes(window.location.host)) {
-    return "https://arb-mainnet.g.alchemy.com/v2/ha7CFsr1bx5ZItuR6VZBbhKozcKDY4LZ";
+    return "https://arb-mainnet.g.alchemy.com/v2/ha7CFsr1bx5ZItuR6VZBbhKozcKDY4LZ"; // TODO
   }
-  return "https://arb-mainnet.g.alchemy.com/v2/EmVYwUw0N2tXOuG0SZfe5Z04rzBsCbr2";
+  return "https://arb-mainnet.g.alchemy.com/v2/EmVYwUw0N2tXOuG0SZfe5Z04rzBsCbr2"; // TODO
 }
 
 export function getAlchemyWsUrl() {
   if (alchemyWhitelistedDomains.includes(window.location.host)) {
-    return "wss://arb-mainnet.g.alchemy.com/v2/ha7CFsr1bx5ZItuR6VZBbhKozcKDY4LZ";
+    return "wss://arb-mainnet.g.alchemy.com/v2/ha7CFsr1bx5ZItuR6VZBbhKozcKDY4LZ"; // TODO
   }
-  return "wss://arb-mainnet.g.alchemy.com/v2/EmVYwUw0N2tXOuG0SZfe5Z04rzBsCbr2";
+  return "wss://arb-mainnet.g.alchemy.com/v2/EmVYwUw0N2tXOuG0SZfe5Z04rzBsCbr2"; // TODO
 }
 
 const FALLBACK_PROVIDERS = {
-  [ARBITRUM]: [getAlchemyHttpUrl()],
-  [AVALANCHE]: ["https://avax-mainnet.gateway.pokt.network/v1/lb/626f37766c499d003aada23b"],
+  [AURORA]: [getAlchemyHttpUrl()],
 };
 
 export function shortenAddress(address, length) {
@@ -1903,16 +1722,10 @@ export function getExplorerUrl(chainId) {
     return "https://ropsten.etherscan.io/";
   } else if (chainId === 42) {
     return "https://kovan.etherscan.io/";
-  } else if (chainId === MAINNET) {
-    return "https://bscscan.com/";
-  } else if (chainId === TESTNET) {
-    return "https://testnet.bscscan.com/";
-  } else if (chainId === ARBITRUM_TESTNET) {
-    return "https://rinkeby-explorer.arbitrum.io/";
-  } else if (chainId === ARBITRUM) {
-    return "https://arbiscan.io/";
-  } else if (chainId === AVALANCHE) {
-    return "https://snowtrace.io/";
+  } else if (chainId === AURORA_TESTNET) {
+    return "https://testnet.aurorascan.dev/";
+  } else if (chainId === AURORA) {
+    return "https://aurorascan.dev/";
   }
   return "https://etherscan.io/";
 }
@@ -2031,11 +1844,11 @@ export function approveTokens({
       ) {
         failMsg = (
           <div>
-            There is not enough ETH in your account on Arbitrum to send this transaction.
+            There is not enough ETH in your account on Aurora to send this transaction.
             <br />
             <br />
-            <a href={"https://arbitrum.io/bridge-tutorial/"} target="_blank" rel="noopener noreferrer">
-              Bridge ETH to Arbitrum
+            <a href={"https://aurora.io/bridge-tutorial/"} target="_blank" rel="noopener noreferrer">
+              Bridge ETH to Aurora
             </a>
           </div>
         );
@@ -2078,65 +1891,28 @@ export const getTokenInfo = (infoTokens, tokenAddress, replaceNative, nativeToke
 };
 
 const NETWORK_METADATA = {
-  [MAINNET]: {
-    chainId: "0x" + MAINNET.toString(16),
-    chainName: "BSC",
-    nativeCurrency: {
-      name: "BNB",
-      symbol: "BNB",
-      decimals: 18,
-    },
-    rpcUrls: BSC_RPC_PROVIDERS,
-    blockExplorerUrls: ["https://bscscan.com"],
-  },
-  [TESTNET]: {
-    chainId: "0x" + TESTNET.toString(16),
-    chainName: "BSC Testnet",
-    nativeCurrency: {
-      name: "BNB",
-      symbol: "BNB",
-      decimals: 18,
-    },
-    rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
-    blockExplorerUrls: ["https://testnet.bscscan.com/"],
-  },
-  [ARBITRUM_TESTNET]: {
-    chainId: "0x" + ARBITRUM_TESTNET.toString(16),
-    chainName: "Arbitrum Testnet",
+  [AURORA_TESTNET]: {
+    chainId: "0x" + AURORA_TESTNET.toString(16),
+    chainName: "Aurora Testnet",
     nativeCurrency: {
       name: "ETH",
       symbol: "ETH",
       decimals: 18,
     },
-    rpcUrls: ["https://rinkeby.arbitrum.io/rpc"],
-    blockExplorerUrls: ["https://rinkeby-explorer.arbitrum.io/"],
+    rpcUrls: ["https://testnet.aurora.dev"],
+    blockExplorerUrls: ["https://testnet.aurorascan.dev/"],
   },
-  [ARBITRUM]: {
-    chainId: "0x" + ARBITRUM.toString(16),
-    chainName: "Arbitrum",
+  [AURORA]: {
+    chainId: "0x" + AURORA.toString(16),
+    chainName: "Aurora",
     nativeCurrency: {
       name: "ETH",
       symbol: "ETH",
       decimals: 18,
     },
-    rpcUrls: ARBITRUM_RPC_PROVIDERS,
-    blockExplorerUrls: [getExplorerUrl(ARBITRUM)],
+    rpcUrls: AURORA_RPC_PROVIDERS,
+    blockExplorerUrls: [getExplorerUrl(AURORA)],
   },
-  [AVALANCHE]: {
-    chainId: "0x" + AVALANCHE.toString(16),
-    chainName: "Avalanche",
-    nativeCurrency: {
-      name: "AVAX",
-      symbol: "AVAX",
-      decimals: 18,
-    },
-    rpcUrls: AVALANCHE_RPC_PROVIDERS,
-    blockExplorerUrls: [getExplorerUrl(AVALANCHE)],
-  },
-};
-
-export const addBscNetwork = async () => {
-  return addNetwork(NETWORK_METADATA[MAINNET]);
 };
 
 export const addNetwork = async (metadata) => {
@@ -2179,7 +1955,7 @@ export const getWalletConnectHandler = (activate, deactivate, setActivatingConne
     setActivatingConnector(walletConnect);
     activate(walletConnect, (ex) => {
       if (ex instanceof UnsupportedChainIdError) {
-        helperToast.error("Unsupported chain. Switch to Arbitrum network on your wallet and try again");
+        helperToast.error("Unsupported chain. Switch to Aurora network on your wallet and try again");
         console.warn(ex);
       } else if (!(ex instanceof UserRejectedRequestErrorWalletConnect)) {
         helperToast.error(ex.message);
@@ -2278,10 +2054,6 @@ export function getInfoTokens(
     const token = JSON.parse(JSON.stringify(tokens[i]));
     if (tokenBalances) {
       token.balance = tokenBalances[i];
-    }
-    if (token.address === USDG_ADDRESS) {
-      token.minPrice = expandDecimals(1, USD_DECIMALS);
-      token.maxPrice = expandDecimals(1, USD_DECIMALS);
     }
     infoTokens[token.address] = token;
   }

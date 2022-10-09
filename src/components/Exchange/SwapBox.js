@@ -16,10 +16,7 @@ import {
   helperToast,
   formatAmount,
   bigNumberify,
-  ARBITRUM,
-  AVALANCHE,
   USD_DECIMALS,
-  USDG_DECIMALS,
   LONG,
   SHORT,
   SWAP,
@@ -32,7 +29,6 @@ import {
   BASIS_POINTS_DIVISOR,
   MARGIN_FEE_BASIS_POINTS,
   PRECISION,
-  USDG_ADDRESS,
   STOP,
   LIMIT,
   SWAP_OPTIONS,
@@ -196,13 +192,7 @@ export default function SwapBox(props) {
   const isSwap = swapOption === SWAP;
 
   const getLeaderboardLink = () => {
-    if (chainId === ARBITRUM) {
-      return "https://www.gmx.house/arbitrum/leaderboard";
-    }
-    if (chainId === AVALANCHE) {
-      return "https://www.gmx.house/avalanche/leaderboard";
-    }
-    return "https://www.gmx.house";
+    return "https://www.gmx.house/aurora/leaderboard";
   };
 
   function getTokenLabel() {
@@ -411,7 +401,7 @@ export default function SwapBox(props) {
     const value = fromTokenInfo.maxUsdgAmount
       ?.sub(fromTokenInfo.usdgAmount)
       .mul(expandDecimals(1, USD_DECIMALS))
-      .div(expandDecimals(1, USDG_DECIMALS));
+      .div(expandDecimals(1, 18));
 
     if (!value) {
       return bigNumberify(0);
@@ -800,7 +790,6 @@ export default function SwapBox(props) {
     if (
       !isWrapOrUnwrap &&
       toToken &&
-      toTokenAddress !== USDG_ADDRESS &&
       toTokenInfo &&
       toTokenInfo.availableAmount &&
       toAmount.gt(toTokenInfo.availableAmount)
@@ -824,7 +813,7 @@ export default function SwapBox(props) {
       fromTokenInfo.usdgAmount &&
       fromTokenInfo.maxPrice
     ) {
-      const usdgFromAmount = adjustForDecimals(fromUsdMin, USD_DECIMALS, USDG_DECIMALS);
+      const usdgFromAmount = adjustForDecimals(fromUsdMin, USD_DECIMALS, 18);
       const nextUsdgAmount = fromTokenInfo.usdgAmount.add(usdgFromAmount);
 
       if (nextUsdgAmount.gt(fromTokenInfo.maxUsdgAmount)) {
@@ -899,7 +888,7 @@ export default function SwapBox(props) {
         );
         requiredAmount = requiredAmount.add(swapAmount);
 
-        if (toToken && toTokenAddress !== USDG_ADDRESS) {
+        if (toToken) {
           if (!toTokenInfo.availableAmount) {
             return ["Liquidity data not loaded"];
           }
@@ -923,7 +912,7 @@ export default function SwapBox(props) {
           fromTokenInfo.minPrice &&
           fromTokenInfo.usdgAmount
         ) {
-          const usdgFromAmount = adjustForDecimals(fromUsdMin, USD_DECIMALS, USDG_DECIMALS);
+          const usdgFromAmount = adjustForDecimals(fromUsdMin, USD_DECIMALS, 18);
           const nextUsdgAmount = fromTokenInfo.usdgAmount.add(usdgFromAmount);
           if (nextUsdgAmount.gt(fromTokenInfo.maxUsdgAmount)) {
             return [`${fromTokenInfo.symbol} pool exceeded, try different token`, true, "MAX_USDG"];
@@ -979,7 +968,7 @@ export default function SwapBox(props) {
           fromTokenInfo.minPrice &&
           fromTokenInfo.usdgAmount
         ) {
-          const usdgFromAmount = adjustForDecimals(fromUsdMin, USD_DECIMALS, USDG_DECIMALS);
+          const usdgFromAmount = adjustForDecimals(fromUsdMin, USD_DECIMALS, 18);
           const nextUsdgAmount = fromTokenInfo.usdgAmount.add(usdgFromAmount);
           if (nextUsdgAmount.gt(fromTokenInfo.maxUsdgAmount)) {
             return [`${fromTokenInfo.symbol} pool exceeded, try different token`, true, "MAX_USDG"];
@@ -1063,12 +1052,8 @@ export default function SwapBox(props) {
       outputCurrency = shortCollateralToken.address;
     }
     let externalSwapUrl = "";
-    if (chainId === AVALANCHE) {
-      externalSwapUrl = `https://traderjoexyz.com/trade?outputCurrency=${outputCurrency}#/`;
-    } else {
-      externalSwapUrl = `https://app.uniswap.org/#/swap?inputCurrency=${inputCurrency}&outputCurrency=${outputCurrency}`;
-    }
-    let externalSwapName = chainId === AVALANCHE ? "Trader Joe" : "Uniswap";
+    externalSwapUrl = `https://app.uniswap.org/#/swap?inputCurrency=${inputCurrency}&outputCurrency=${outputCurrency}`;
+    let externalSwapName = "Uniswap";
     const label =
       modalError === "BUFFER" ? `${shortCollateralToken.symbol} Required` : `${fromToken.symbol} Capacity Reached`;
     const swapTokenSymbol = isLong ? toToken.symbol : shortCollateralToken.symbol;
@@ -1180,6 +1165,7 @@ export default function SwapBox(props) {
     if (isLong) {
       const indexTokenInfo = getTokenInfo(infoTokens, toTokenAddress);
       if (indexTokenInfo && indexTokenInfo.minPrice) {
+        // eslint-disable-next-line
         const { amount: nextToAmount } = getNextToAmount(
           chainId,
           fromAmount,
@@ -1192,12 +1178,6 @@ export default function SwapBox(props) {
           totalTokenWeights,
           isSwap
         );
-        const nextToAmountUsd = nextToAmount
-          .mul(indexTokenInfo.minPrice)
-          .div(expandDecimals(1, indexTokenInfo.decimals));
-        if (fromTokenAddress === USDG_ADDRESS && nextToAmountUsd.lt(fromUsdMin.mul(98).div(100))) {
-          return "High USDG Slippage, Long Anyway";
-        }
       }
       return `Long ${toToken.symbol}`;
     }
@@ -1405,15 +1385,6 @@ export default function SwapBox(props) {
   const createIncreaseOrder = () => {
     let path = [fromTokenAddress];
 
-    if (path[0] === USDG_ADDRESS) {
-      if (isLong) {
-        const stableToken = getMostAbundantStableToken(chainId, infoTokens);
-        path.push(stableToken.address);
-      } else {
-        path.push(shortCollateralAddress);
-      }
-    }
-
     const minOut = 0;
     const indexToken = getToken(chainId, indexTokenAddress);
     const successMsg = `
@@ -1486,28 +1457,6 @@ export default function SwapBox(props) {
     const priceLimit = refPrice.mul(priceBasisPoints).div(BASIS_POINTS_DIVISOR);
 
     const boundedFromAmount = fromAmount ? fromAmount : bigNumberify(0);
-
-    if (fromAmount && fromAmount.gt(0) && fromTokenAddress === USDG_ADDRESS && isLong) {
-      const { amount: nextToAmount, path: multiPath } = getNextToAmount(
-        chainId,
-        fromAmount,
-        fromTokenAddress,
-        indexTokenAddress,
-        infoTokens,
-        undefined,
-        undefined,
-        usdgSupply,
-        totalTokenWeights,
-        isSwap
-      );
-      if (nextToAmount.eq(0)) {
-        helperToast.error("Insufficient liquidity");
-        return;
-      }
-      if (multiPath) {
-        path = replaceNativeTokenAddress(multiPath);
-      }
-    }
 
     let params = [
       path, // _path
@@ -1731,8 +1680,7 @@ export default function SwapBox(props) {
       );
       if (feeBasisPoints !== undefined) {
         fees = fromAmount.mul(feeBasisPoints).div(BASIS_POINTS_DIVISOR);
-        const feeTokenPrice =
-          fromTokenInfo.address === USDG_ADDRESS ? expandDecimals(1, USD_DECIMALS) : fromTokenInfo.maxPrice;
+        const feeTokenPrice = fromTokenInfo.maxPrice;
         feesUsd = fees.mul(feeTokenPrice).div(expandDecimals(1, fromTokenInfo.decimals));
       }
       feeBps = feeBasisPoints;

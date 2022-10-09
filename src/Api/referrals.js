@@ -5,8 +5,7 @@ import useSWR from "swr";
 
 import ReferralStorage from "../abis/ReferralStorage.json";
 import {
-  ARBITRUM,
-  AVALANCHE,
+  AURORA,
   MAX_REFERRAL_CODE_LENGTH,
   bigNumberify,
   isAddressZero,
@@ -16,22 +15,21 @@ import {
   isHashZero,
   REFERRAL_CODE_KEY,
 } from "../Helpers";
-import { arbitrumReferralsGraphClient, avalancheReferralsGraphClient } from "./common";
+import { auroraReferralsGraphClient } from "./common";
 import { getContract } from "../Addresses";
 import { callContract } from ".";
 import { REGEX_VERIFY_BYTES32 } from "../components/Referrals/referralsHelper";
 
-const ACTIVE_CHAINS = [ARBITRUM, AVALANCHE];
+const ACTIVE_CHAINS = [AURORA];
 const DISTRIBUTION_TYPE_REBATES = "1";
 const DISTRIBUTION_TYPE_DISCOUNT = "2";
 
 function getGraphClient(chainId) {
-  if (chainId === ARBITRUM) {
-    return arbitrumReferralsGraphClient;
-  } else if (chainId === AVALANCHE) {
-    return avalancheReferralsGraphClient;
+  try {
+    return auroraReferralsGraphClient;
+  } catch {
+    throw new Error(`Unsupported chain ${chainId}`);
   }
-  throw new Error(`Unsupported chain ${chainId}`);
 }
 
 export function decodeReferralCode(hexCode) {
@@ -99,7 +97,7 @@ export function useUserCodesOnAllChain(account) {
   `;
   useEffect(() => {
     async function main() {
-      const [arbitrumCodes, avalancheCodes] = await Promise.all(
+      const [avalancheCodes] = await Promise.all(
         ACTIVE_CHAINS.map((chainId) => {
           return getGraphClient(chainId)
             .query({ query, variables: { account: (account || "").toLowerCase() } })
@@ -108,17 +106,10 @@ export function useUserCodesOnAllChain(account) {
             });
         })
       );
-      const [codeOwnersOnAvax = [], codeOwnersOnArbitrum = []] = await Promise.all([
-        getCodeOwnersData(AVALANCHE, account, arbitrumCodes),
-        getCodeOwnersData(ARBITRUM, account, avalancheCodes),
-      ]);
+      const [codeOwnersOnAvax = []] = await Promise.all([getCodeOwnersData(AURORA, account, avalancheCodes)]);
 
       setData({
-        [ARBITRUM]: codeOwnersOnAvax.reduce((acc, cv) => {
-          acc[cv.code] = cv;
-          return acc;
-        }, {}),
-        [AVALANCHE]: codeOwnersOnArbitrum.reduce((acc, cv) => {
+        [AURORA]: codeOwnersOnAvax.reduce((acc, cv) => {
           acc[cv.code] = cv;
           return acc;
         }, {}),

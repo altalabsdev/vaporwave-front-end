@@ -2,8 +2,7 @@ import { Menu } from "@headlessui/react";
 import { FiChevronDown } from "react-icons/fi";
 import "./AssetDropdown.css";
 import coingeckoIcon from "../../img/ic_coingecko_16.svg";
-import arbitrumIcon from "../../img/ic_arbitrum_16.svg";
-import avalancheIcon from "../../img/ic_avalanche_16.svg";
+import auroraIcon from "../../img/ic_aurora_16.svg";
 import metamaskIcon from "../../img/ic_metamask_16.svg";
 import { addTokenToMetamask, ICONLINKS, platformTokens, useChainId } from "../../Helpers";
 import { useWeb3React } from "@web3-react/core";
@@ -11,10 +10,9 @@ import { useWeb3React } from "@web3-react/core";
 function AssetDropdown({ assetSymbol, assetInfo }) {
   const { active } = useWeb3React();
   const { chainId } = useChainId();
-  let { coingecko, arbitrum, avalanche } = ICONLINKS[chainId][assetSymbol];
+  let { coingecko, aurora } = ICONLINKS[chainId][assetSymbol];
   const unavailableTokenSymbols = {
-    42161: ["ETH"],
-    43114: ["AVAX"],
+    1313161554: ["ETH"],
   };
 
   return (
@@ -35,15 +33,9 @@ function AssetDropdown({ assetSymbol, assetInfo }) {
         </Menu.Item>
         <Menu.Item>
           <>
-            {arbitrum && (
-              <a href={arbitrum} className="asset-item" target="_blank" rel="noopener noreferrer">
-                <img src={arbitrumIcon} alt="Open in explorer" />
-                <p>Open in Explorer</p>
-              </a>
-            )}
-            {avalanche && (
-              <a target="_blank" rel="noopener noreferrer" href={avalanche} className="asset-item">
-                <img src={avalancheIcon} alt="Open in explorer" />
+            {aurora && (
+              <a href={aurora} className="asset-item" target="_blank" rel="noopener noreferrer">
+                <img src={auroraIcon} alt="Open in explorer" />
                 <p>Open in Explorer</p>
               </a>
             )}

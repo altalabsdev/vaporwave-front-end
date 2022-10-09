@@ -316,10 +316,10 @@ export default function TermsAndConditions() {
                 </li>
                 <li>
                   <p className="body-text">
-                    6.3. You understand that the Arbitrum and Avalanche blockchain remains under development, which
+                    6.3. You understand that the Aurora blockchain remains under development, which
                     creates technological and security risks when using the Interface in addition to uncertainty
                     relating to digital assets and transactions therein. You acknowledge that the cost of transacting on
-                    the Arbitrum and Avalanche blockchain is variable and may increase at any time causing impact to any
+                    the Aurora blockchain is variable and may increase at any time causing impact to any
                     activities taking place on these blockchains, which may result in price fluctuations or increased
                     costs when using the Interface.
                   </p>
