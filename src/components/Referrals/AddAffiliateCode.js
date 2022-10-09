@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import cx from "classnames";
-import { ARBITRUM, helperToast, useDebounce } from "../../Helpers";
+import { AURORA, helperToast, useDebounce } from "../../Helpers";
 import { getCodeError, getReferralCodeTakenStatus, getSampleReferrarStat } from "./referralsHelper";
 import { useWeb3React } from "@web3-react/core";
 
@@ -122,7 +122,7 @@ export function AffiliateCodeForm({
     }
 
     if (takenStatus === "none" || takenStatus === "other") {
-      const ownerOnOtherNetwork = takenInfo[chainId === ARBITRUM ? "ownerAvax" : "ownerArbitrum"];
+      const ownerOnOtherNetwork = takenInfo[chainId === AURORA ? "ownerAvax" : "ownerAurora"];
       try {
         const tx = await handleCreateReferralCode(referralCode);
         if (callAfterSuccess) {

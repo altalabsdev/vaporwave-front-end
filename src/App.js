@@ -11,7 +11,7 @@ import useScrollToTop from "./hooks/useScrollToTop";
 import { Switch, Route, NavLink, HashRouter as Router, Redirect, useLocation, useHistory } from "react-router-dom";
 
 import {
-  ARBITRUM,
+  AURORA,
   DEFAULT_SLIPPAGE_AMOUNT,
   SLIPPAGE_BPS_KEY,
   IS_PNL_IN_LEVERAGE_KEY,
@@ -130,12 +130,11 @@ const Zoom = cssTransition({
 
 const arbWsProvider = new ethers.providers.WebSocketProvider(getAlchemyWsUrl());
 
-
 function getWsProvider(active, chainId) {
   if (!active) {
     return;
   }
-  if (chainId === ARBITRUM) {
+  if (chainId === AURORA) {
     return arbWsProvider;
   }
 }
@@ -204,9 +203,9 @@ function AppHeaderUser({
 
   const networkOptions = [
     {
-      label: "Arbitrum",
-      value: ARBITRUM,
-      icon: "ic_arbitrum_24.svg",
+      label: "Aurora",
+      value: AURORA,
+      icon: "ic_aurora_24.svg",
       color: "#264f79",
     },
   ];
@@ -595,7 +594,7 @@ function FullApp() {
   const positionRouterAddress = getContract(chainId, "PositionRouter");
 
   useEffect(() => {
-    const wsVaultAbi = chainId === ARBITRUM ? VaultV2.abi : VaultV2b.abi;
+    const wsVaultAbi = chainId === AURORA ? VaultV2.abi : VaultV2b.abi;
     const wsProvider = getWsProvider(active, chainId);
     if (!wsProvider) {
       return;
@@ -682,7 +681,7 @@ function FullApp() {
             <div className="App-header large">
               <div className="App-header-container-left">
                 <HeaderLink isHomeLink={true} exact={true} className="App-header-link-main" to="/">
-                  <img src={logoImg} className="big" alt="VWAVE Logo"/>
+                  <img src={logoImg} className="big" alt="VWAVE Logo" />
                   {/* <img src={logoSmallImg} className="small" alt="VWAVE Logo" /> */}
                 </HeaderLink>
                 <AppHeaderLinks HeaderLink={HeaderLink} />

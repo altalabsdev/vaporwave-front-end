@@ -33,7 +33,7 @@ import {
   VLP_DECIMALS,
   USD_DECIMALS,
   BASIS_POINTS_DIVISOR,
-  ARBITRUM,
+  AURORA,
   PLACEHOLDER_ACCOUNT,
   getBalanceAndSupplyData,
   getDepositBalanceData,
@@ -1047,15 +1047,15 @@ export default function StakeV2({ setPendingTxns, connectWallet }) {
     }
   );
 
-  const { vwavePrice, vwavePriceFromArbitrum } = useVwavePrice(
+  const { vwavePrice, vwavePriceFromAurora } = useVwavePrice(
     chainId,
-    { arbitrum: chainId === ARBITRUM ? library : undefined },
+    { aurora: chainId === AURORA ? library : undefined },
     active
   );
 
   let { total: totalVwaveSupply } = useTotalVwaveSupply();
 
-  let { arbitrum: arbitrumVwaveStaked, total: totalVwaveStaked } = useTotalVwaveStaked();
+  let { aurora: auroraVwaveStaked, total: totalVwaveStaked } = useTotalVwaveStaked();
 
   const vwaveSupplyUrl = getServerUrl(chainId, "/vwave_supply");
   const { data: vwaveSupply } = useSWR([vwaveSupplyUrl], {
@@ -1454,9 +1454,7 @@ export default function StakeV2({ setPendingTxns, connectWallet }) {
                       className="nowrap"
                       handle={"$" + formatAmount(vwavePrice, USD_DECIMALS, 2, true)}
                       renderContent={() => (
-                        <>
-                          Price on Arbitrum: ${formatAmount(vwavePriceFromArbitrum, USD_DECIMALS, 2, true)}
-                        </>
+                        <>Price on Aurora: ${formatAmount(vwavePriceFromAurora, USD_DECIMALS, 2, true)}</>
                       )}
                     />
                   )}
@@ -1598,11 +1596,7 @@ export default function StakeV2({ setPendingTxns, connectWallet }) {
                         " VWAVE" +
                         ` ($${formatAmount(stakedVwaveSupplyUsd, USD_DECIMALS, 0, true)})`
                       }
-                      renderContent={() => (
-                        <>
-                          Arbitrum: {formatAmount(arbitrumVwaveStaked, 18, 0, true)} VWAVE
-                        </>
-                      )}
+                      renderContent={() => <>Aurora: {formatAmount(auroraVwaveStaked, 18, 0, true)} VWAVE</>}
                     />
                   )}
                 </div>

@@ -13,7 +13,7 @@ import { useLockBodyScroll } from "react-use";
 
 function getDotColor(network) {
   switch (network) {
-    case "Arbitrum":
+    case "Aurora":
       return "#4275a8";
     default:
       return "";

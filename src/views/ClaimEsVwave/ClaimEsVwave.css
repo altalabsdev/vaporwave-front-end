@@ -33,7 +33,7 @@
   padding-top: 0.465rem;
 }
 
-.ClaimEsVwave-vesting-options .Checkbox.btn-lg.selected.arbitrum {
+.ClaimEsVwave-vesting-options .Checkbox.btn-lg.selected.aurora {
   background: rgba(41, 160, 240, 0.2);
 }
 
@@ -52,7 +52,7 @@
   opacity: 1;
 }
 
-.ClaimEsVwave-vesting-options .Checkbox.arbitrum .Checkbox-icon.active {
+.ClaimEsVwave-vesting-options .Checkbox.aurora .Checkbox-icon.active {
   color: #29a0f0;
 }
 

@@ -26,7 +26,7 @@ import {
   VWAVE_DECIMALS,
   VLP_DECIMALS,
   BASIS_POINTS_DIVISOR,
-  ARBITRUM,
+  AURORA,
   getTotalVolumeSum,
   VLPPOOLCOLORS,
   DEFAULT_MAX_USDG_AMOUNT,
@@ -53,13 +53,13 @@ import "./DashboardV2.css";
 
 import vwave40Icon from "../../img/ic_vwave_40.svg";
 import vlp40Icon from "../../img/ic_vlp_40.svg";
-import arbitrum16Icon from "../../img/ic_arbitrum_16.svg";
-import arbitrum24Icon from "../../img/ic_arbitrum_24.svg";
+import aurora16Icon from "../../img/ic_aurora_16.svg";
+import aurora24Icon from "../../img/ic_aurora_24.svg";
 
 import AssetDropdown from "./AssetDropdown";
 import SEO from "../../components/Common/SEO";
 import TooltipCard from "./TooltipCard";
-const ACTIVE_CHAIN_IDS = [ARBITRUM];
+const ACTIVE_CHAIN_IDS = [AURORA];
 
 const { AddressZero } = ethers.constants;
 
@@ -211,42 +211,33 @@ export default function DashboardV2() {
   );
 
   const { infoTokens } = useInfoTokens(library, chainId, active, undefined, undefined);
-  const { infoTokens: infoTokensArbitrum } = useInfoTokens(null, ARBITRUM, active, undefined, undefined);
+  const { infoTokens: infoTokensAurora } = useInfoTokens(null, AURORA, active, undefined, undefined);
 
-  const { data: feesInfo } = useSWR(
-    infoTokensArbitrum[AddressZero].contractMinPrice
-      ? "Dashboard:feesInfo"
-      : null,
-    {
-      fetcher: () => {
-        return Promise.all(
-          ACTIVE_CHAIN_IDS.map((chainId) =>
-            fetcher(null, ReaderV2, [getWhitelistedTokenAddresses(chainId)])(
-              `Dashboard:fees:${chainId}`,
-              chainId,
-              getContract(chainId, "Reader"),
-              "getFees",
-              getContract(chainId, "Vault")
-            )
+  const { data: feesInfo } = useSWR(infoTokensAurora[AddressZero].contractMinPrice ? "Dashboard:feesInfo" : null, {
+    fetcher: () => {
+      return Promise.all(
+        ACTIVE_CHAIN_IDS.map((chainId) =>
+          fetcher(null, ReaderV2, [getWhitelistedTokenAddresses(chainId)])(
+            `Dashboard:fees:${chainId}`,
+            chainId,
+            getContract(chainId, "Reader"),
+            "getFees",
+            getContract(chainId, "Vault")
           )
-        ).then((fees) => {
-          return fees.reduce(
-            (acc, cv, i) => {
-              const feeUSD = getCurrentFeesUsd(
-                getWhitelistedTokenAddresses(ACTIVE_CHAIN_IDS[i]),
-                cv,
-                infoTokensArbitrum,
-              );
-              acc[ACTIVE_CHAIN_IDS[i]] = feeUSD;
-              acc.total = acc.total.add(feeUSD);
-              return acc;
-            },
-            { total: bigNumberify(0) }
-          );
-        });
-      },
-    }
-  );
+        )
+      ).then((fees) => {
+        return fees.reduce(
+          (acc, cv, i) => {
+            const feeUSD = getCurrentFeesUsd(getWhitelistedTokenAddresses(ACTIVE_CHAIN_IDS[i]), cv, infoTokensAurora);
+            acc[ACTIVE_CHAIN_IDS[i]] = feeUSD;
+            acc.total = acc.total.add(feeUSD);
+            return acc;
+          },
+          { total: bigNumberify(0) }
+        );
+      });
+    },
+  });
 
   const eth = infoTokens[getTokenBySymbol(chainId, "ETH").address];
   const currentFeesUsd = getCurrentFeesUsd(whitelistedTokenAddresses, fees, infoTokens);
@@ -259,15 +250,15 @@ export default function DashboardV2() {
     totalFeesDistributed += parseFloat(feeHistory[i].feeUsd);
   }
 
-  const { vwavePrice, vwavePriceFromArbitrum, vwavePriceFromAvalanche } = useVwavePrice(
+  const { vwavePrice, vwavePriceFromAurora, vwavePriceFromAvalanche } = useVwavePrice(
     chainId,
-    { arbitrum: chainId === ARBITRUM ? library : undefined },
+    { aurora: chainId === AURORA ? library : undefined },
     active
   );
 
   let { total: totalVwaveInLiquidity } = useTotalVwaveInLiquidity(chainId, active);
 
-  let { avax: avaxStakedVwave, arbitrum: arbitrumStakedVwave, total: totalStakedVwave } = useTotalVwaveStaked();
+  let { avax: avaxStakedVwave, aurora: auroraStakedVwave, total: totalStakedVwave } = useTotalVwaveStaked();
 
   let vwaveMarketCap;
   if (vwavePrice && totalVwaveSupply) {
@@ -507,11 +498,11 @@ export default function DashboardV2() {
           <div className="section-title-icon"></div>
           <div className="section-title-content">
             <div className="Page-title">
-              Stats {chainId === ARBITRUM && <img src={arbitrum24Icon} alt="arbitrum24Icon" />}
+              Stats {chainId === AURORA && <img src={aurora24Icon} alt="aurora24Icon" />}
             </div>
             <div className="Page-description">
               {chainName} Total Stats start from {totalStatsStartDate}.<br /> For detailed stats:{" "}
-              {chainId === ARBITRUM && (
+              {chainId === AURORA && (
                 <a href="https://stats.vaporwave.farm" target="_blank" rel="noopener noreferrer">
                   https://stats.vwave.io
                 </a>
@@ -558,7 +549,7 @@ export default function DashboardV2() {
                       renderContent={() => (
                         <TooltipCard
                           title="Volume"
-                          arbitrum={volumeInfo?.[ARBITRUM].totalVolume}
+                          aurora={volumeInfo?.[AURORA].totalVolume}
                           total={volumeInfo?.totalVolume}
                         />
                       )}
@@ -580,7 +571,7 @@ export default function DashboardV2() {
                       renderContent={() => (
                         <TooltipCard
                           title="Long Positions"
-                          arbitrum={positionStatsInfo?.[ARBITRUM].totalLongPositionSizes}
+                          aurora={positionStatsInfo?.[AURORA].totalLongPositionSizes}
                           total={positionStatsInfo?.totalLongPositionSizes}
                         />
                       )}
@@ -602,7 +593,7 @@ export default function DashboardV2() {
                       renderContent={() => (
                         <TooltipCard
                           title="Short Positions"
-                          arbitrum={positionStatsInfo?.[ARBITRUM].totalShortPositionSizes}
+                          aurora={positionStatsInfo?.[AURORA].totalShortPositionSizes}
                           total={positionStatsInfo?.totalShortPositionSizes}
                         />
                       )}
@@ -618,11 +609,7 @@ export default function DashboardV2() {
                         className="nowrap"
                         handle={`$${formatAmount(feesInfo?.[chainId], USD_DECIMALS, 2, true)}`}
                         renderContent={() => (
-                          <TooltipCard
-                            title="Fees"
-                            arbitrum={feesInfo?.[ARBITRUM]}
-                            total={feesInfo?.total}
-                          />
+                          <TooltipCard title="Fees" aurora={feesInfo?.[AURORA]} total={feesInfo?.total} />
                         )}
                       />
                     </div>
@@ -651,7 +638,7 @@ export default function DashboardV2() {
           </div>
           <div className="Tab-title-section">
             <div className="Page-title">
-              Tokens {chainId === ARBITRUM && <img src={arbitrum24Icon} alt="arbitrum24Icon" />}
+              Tokens {chainId === AURORA && <img src={aurora24Icon} alt="aurora24Icon" />}
             </div>
             <div className="Page-description">Platform and VLP index tokens.</div>
           </div>
@@ -686,7 +673,7 @@ export default function DashboardV2() {
                             handle={"$" + formatAmount(vwavePrice, USD_DECIMALS, 2, true)}
                             renderContent={() => (
                               <>
-                                Price on Arbitrum: ${formatAmount(vwavePriceFromArbitrum, USD_DECIMALS, 2, true)}
+                                Price on Aurora: ${formatAmount(vwavePriceFromAurora, USD_DECIMALS, 2, true)}
                                 <br />
                                 Price on Avalanche: ${formatAmount(vwavePriceFromAvalanche, USD_DECIMALS, 2, true)}
                               </>
@@ -709,8 +696,8 @@ export default function DashboardV2() {
                           renderContent={() => (
                             <>
                               <p className="Tooltip-row">
-                                <span className="label">Staked on Arbitrum:</span>
-                                <span>{formatAmount(arbitrumStakedVwave, VWAVE_DECIMALS, 0, true)} VWAVE</span>
+                                <span className="label">Staked on Aurora:</span>
+                                <span>{formatAmount(auroraStakedVwave, VWAVE_DECIMALS, 0, true)} VWAVE</span>
                               </p>
                               <p className="Tooltip-row">
                                 <span className="label">Staked on Avalanche:</span>
@@ -780,7 +767,7 @@ export default function DashboardV2() {
                     <div className="App-card-title-mark">
                       <div className="App-card-title-mark-icon">
                         <img src={vlp40Icon} alt="vlp40Icon" />
-                          <img src={arbitrum16Icon} alt="arbitrum16Icon" className="selected-network-symbol" />
+                        <img src={aurora16Icon} alt="aurora16Icon" className="selected-network-symbol" />
                       </div>
                       <div className="App-card-title-mark-info">
                         <div className="App-card-title-mark-title">VLP</div>
@@ -860,7 +847,7 @@ export default function DashboardV2() {
             </div>
             <div className="token-table-wrapper App-card">
               <div className="App-card-title">
-                VLP Index Composition {chainId === ARBITRUM && <img src={arbitrum16Icon} alt="arbitrum16Icon" />}
+                VLP Index Composition {chainId === AURORA && <img src={aurora16Icon} alt="aurora16Icon" />}
               </div>
               <div className="App-card-divider"></div>
               <table className="token-table">

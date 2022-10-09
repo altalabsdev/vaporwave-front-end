@@ -35,7 +35,7 @@ import {
   VLP_COOLDOWN_DURATION,
   SECONDS_PER_YEAR,
   USDG_DECIMALS,
-  ARBITRUM,
+  AURORA,
   PLACEHOLDER_ACCOUNT,
   importImage,
 } from "../../Helpers";
@@ -59,7 +59,7 @@ import vlp24Icon from "../../img/ic_vlp_24.svg";
 import vlp40Icon from "../../img/ic_vlp_40.svg";
 import arrowIcon from "../../img/ic_convert_down.svg";
 
-import arbitrum16Icon from "../../img/ic_arbitrum_16.svg";
+import aurora16Icon from "../../img/ic_aurora_16.svg";
 
 import "./VlpSwap.css";
 import AssetDropdown from "../../views/Dashboard/AssetDropdown";
@@ -187,7 +187,7 @@ export default function VlpSwap(props) {
     }
   );
 
-  const { vwavePrice } = useVwavePrice(chainId, { arbitrum: chainId === ARBITRUM ? library : undefined }, active);
+  const { vwavePrice } = useVwavePrice(chainId, { aurora: chainId === AURORA ? library : undefined }, active);
 
   const rewardTrackersForStakingInfo = [stakedVlpTrackerAddress, feeVlpTrackerAddress];
   const { data: stakingInfo } = useSWR(
@@ -671,7 +671,7 @@ export default function VlpSwap(props) {
             <div className="App-card-title-mark">
               <div className="App-card-title-mark-icon">
                 <img src={vlp40Icon} alt="vlp40Icon" />
-                  <img src={arbitrum16Icon} alt="arbitrum16Icon" className="selected-network-symbol" />
+                <img src={aurora16Icon} alt="aurora16Icon" className="selected-network-symbol" />
               </div>
               <div className="App-card-title-mark-info">
                 <div className="App-card-title-mark-title">VLP</div>
@@ -1019,7 +1019,7 @@ export default function VlpSwap(props) {
               }
               function renderFees() {
                 const swapUrl =
-                  chainId === ARBITRUM
+                  chainId === AURORA
                     ? `https://app.uniswap.org/#/swap?inputCurrency=${token.address}`
                     : `https://traderjoexyz.com/trade?inputCurrency=${token.address}`;
                 switch (true) {
@@ -1037,7 +1037,7 @@ export default function VlpSwap(props) {
                             <br />
                             <p>
                               <a href={swapUrl} target="_blank" rel="noreferrer">
-                                Swap on {chainId === ARBITRUM ? "Uniswap" : "Trader Joe"}
+                                Swap on {chainId === AURORA ? "Uniswap" : "Trader Joe"}
                               </a>
                             </p>
                           </div>

@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { ethers } from "ethers";
 import { useWeb3React } from "@web3-react/core";
 import {
-  ARBITRUM,
+  AURORA,
   PLACEHOLDER_ACCOUNT,
   useChainId,
   fetcher,
@@ -24,7 +24,7 @@ import Checkbox from "../../components/Checkbox/Checkbox";
 
 import "./ClaimEsVwave.css";
 
-import arbitrumIcon from "../../img/ic_arbitrum_96.svg";
+import auroraIcon from "../../img/ic_aurora_96.svg";
 
 const VEST_WITH_VWAVE_ARB = "VEST_WITH_VWAVE_ARB";
 const VEST_WITH_VLP_ARB = "VEST_WITH_VLP_ARB";
@@ -135,12 +135,12 @@ export default function ClaimEsVwave({ setPendingTxns }) {
   const [isClaiming, setIsClaiming] = useState(false);
   const [value, setValue] = useState("");
 
-  const isArbitrum = chainId === ARBITRUM;
+  const isAurora = chainId === AURORA;
 
   const esVwaveIouAddress = getContract(chainId, "ES_VWAVE_IOU");
 
   const { data: esVwaveIouBalance } = useSWR(
-    isArbitrum && [
+    isAurora && [
       `ClaimEsVwave:esVwaveIouBalance:${active}`,
       chainId,
       esVwaveIouAddress,
@@ -152,14 +152,14 @@ export default function ClaimEsVwave({ setPendingTxns }) {
     }
   );
 
-  const arbRewardReaderAddress = getContract(ARBITRUM, "RewardReader");
+  const arbRewardReaderAddress = getContract(AURORA, "RewardReader");
 
-  const arbVesterAdddresses = [getContract(ARBITRUM, "VwaveVester"), getContract(ARBITRUM, "VlpVester")];
+  const arbVesterAdddresses = [getContract(AURORA, "VwaveVester"), getContract(AURORA, "VlpVester")];
 
   const { data: arbVestingInfo } = useSWR(
     [
       `StakeV2:vestingInfo:${active}`,
-      ARBITRUM,
+      AURORA,
       arbRewardReaderAddress,
       "getVestingInfoV2",
       account || PLACEHOLDER_ACCOUNT,
@@ -290,13 +290,13 @@ export default function ClaimEsVwave({ setPendingTxns }) {
     <div className="ClaimEsVwave Page page-layout">
       <div className="Page-title-section mt-0">
         <div className="Page-title">Claim esVWAVE</div>
-        {!isArbitrum && (
+        {!isAurora && (
           <div className="Page-description">
             <br />
-            Please switch your network to Arbitrum.
+            Please switch your network to Aurora.
           </div>
         )}
-        {isArbitrum && (
+        {isAurora && (
           <div>
             <div className="Page-description">
               <br />
@@ -329,20 +329,20 @@ export default function ClaimEsVwave({ setPendingTxns }) {
             <br />
             <div className="ClaimEsVwave-vesting-options">
               <Checkbox
-                className="arbitrum btn btn-primary btn-left btn-lg"
+                className="aurora btn btn-primary btn-left btn-lg"
                 isChecked={selectedOption === VEST_WITH_VWAVE_ARB}
                 setIsChecked={() => setSelectedOption(VEST_WITH_VWAVE_ARB)}
               >
-                <div className="ClaimEsVwave-option-label">Vest with VWAVE on Arbitrum</div>
-                <img src={arbitrumIcon} alt="arbitrum" />
+                <div className="ClaimEsVwave-option-label">Vest with VWAVE on Aurora</div>
+                <img src={auroraIcon} alt="aurora" />
               </Checkbox>
               <Checkbox
-                className="arbitrum btn btn-primary btn-left btn-lg"
+                className="aurora btn btn-primary btn-left btn-lg"
                 isChecked={selectedOption === VEST_WITH_VLP_ARB}
                 setIsChecked={() => setSelectedOption(VEST_WITH_VLP_ARB)}
               >
-                <div className="ClaimEsVwave-option-label">Vest with VLP on Arbitrum</div>
-                <img src={arbitrumIcon} alt="arbitrum" />
+                <div className="ClaimEsVwave-option-label">Vest with VLP on Aurora</div>
+                <img src={auroraIcon} alt="aurora" />
               </Checkbox>
             </div>
             <br />

@@ -82,26 +82,26 @@ export const appEventsData = [
   //   ],
   // },
   // {
-  //   id: "gmx-arbitrum-odyssey",
-  //   title: "VWAVE Arbitrum Odyssey",
+  //   id: "gmx-aurora-odyssey",
+  //   title: "VWAVE Aurora Odyssey",
   //   isActive: true,
   //   validTill: "3 Jul 2022, 12:00",
   //   bodyText:
-  //     "The VWAVE Arbitrum Odyssey is taking place this week, all participants will receive prizes. Read on to find out more.",
+  //     "The VWAVE Aurora Odyssey is taking place this week, all participants will receive prizes. Read on to find out more.",
   //   buttons: [
   //     {
   //       text: "Read More",
-  //       link: "https://medium.com/@vaporwave.farm/gmx-arbitrum-odyssey-fc12cba2d10d",
+  //       link: "https://medium.com/@vaporwave.farm/gmx-aurora-odyssey-fc12cba2d10d",
   //     },
   //   ],
   // },
   // {
-  //   id: "fix-arbitrum-transaction-issues",
-  //   title: "Fix Arbitrum Transactions",
+  //   id: "fix-aurora-transaction-issues",
+  //   title: "Fix Aurora Transactions",
   //   isActive: true,
   //   validTill: "30 Jun 2022, 12:00",
   //   bodyText:
-  //     "If you experience transaction errors on Arbitrum or data loading issues, please use a free RPC URL from Alchemy.",
+  //     "If you experience transaction errors on Aurora or data loading issues, please use a free RPC URL from Alchemy.",
   //   buttons: [
   //     {
   //       text: "Learn More",
@@ -111,11 +111,11 @@ export const appEventsData = [
   //   ],
   // },
   // {
-  //   id: "gmx-arbitrum-odyssey-paused",
-  //   title: "VWAVE Arbitrum Odyssey Paused",
+  //   id: "gmx-aurora-odyssey-paused",
+  //   title: "VWAVE Aurora Odyssey Paused",
   //   isActive: true,
   //   validTill: "3 Jul 2022, 12:00",
-  //   bodyText: "The VWAVE Arbitrum Odyssey has been paused. Please read the linked post for more information.",
+  //   bodyText: "The VWAVE Aurora Odyssey has been paused. Please read the linked post for more information.",
   //   buttons: [
   //     {
   //       text: "Read More",
@@ -145,7 +145,7 @@ export const appEventsData = [
   //   isActive: true,
   //   validTill: "3 Jul 2022, 12:00",
   //   bodyText:
-  //     "There are ongoing syncing issues on Alchemy for Arbitrum at the moment, please check their status page and use the public Arbitrum RPC in the meantime",
+  //     "There are ongoing syncing issues on Alchemy for Aurora at the moment, please check their status page and use the public Aurora RPC in the meantime",
   //   buttons: [
   //     {
   //       text: "Check Status",
@@ -154,7 +154,7 @@ export const appEventsData = [
   //     },
   //     {
   //       text: "Public RPC URL",
-  //       link: "https://metamask.zendesk.com/hc/en-us/articles/4415758358299-Network-profile-Arbitrum",
+  //       link: "https://metamask.zendesk.com/hc/en-us/articles/4415758358299-Network-profile-Aurora",
   //       newTab: true,
   //     },
   //   ],
@@ -179,8 +179,7 @@ export const appEventsData = [
     title: "Use Alchemy RPC URL",
     isActive: true,
     validTill: "10 Jul 2022, 12:00",
-    bodyText:
-      "If you experience data loading or transaction issues on Arbitrum, please use a free RPC URL from Alchemy.",
+    bodyText: "If you experience data loading or transaction issues on Aurora, please use a free RPC URL from Alchemy.",
     buttons: [
       {
         text: "Learn More",

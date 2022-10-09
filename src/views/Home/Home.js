@@ -10,7 +10,7 @@ import costIcon from "../../img/ic_cost.svg";
 import liquidityIcon from "../../img/ic_liquidity.svg";
 import totaluserIcon from "../../img/ic_totaluser.svg";
 
-import arbitrumIcon from "../../img/ic_arbitrum_96.svg";
+import auroraIcon from "../../img/ic_aurora_96.svg";
 
 import statsIcon from "../../img/ic_stats.svg";
 import tradingIcon from "../../img/ic_trading.svg";
@@ -23,7 +23,7 @@ import {
   numberWithCommas,
   getServerUrl,
   USD_DECIMALS,
-  ARBITRUM,
+  AURORA,
   getTotalVolumeSum,
 } from "../../Helpers";
 
@@ -59,45 +59,45 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
   //   }
   // }
 
-  // ARBITRUM
+  // AURORA
 
-  const arbitrumPositionStatsUrl = getServerUrl(ARBITRUM, "/position_stats");
-  const { data: arbitrumPositionStats } = useSWR([arbitrumPositionStatsUrl], {
+  const auroraPositionStatsUrl = getServerUrl(AURORA, "/position_stats");
+  const { data: auroraPositionStats } = useSWR([auroraPositionStatsUrl], {
     fetcher: (...args) => fetch(...args).then((res) => res.json()),
   });
 
-  const arbitrumTotalVolumeUrl = getServerUrl(ARBITRUM, "/total_volume");
-  const { data: arbitrumTotalVolume } = useSWR([arbitrumTotalVolumeUrl], {
+  const auroraTotalVolumeUrl = getServerUrl(AURORA, "/total_volume");
+  const { data: auroraTotalVolume } = useSWR([auroraTotalVolumeUrl], {
     fetcher: (...args) => fetch(...args).then((res) => res.json()),
   });
 
   // Total Volume
 
-  const arbitrumTotalVolumeSum = getTotalVolumeSum(arbitrumTotalVolume);
+  const auroraTotalVolumeSum = getTotalVolumeSum(auroraTotalVolume);
 
   let totalVolumeSum = bigNumberify(0);
-  if (arbitrumTotalVolumeSum) {
-    totalVolumeSum = totalVolumeSum.add(arbitrumTotalVolumeSum);
+  if (auroraTotalVolumeSum) {
+    totalVolumeSum = totalVolumeSum.add(auroraTotalVolumeSum);
   }
 
   // Open Interest
 
   let openInterest = bigNumberify(0);
   if (
-    arbitrumPositionStats &&
-    arbitrumPositionStats.totalLongPositionSizes &&
-    arbitrumPositionStats.totalShortPositionSizes
+    auroraPositionStats &&
+    auroraPositionStats.totalLongPositionSizes &&
+    auroraPositionStats.totalShortPositionSizes
   ) {
-    openInterest = openInterest.add(arbitrumPositionStats.totalLongPositionSizes);
-    openInterest = openInterest.add(arbitrumPositionStats.totalShortPositionSizes);
+    openInterest = openInterest.add(auroraPositionStats.totalLongPositionSizes);
+    openInterest = openInterest.add(auroraPositionStats.totalShortPositionSizes);
   }
 
   // user stat
-  const arbitrumUserStats = useUserStat(ARBITRUM);
+  const auroraUserStats = useUserStat(AURORA);
   let totalUsers = 0;
 
-  if (arbitrumUserStats && arbitrumUserStats.uniqueCount) {
-    totalUsers += arbitrumUserStats.uniqueCount;
+  if (auroraUserStats && auroraUserStats.uniqueCount) {
+    totalUsers += auroraUserStats.uniqueCount;
   }
 
   const LaunchExchangeButton = () => {
@@ -187,15 +187,15 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
         <div className="Home-cta-container default-container">
           <div className="Home-cta-info">
             <div className="Home-cta-info__title">Available on your preferred network</div>
-            <div className="Home-cta-info__description">VWAVE is currently live on Arbitrum.</div>
+            <div className="Home-cta-info__description">VWAVE is currently live on Aurora.</div>
           </div>
           <div className="Home-cta-options">
-            <div className="Home-cta-option Home-cta-option-arbitrum">
+            <div className="Home-cta-option Home-cta-option-aurora">
               <div className="Home-cta-option-icon">
-                <img src={arbitrumIcon} alt="arbitrum" />
+                <img src={auroraIcon} alt="aurora" />
               </div>
               <div className="Home-cta-option-info">
-                <div className="Home-cta-option-title">Arbitrum</div>
+                <div className="Home-cta-option-title">Aurora</div>
                 <div className="Home-cta-option-action">
                   <LaunchExchangeButton />
                 </div>

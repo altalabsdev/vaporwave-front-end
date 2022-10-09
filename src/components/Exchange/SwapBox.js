@@ -194,7 +194,7 @@ export default function SwapBox(props) {
   const isSwap = swapOption === SWAP;
 
   const getLeaderboardLink = () => {
-    return "https://www.gmx.house/arbitrum/leaderboard";
+    return "https://www.gmx.house/aurora/leaderboard";
   };
 
   function getTokenLabel() {

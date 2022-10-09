@@ -5,7 +5,7 @@ import useSWR from "swr";
 
 import ReferralStorage from "../abis/ReferralStorage.json";
 import {
-  ARBITRUM,
+  AURORA,
   MAX_REFERRAL_CODE_LENGTH,
   bigNumberify,
   isAddressZero,
@@ -15,20 +15,20 @@ import {
   isHashZero,
   REFERRAL_CODE_KEY,
 } from "../Helpers";
-import { arbitrumReferralsGraphClient } from "./common";
+import { auroraReferralsGraphClient } from "./common";
 import { getContract } from "../Addresses";
 import { callContract } from ".";
 import { REGEX_VERIFY_BYTES32 } from "../components/Referrals/referralsHelper";
 
-const ACTIVE_CHAINS = [ARBITRUM];
+const ACTIVE_CHAINS = [AURORA];
 const DISTRIBUTION_TYPE_REBATES = "1";
 const DISTRIBUTION_TYPE_DISCOUNT = "2";
 
 function getGraphClient(chainId) {
   try {
-    return arbitrumReferralsGraphClient;
+    return auroraReferralsGraphClient;
   } catch {
-  throw new Error(`Unsupported chain ${chainId}`);
+    throw new Error(`Unsupported chain ${chainId}`);
   }
 }
 
@@ -106,12 +106,10 @@ export function useUserCodesOnAllChain(account) {
             });
         })
       );
-      const [codeOwnersOnAvax = []] = await Promise.all([
-        getCodeOwnersData(ARBITRUM, account, avalancheCodes),
-      ]);
+      const [codeOwnersOnAvax = []] = await Promise.all([getCodeOwnersData(AURORA, account, avalancheCodes)]);
 
       setData({
-        [ARBITRUM]: codeOwnersOnAvax.reduce((acc, cv) => {
+        [AURORA]: codeOwnersOnAvax.reduce((acc, cv) => {
           acc[cv.code] = cv;
           return acc;
         }, {}),

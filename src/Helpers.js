@@ -28,10 +28,10 @@ export const PLACEHOLDER_ACCOUNT = ethers.Wallet.createRandom().address;
 
 export const MAINNET = 56;
 export const TESTNET = 97;
-export const ARBITRUM_TESTNET = 421611;
-export const ARBITRUM = 42161;
+export const AURORA_TESTNET = 421611;
+export const AURORA = 42161;
 // TODO take it from web3
-export const DEFAULT_CHAIN_ID = ARBITRUM;
+export const DEFAULT_CHAIN_ID = AURORA;
 export const CHAIN_ID = DEFAULT_CHAIN_ID;
 
 export const MIN_PROFIT_TIME = 0;
@@ -41,19 +41,19 @@ const SELECTED_NETWORK_LOCAL_STORAGE_KEY = "SELECTED_NETWORK";
 const CHAIN_NAMES_MAP = {
   [MAINNET]: "BSC",
   [TESTNET]: "BSC Testnet",
-  [ARBITRUM_TESTNET]: "Arbitrum Testnet",
-  [ARBITRUM]: "Arbitrum",
+  [AURORA_TESTNET]: "Aurora Testnet",
+  [AURORA]: "Aurora",
 };
 
 const GAS_PRICE_ADJUSTMENT_MAP = {
-  [ARBITRUM]: "0",
+  [AURORA]: "0",
 };
 
 const MAX_GAS_PRICE_MAP = {
-  [ARBITRUM]: "200000000000", // 200 gwei
+  [AURORA]: "200000000000", // 200 gwei
 };
 
-const ARBITRUM_RPC_PROVIDERS = ["https://arb1.arbitrum.io/rpc"];
+const AURORA_RPC_PROVIDERS = ["https://arb1.aurora.io/rpc"];
 export const WALLET_CONNECT_LOCALSTORAGE_KEY = "walletconnect";
 export const WALLET_LINK_LOCALSTORAGE_PREFIX = "-walletlink";
 export const SHOULD_EAGER_CONNECT_LOCALSTORAGE_KEY = "eagerconnect";
@@ -138,77 +138,77 @@ export const VLPPOOLCOLORS = {
 };
 
 export const HIGH_EXECUTION_FEES_MAP = {
-  [ARBITRUM]: 3, // 3 USD
+  [AURORA]: 3, // 3 USD
 };
 
 export const ICONLINKS = {
   42161: {
     VWAVE: {
       coingecko: "https://www.coingecko.com/en/coins/gmx",
-      arbitrum: "https://arbiscan.io/address/0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a",
+      aurora: "https://arbiscan.io/address/0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a",
     },
     VLP: {
-      arbitrum: "https://arbiscan.io/token/0x1aDDD80E6039594eE970E5872D247bf0414C8903",
+      aurora: "https://arbiscan.io/token/0x1aDDD80E6039594eE970E5872D247bf0414C8903",
     },
     ETH: {
       coingecko: "https://www.coingecko.com/en/coins/ethereum",
     },
     BTC: {
       coingecko: "https://www.coingecko.com/en/coins/wrapped-bitcoin",
-      arbitrum: "https://arbiscan.io/address/0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f",
+      aurora: "https://arbiscan.io/address/0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f",
     },
     LINK: {
       coingecko: "https://www.coingecko.com/en/coins/chainlink",
-      arbitrum: "https://arbiscan.io/address/0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
+      aurora: "https://arbiscan.io/address/0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
     },
     UNI: {
       coingecko: "https://www.coingecko.com/en/coins/uniswap",
-      arbitrum: "https://arbiscan.io/address/0xfa7f8980b0f1e64a2062791cc3b0871572f1f7f0",
+      aurora: "https://arbiscan.io/address/0xfa7f8980b0f1e64a2062791cc3b0871572f1f7f0",
     },
     USDC: {
       coingecko: "https://www.coingecko.com/en/coins/usd-coin",
-      arbitrum: "https://arbiscan.io/address/0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+      aurora: "https://arbiscan.io/address/0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
     },
     USDT: {
       coingecko: "https://www.coingecko.com/en/coins/tether",
-      arbitrum: "https://arbiscan.io/address/0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+      aurora: "https://arbiscan.io/address/0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
     },
     DAI: {
       coingecko: "https://www.coingecko.com/en/coins/dai",
-      arbitrum: "https://arbiscan.io/address/0xda10009cbd5d07dd0cecc66161fc93d7c9000da1",
+      aurora: "https://arbiscan.io/address/0xda10009cbd5d07dd0cecc66161fc93d7c9000da1",
     },
     MIM: {
       coingecko: "https://www.coingecko.com/en/coins/magic-internet-money",
-      arbitrum: "https://arbiscan.io/address/0xfea7a6a0b346362bf88a9e4a88416b77a57d6c2a",
+      aurora: "https://arbiscan.io/address/0xfea7a6a0b346362bf88a9e4a88416b77a57d6c2a",
     },
     FRAX: {
       coingecko: "https://www.coingecko.com/en/coins/frax",
-      arbitrum: "https://arbiscan.io/address/0x17fc002b466eec40dae837fc4be5c67993ddbd6f",
+      aurora: "https://arbiscan.io/address/0x17fc002b466eec40dae837fc4be5c67993ddbd6f",
     },
   },
 };
 
 export const platformTokens = {
   42161: {
-    // arbitrum
+    // aurora
     VWAVE: {
       name: "VWAVE",
       symbol: "VWAVE",
       decimals: 18,
-      address: getContract(ARBITRUM, "VWAVE"),
+      address: getContract(AURORA, "VWAVE"),
       imageUrl: "https://assets.coingecko.com/coins/images/18323/small/arbit.png?1631532468",
     },
     VLP: {
       name: "VWAVE LP",
       symbol: "VLP",
       decimals: 18,
-      address: getContract(ARBITRUM, "StakedVlpTracker"), // address of fsVLP token because user only holds fsVLP
+      address: getContract(AURORA, "StakedVlpTracker"), // address of fsVLP token because user only holds fsVLP
       imageUrl: "https://github.com/gmx-io/gmx-assets/blob/main/VWAVE-Assets/PNG/VLP_LOGO%20ONLY.png?raw=true",
     },
   },
 };
 
-const supportedChainIds = [ARBITRUM];
+const supportedChainIds = [AURORA];
 const injectedConnector = new InjectedConnector({
   supportedChainIds,
 });
@@ -217,7 +217,7 @@ const getWalletConnectConnector = () => {
   const chainId = localStorage.getItem(SELECTED_NETWORK_LOCAL_STORAGE_KEY) || DEFAULT_CHAIN_ID;
   return new WalletConnectConnector({
     rpc: {
-      [ARBITRUM]: ARBITRUM_RPC_PROVIDERS[0],
+      [AURORA]: AURORA_RPC_PROVIDERS[0],
     },
     qrcode: true,
     chainId,
@@ -359,9 +359,9 @@ export function getServerBaseUrl(chainId) {
   }
   if (chainId === MAINNET) {
     return "https://gambit-server-staging.uc.r.appspot.com";
-  } else if (chainId === ARBITRUM_TESTNET) {
+  } else if (chainId === AURORA_TESTNET) {
     return "https://gambit-l2.as.r.appspot.com";
-  } else if (chainId === ARBITRUM) {
+  } else if (chainId === AURORA) {
     return "https://gmx-server-mainnet.uw.r.appspot.com";
   }
   return "https://gmx-server-mainnet.uw.r.appspot.com";
@@ -1169,7 +1169,7 @@ export const BSC_RPC_PROVIDERS = [
 
 const RPC_PROVIDERS = {
   [MAINNET]: BSC_RPC_PROVIDERS,
-  [ARBITRUM]: ARBITRUM_RPC_PROVIDERS,
+  [AURORA]: AURORA_RPC_PROVIDERS,
 };
 
 const alchemyWhitelistedDomains = ["vaporwave.farm", "app.vaporwave.farm"];
@@ -1189,7 +1189,7 @@ export function getAlchemyWsUrl() {
 }
 
 const FALLBACK_PROVIDERS = {
-  [ARBITRUM]: [getAlchemyHttpUrl()],
+  [AURORA]: [getAlchemyHttpUrl()],
 };
 
 export function shortenAddress(address, length) {
@@ -1848,9 +1848,9 @@ export function getExplorerUrl(chainId) {
     return "https://bscscan.com/";
   } else if (chainId === TESTNET) {
     return "https://testnet.bscscan.com/";
-  } else if (chainId === ARBITRUM_TESTNET) {
-    return "https://rinkeby-explorer.arbitrum.io/";
-  } else if (chainId === ARBITRUM) {
+  } else if (chainId === AURORA_TESTNET) {
+    return "https://rinkeby-explorer.aurora.io/";
+  } else if (chainId === AURORA) {
     return "https://arbiscan.io/";
   }
   return "https://etherscan.io/";
@@ -1970,11 +1970,11 @@ export function approveTokens({
       ) {
         failMsg = (
           <div>
-            There is not enough ETH in your account on Arbitrum to send this transaction.
+            There is not enough ETH in your account on Aurora to send this transaction.
             <br />
             <br />
-            <a href={"https://arbitrum.io/bridge-tutorial/"} target="_blank" rel="noopener noreferrer">
-              Bridge ETH to Arbitrum
+            <a href={"https://aurora.io/bridge-tutorial/"} target="_blank" rel="noopener noreferrer">
+              Bridge ETH to Aurora
             </a>
           </div>
         );
@@ -2039,27 +2039,27 @@ const NETWORK_METADATA = {
     rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
     blockExplorerUrls: ["https://testnet.bscscan.com/"],
   },
-  [ARBITRUM_TESTNET]: {
-    chainId: "0x" + ARBITRUM_TESTNET.toString(16),
-    chainName: "Arbitrum Testnet",
+  [AURORA_TESTNET]: {
+    chainId: "0x" + AURORA_TESTNET.toString(16),
+    chainName: "Aurora Testnet",
     nativeCurrency: {
       name: "ETH",
       symbol: "ETH",
       decimals: 18,
     },
-    rpcUrls: ["https://rinkeby.arbitrum.io/rpc"],
-    blockExplorerUrls: ["https://rinkeby-explorer.arbitrum.io/"],
+    rpcUrls: ["https://rinkeby.aurora.io/rpc"],
+    blockExplorerUrls: ["https://rinkeby-explorer.aurora.io/"],
   },
-  [ARBITRUM]: {
-    chainId: "0x" + ARBITRUM.toString(16),
-    chainName: "Arbitrum",
+  [AURORA]: {
+    chainId: "0x" + AURORA.toString(16),
+    chainName: "Aurora",
     nativeCurrency: {
       name: "ETH",
       symbol: "ETH",
       decimals: 18,
     },
-    rpcUrls: ARBITRUM_RPC_PROVIDERS,
-    blockExplorerUrls: [getExplorerUrl(ARBITRUM)],
+    rpcUrls: AURORA_RPC_PROVIDERS,
+    blockExplorerUrls: [getExplorerUrl(AURORA)],
   },
 };
 
@@ -2107,7 +2107,7 @@ export const getWalletConnectHandler = (activate, deactivate, setActivatingConne
     setActivatingConnector(walletConnect);
     activate(walletConnect, (ex) => {
       if (ex instanceof UnsupportedChainIdError) {
-        helperToast.error("Unsupported chain. Switch to Arbitrum network on your wallet and try again");
+        helperToast.error("Unsupported chain. Switch to Aurora network on your wallet and try again");
         console.warn(ex);
       } else if (!(ex instanceof UserRejectedRequestErrorWalletConnect)) {
         helperToast.error(ex.message);

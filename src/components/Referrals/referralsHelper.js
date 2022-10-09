@@ -4,7 +4,7 @@ import {
   isAddressZero,
   USD_DECIMALS,
   MAX_REFERRAL_CODE_LENGTH,
-  ARBITRUM,
+  AURORA,
 } from "../../Helpers";
 import { encodeReferralCode, getReferralCodeOwner } from "../../Api/referrals";
 
@@ -20,17 +20,14 @@ export function isRecentReferralCodeNotExpired(referralCodeInfo) {
 
 export async function getReferralCodeTakenStatus(account, referralCode, chainId) {
   const referralCodeBytes32 = encodeReferralCode(referralCode);
-  const [ownerArbitrum,] = await Promise.all([
-    getReferralCodeOwner(ARBITRUM, referralCodeBytes32),
-  ]);
+  const [ownerAurora] = await Promise.all([getReferralCodeOwner(AURORA, referralCodeBytes32)]);
 
-  const takenOnArb =
-    !isAddressZero(ownerArbitrum) && (ownerArbitrum !== account || (ownerArbitrum === account));
+  const takenOnArb = !isAddressZero(ownerAurora) && (ownerAurora !== account || ownerAurora === account);
 
   const referralCodeTakenInfo = {
-    [ARBITRUM]: takenOnArb,
+    [AURORA]: takenOnArb,
     both: false,
-    ownerArbitrum,
+    ownerAurora,
   };
 
   if (referralCodeTakenInfo.both) {

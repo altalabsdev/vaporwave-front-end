@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 
-import { MAINNET, TESTNET, ARBITRUM_TESTNET, ARBITRUM  } from "./Helpers";
+import { MAINNET, TESTNET, AURORA_TESTNET, AURORA } from "./Helpers";
 
 const { parseEther } = ethers.utils;
 
@@ -21,7 +21,7 @@ const constants = {
     v2: false,
   },
 
-  [ARBITRUM_TESTNET]: {
+  [AURORA_TESTNET]: {
     nativeTokenSymbol: "ETH",
     defaultCollateralSymbol: "USDC",
     defaultFlagOrdersEnabled: false,
@@ -29,7 +29,7 @@ const constants = {
     v2: true,
   },
 
-  [ARBITRUM]: {
+  [AURORA]: {
     nativeTokenSymbol: "ETH",
     wrappedTokenSymbol: "WETH",
     defaultCollateralSymbol: "USDC",

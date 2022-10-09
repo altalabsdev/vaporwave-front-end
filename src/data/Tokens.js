@@ -132,7 +132,7 @@ const TOKENS = {
       address: ethers.constants.AddressZero,
       isNative: true,
     },
-    // https://github.com/OffchainLabs/arbitrum/blob/950c2f91b2e951cd3764394e0a73eac3797aecf3/packages/arb-ts/src/lib/networks.ts#L65
+    // https://github.com/OffchainLabs/aurora/blob/950c2f91b2e951cd3764394e0a73eac3797aecf3/packages/arb-ts/src/lib/networks.ts#L65
     {
       name: "Wrapped Ethereum",
       symbol: "WETH",
@@ -266,29 +266,9 @@ const ADDITIONAL_TOKENS = {
       decimals: 18,
     },
   ],
-  43114: [
-    {
-      name: "VWAVE",
-      symbol: "VWAVE",
-      address: getContract(43114, "VWAVE"),
-      decimals: 18,
-    },
-    {
-      name: "Escrowed VWAVE",
-      symbol: "esVWAVE",
-      address: getContract(43114, "ES_VWAVE"),
-      decimals: 18,
-    },
-    {
-      name: "VWAVE LP",
-      symbol: "VLP",
-      address: getContract(42161, "VLP"),
-      decimals: 18,
-    },
-  ],
 };
 
-const CHAIN_IDS = [56, 97, 42161, 421611, 43114];
+const CHAIN_IDS = [56, 97, 42161, 421611];
 
 const TOKENS_MAP = {};
 const TOKENS_BY_SYMBOL_MAP = {};
