@@ -115,6 +115,10 @@
   /* z-index: 2; */
 }
 
+.App-header-aurora-logo {
+  margin-right: 0.8rem;
+}
+
 .App-header-menu-icon-block {
   margin-right: 1.2rem;
   margin-left: 0px;

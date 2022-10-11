@@ -82,11 +82,10 @@ import "./App.css";
 import "./Input.css";
 import "./AppOrder.css";
 
-import logoImg from "./img/vwave-logo-final.png";
-
-import logoSmallImg from "./img/logo_VWAVE_small.svg";
+import aurora24Icon from "./img/ic_aurora_24.svg";
+import logoSmallImg from "./img/vwave_logo_small.svg";
+import logoImg from "./img/vwave_logo_large.svg";
 import connectWalletImg from "./img/ic_wallet_24.svg";
-
 import metamaskImg from "./img/metamask.png";
 import coinbaseImg from "./img/coinbaseWallet.png";
 import walletConnectImg from "./img/walletconnect-circle-blue.svg";
@@ -236,18 +235,7 @@ function AppHeaderUser({
             Trade
           </HeaderLink>
         </div>
-        {showConnectionOptions && (
-          <NetworkSelector
-            options={networkOptions}
-            label={selectorLabel}
-            onSelect={onNetworkSelect}
-            className="App-header-user-netowork"
-            showCaret={true}
-            modalLabel="Select Network"
-            small={small}
-            showModal={showNetworkSelectorModal}
-          />
-        )}
+        <img src={aurora24Icon} alt="aurora16Icon" className="App-header-aurora-logo"/>
         {showConnectionOptions && (
           <ConnectWalletButton onClick={() => setWalletModalVisible(true)} imgSrc={connectWalletImg}>
             {small ? "Connect" : "Connect Wallet"}

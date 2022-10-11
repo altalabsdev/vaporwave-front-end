@@ -84,8 +84,9 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  border: 1px solid #1e1f37;
-  border-radius: 50%;
+  transform: scale(0.6, 0.6);
+  -ms-transform: scale(0.6, 0.6);
+  -webkit-transform: scale(0.6, 0.6);
 }
 
 .App-card-title-mark {
