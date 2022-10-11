@@ -503,7 +503,7 @@ export default function DashboardV2() {
               {chainName} Total Stats start from {totalStatsStartDate}.<br /> For detailed stats:{" "}
               {chainId === AURORA && (
                 <a href="https://stats.vaporwave.farm" target="_blank" rel="noopener noreferrer">
-                  https://stats.vwave.farm
+                  https://stats.vaporwave.farm
                 </a>
               )}
               .
@@ -766,7 +766,7 @@ export default function DashboardV2() {
                     <div className="App-card-title-mark">
                       <div className="App-card-title-mark-icon">
                         <img src={vlp40Icon} alt="vlp40Icon" />
-                        <img src={aurora16Icon} alt="aurora16Icon" className="selected-network-symbol" />
+                        {/* <img src={aurora16Icon} alt="aurora16Icon" className="selected-network-symbol"/> */}
                       </div>
                       <div className="App-card-title-mark-info">
                         <div className="App-card-title-mark-title">VLP</div>

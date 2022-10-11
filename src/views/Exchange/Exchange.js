@@ -38,7 +38,6 @@ import { getTokens, getToken, getWhitelistedTokens, getTokenBySymbol } from "../
 import Reader from "../../abis/ReaderV2.json";
 import VaultV2 from "../../abis/VaultV2.json";
 import Router from "../../abis/Router.json";
-import Token from "../../abis/Token.json";
 
 import Checkbox from "../../components/Checkbox/Checkbox";
 import SwapBox from "../../components/Exchange/SwapBox";

@@ -235,18 +235,6 @@ function AppHeaderUser({
           </HeaderLink>
         </div>
         {showConnectionOptions && (
-          <NetworkSelector
-            options={networkOptions}
-            label={selectorLabel}
-            onSelect={onNetworkSelect}
-            className="App-header-user-netowork"
-            showCaret={true}
-            modalLabel="Select Network"
-            small={small}
-            showModal={showNetworkSelectorModal}
-          />
-        )}
-        {showConnectionOptions && (
           <ConnectWalletButton onClick={() => setWalletModalVisible(true)} imgSrc={connectWalletImg}>
             {small ? "Connect" : "Connect Wallet"}
           </ConnectWalletButton>
