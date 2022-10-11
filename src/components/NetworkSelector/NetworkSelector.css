@@ -9,7 +9,7 @@
 .Selector .Modal-backdrop {
   height: 100vh;
   backdrop-filter: blur(4px);
-  background: #101124aa;
+  background: #22222240;
 }
 
 .Selector-box {
@@ -63,12 +63,12 @@
   font-size: 1.6rem;
   line-height: 2rem;
   letter-spacing: 0.29px;
-  color: #ffffff;
+  color: #FFFEFA;
 }
 
 .Selector-option.Aurora:hover {
-  background: #808aff14 !important;
-  border: 1px solid #4275a8;
+  background: #222222 !important;
+  border: 1px solid #FFFEFA;
 }
 
 .Selector-option .selected-icon {
@@ -80,7 +80,7 @@
 }
 
 .Selector-option.Aurora .selected-icon {
-  background-color: #4275a8;
+  background-color: #00F9A8;
 }
 
 .selected-icon {
@@ -114,7 +114,7 @@
   width: 100%;
   max-width: 29.6rem;
   margin: auto;
-  background: #16182e 0% 0% no-repeat padding-box;
+  background: #222222 0% 0% no-repeat padding-box;
   border: 1px solid #262638;
   border-radius: 0.4rem;
 }
@@ -124,12 +124,12 @@
   border-radius: 0.4rem;
 }
 .react-select__option.aurora:hover {
-  border: 1px solid #4275a8;
+  border: 1px solid #FFFEFA;
   border-radius: 0.4rem;
   color: #eee;
 }
 .react-select__option.aurora:active {
-  background: #818cef33 !important;
+  background: #222222 !important;
 }
 .react-select__indicator {
   border-radius: 0.4rem;
@@ -138,13 +138,13 @@
   background: transparent;
 }
 .network-select:hover {
-  background: #808aff14;
+  background: #222222;
 }
 .network-select:active {
   background: var(--dark-blue-active);
 }
 .App-header-user-settings:hover {
-  background: #2c2d45;
+  background: #222222;
 }
 
 @media (max-width: 900px) {

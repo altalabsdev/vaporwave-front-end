@@ -399,7 +399,6 @@ export const Exchange = forwardRef((props, ref) => {
   const vaultAddress = getContract(chainId, "Vault");
   const positionRouterAddress = getContract(chainId, "PositionRouter");
   const readerAddress = getContract(chainId, "Reader");
-  const usdgAddress = getContract(chainId, "USDG");
 
   const whitelistedTokens = getWhitelistedTokens(chainId);
   const whitelistedTokenAddresses = whitelistedTokens.map((token) => token.address);
@@ -502,9 +501,9 @@ export const Exchange = forwardRef((props, ref) => {
     }
   );
 
-  const { data: usdgSupply } = useSWR([`Exchange:usdgSupply:${active}`, chainId, usdgAddress, "totalSupply"], {
-    fetcher: fetcher(library, Token),
-  });
+  // const { data: usdgSupply } = useSWR([`Exchange:usdgSupply:${active}`, chainId, usdgAddress, "totalSupply"], {
+  //   fetcher: fetcher(library, Token),
+  // });
 
   const orderBookAddress = getContract(chainId, "OrderBook");
   const routerAddress = getContract(chainId, "Router");
@@ -879,7 +878,6 @@ export const Exchange = forwardRef((props, ref) => {
             chainId={chainId}
             orders={orders}
             totalTokenWeights={totalTokenWeights}
-            usdgSupply={usdgSupply}
             savedShouldDisableOrderValidation={savedShouldDisableOrderValidation}
             cancelOrderIdList={cancelOrderIdList}
             setCancelOrderIdList={setCancelOrderIdList}
@@ -969,7 +967,6 @@ export const Exchange = forwardRef((props, ref) => {
             nativeTokenAddress={nativeTokenAddress}
             savedSlippageAmount={savedSlippageAmount}
             totalTokenWeights={totalTokenWeights}
-            usdgSupply={usdgSupply}
             savedShouldDisableOrderValidation={savedShouldDisableOrderValidation}
             minExecutionFee={minExecutionFee}
             minExecutionFeeUSD={minExecutionFeeUSD}

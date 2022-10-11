@@ -503,7 +503,7 @@ export default function DashboardV2() {
               {chainName} Total Stats start from {totalStatsStartDate}.<br /> For detailed stats:{" "}
               {chainId === AURORA && (
                 <a href="https://stats.vaporwave.farm" target="_blank" rel="noopener noreferrer">
-                  https://stats.vwave.io
+                  https://stats.vwave.farm
                 </a>
               )}
               .

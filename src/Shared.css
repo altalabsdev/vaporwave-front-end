@@ -7,7 +7,7 @@ body,
   padding: 0;
   color: white;
   font-size: 10px;
-  background-color: #101124;
+  background-color: #222222;
 }
 
 * {
@@ -43,12 +43,12 @@ input {
 }
 
 :root {
-  --dark-blue: #17182c;
-  --dark-blue-bg: #16182e;
+  --dark-blue: #222222;
+  --dark-blue-bg: #222222;
   --dark-blue-accent: #a0a3c4;
-  --dark-blue-hover: #808aff14;
+  --dark-blue-hover: #FFFEFA30;
   --dark-blue-border: #ffffff29;
-  --dark-blue-active: #818cef33;
+  --dark-blue-active: #FFFEFA50;
   --avax-red: #e84143;
   --aurora-blue: #28a0f0;
   --border-radius-sm: 4px;
@@ -96,6 +96,8 @@ button.App-cta:disabled {
   cursor: not-allowed;
   opacity: 0.9;
   box-shadow: none;
+  background-color: #D9D9D9;
+  color: #666666;
 }
 
 table {
@@ -180,13 +182,13 @@ a.plain {
 }
 
 .default-btn {
-  background: #2d42fc;
+  background: #00F9A8;
   border-radius: 4px;
   font-size: 1.4rem;
   line-height: 2rem;
   font-weight: normal;
   letter-spacing: 0px;
-  color: #ffffff !important;
+  color: #222222 !important;
   padding-left: 1.6rem;
   padding-right: 1.6rem;
   /* padding: 9px 16px!important; */
@@ -203,7 +205,7 @@ a.plain {
 }
 
 .default-btn:hover {
-  background: #4f60fc;
+  box-shadow: 0px 0px 4px #00F9A8;
 }
 
 /* .default-btn:focus {
@@ -215,12 +217,12 @@ a.plain {
 } */
 
 .default-btn:active {
-  background: #5f6ffd;
   border: none;
   padding-left: 1.6rem;
   padding-right: 1.6rem;
   box-sizing: border-box;
   overflow: hidden;
+  box-shadow: 0px 0px 6px #00F9A8;
 }
 
 .default-btn:active::after {
@@ -238,8 +240,8 @@ a.plain {
 }
 
 .default-btn:disabled {
-  background: #2d2e3f 0% 0% no-repeat padding-box;
-  color: #ffffff61;
+  background: #D9D9D9 0% 0% no-repeat padding-box;
+  color: #666666;
 }
 
 .default-container {
