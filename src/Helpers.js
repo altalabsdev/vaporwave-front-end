@@ -138,8 +138,8 @@ export const HIGH_EXECUTION_FEES_MAP = {
 export const ICONLINKS = {
   1313161554: {
     VWAVE: {
-      coingecko: "https://www.coingecko.com/en/coins/gmx",
-      aurora: "https://arbiscan.io/address/0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a",
+      coingecko: "https://www.coingecko.com/en/coins/vaporwave",
+      aurora: "https://aurorascan.dev/token/0x2451db68ded81900c4f16ae1af597e9658689734",
     },
     VLP: {
       aurora: "https://arbiscan.io/token/0x1aDDD80E6039594eE970E5872D247bf0414C8903",
@@ -149,7 +149,7 @@ export const ICONLINKS = {
     },
     BTC: {
       coingecko: "https://www.coingecko.com/en/coins/wrapped-bitcoin",
-      aurora: "https://arbiscan.io/address/0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f",
+      aurora: "https://aurorascan.dev/token/0xf4eb217ba2454613b15dbdea6e5f22276410e89e",
     },
     LINK: {
       coingecko: "https://www.coingecko.com/en/coins/chainlink",
@@ -161,15 +161,15 @@ export const ICONLINKS = {
     },
     USDC: {
       coingecko: "https://www.coingecko.com/en/coins/usd-coin",
-      aurora: "https://arbiscan.io/address/0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+      aurora: "https://aurorascan.dev/token/0xb12bfca5a55806aaf64e99521918a4bf0fc40802",
     },
     USDT: {
       coingecko: "https://www.coingecko.com/en/coins/tether",
-      aurora: "https://arbiscan.io/address/0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+      aurora: "https://aurorascan.dev/token/0x4988a896b1227218e4a686fde5eabdcabd91571f",
     },
     DAI: {
       coingecko: "https://www.coingecko.com/en/coins/dai",
-      aurora: "https://arbiscan.io/address/0xda10009cbd5d07dd0cecc66161fc93d7c9000da1",
+      aurora: "https://aurorascan.dev/token/0xe3520349f477a5f6eb06107066048508498a291b",
     },
     MIM: {
       coingecko: "https://www.coingecko.com/en/coins/magic-internet-money",
@@ -177,7 +177,7 @@ export const ICONLINKS = {
     },
     FRAX: {
       coingecko: "https://www.coingecko.com/en/coins/frax",
-      aurora: "https://arbiscan.io/address/0x17fc002b466eec40dae837fc4be5c67993ddbd6f",
+      aurora: "https://aurorascan.dev/token/0xe4b9e004389d91e4134a28f19bd833cba1d994b6",
     },
   },
 };
