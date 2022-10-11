@@ -82,6 +82,7 @@ import "./App.css";
 import "./Input.css";
 import "./AppOrder.css";
 
+import aurora24Icon from "./img/ic_aurora_24.svg";
 import logoSmallImg from "./img/vwave_logo_small.svg";
 import logoImg from "./img/vwave_logo_large.svg";
 import connectWalletImg from "./img/ic_wallet_24.svg";
@@ -234,6 +235,7 @@ function AppHeaderUser({
             Trade
           </HeaderLink>
         </div>
+        <img src={aurora24Icon} alt="aurora16Icon" className="App-header-aurora-logo"/>
         {showConnectionOptions && (
           <ConnectWalletButton onClick={() => setWalletModalVisible(true)} imgSrc={connectWalletImg}>
             {small ? "Connect" : "Connect Wallet"}

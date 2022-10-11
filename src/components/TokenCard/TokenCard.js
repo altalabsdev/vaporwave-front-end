@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import cx from "classnames";
 
-import vwaveBigIcon from "../../img/ic_vwave_custom.svg";
+import vwaveBigIcon from "../../img/ic_vwave_30.svg";
 import vlpBigIcon from "../../img/ic_vlp_custom.svg";
 
 import { AURORA, switchNetwork, useChainId, isHomeSite } from "../../Helpers";
