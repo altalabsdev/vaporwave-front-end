@@ -10,6 +10,8 @@ import costIcon from "../../img/ic_cost.svg";
 import liquidityIcon from "../../img/ic_liquidity.svg";
 import totaluserIcon from "../../img/ic_totaluser.svg";
 
+import auroraIcon from "../../img/ic_aurora_96.svg";
+
 import statsIcon from "../../img/ic_stats.svg";
 import tradingIcon from "../../img/ic_trading.svg";
 
@@ -190,7 +192,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
           <div className="Home-cta-options">
             <div className="Home-cta-option Home-cta-option-aurora">
               <div className="Home-cta-option-icon">
-                {/* <img src={auroraIcon} alt="aurora" /> */}
+                <img src={auroraIcon} alt="aurora" />
               </div>
               <div className="Home-cta-option-info">
                 <div className="Home-cta-option-title">Aurora</div>
